@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
+    <title>CATS!</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <style>
+        body {
+            width: auto;
+            margin: 0px auto;
+            -moz-user-select: none;
+            /*火狐*/
+            -webkit-user-select: none;
+            /*webkit浏览器*/
+            -ms-user-select: none;
+            /*IE10*/
+            -khtml-user-select: none;
+            /*早期浏览器*/
+            user-select: none;
+        }
+        
+        div {
+            margin: 20px;
+            border: 0;
+            padding: 0;
+        }
+        
+        .lastResult {
+            color: white;
+            padding: 3px;
+        }
+    </style>
+
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function delCookie(cname) {
+            document.cookie = cname + "=" + ";expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    </script>
+
+    <!-- Buttons 库的核心文件 -->
+    <link rel="stylesheet" href="css/buttons.css">
+
+    <!-- 当需要使用带下拉菜单的按钮时才需要加载下面的 JavaScript 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+
+<body onload="onload()">
+
+
+    <div id="wrapper" class="wrapper;text-align: center">
+        <header class="header htmleaf-header">
+            <h1>CATS!<span>beta:<text id="version"></text><br><a href="https://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
+        </header>
+        <main>
+            <div class="container;text-align: center">
+                <section>
+
+
+                    <div class="text-align: center">
+                        <p id="day" class="button-border button-rounded button-primary">day:</p>
+                    </div>
+
+
+
+
+                    <div class="btn-group">
+                        <button type="button" id="catselect" class=" button button-rounded" data-toggle="dropdown">
+                                选择猫<span class="caret"></span>
+                            </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a id="cat1" onclick="catselect1()" href="#"></a>
+                            </li>
+                            <li>
+                                <a id="cat2" onclick="catselect2()" href="#"></a>
+                            </li>
+                            <li><a href="#">其他</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="text-align: center">
+                        <p id="status" class="button-border button-rounded button-primary"></p>
+                    </div>
+
+                    <div class="button-group;text-align: center">
+                        <button type="button" onclick="feedfunction()" class="button button-primary">喂猫</button>
+                        <button type="button" onclick="playwithcat()" class="button button-primary">逗猫</button>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" id="" class=" button button-rounded" data-toggle="dropdown">
+                                训练猫<span class="caret"></span>
+                            </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a id="" onclick="">项目1</a>
+                            </li>
+                            <li>
+                                <a id="" onclick="">项目2</a>
+                            </li>
+                            <li><a href="#">其他</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="button-group;text-align: center">
+                        <button type="button" class="button button-pill button-action">买猫</button>
+                        <button type="button" class="button button-pill button-action">卖猫</button>
+                        <button type="button" class="button button-pill button-action">交配猫</button>
+                    </div>
+
+                    <div class="text-align: center">
+                        <p id="hunger" class="button-border button-rounded button-primary">饱食度:</p>
+                        <p id="life" class="button-border button-rounded button-primary">体力值:</p>
+                        <p id="love" class="button-border button-rounded button-primary">好感度:</p>
+                    </div>
+
+                    <div id="da" style="overflow:hidden" class="text-align: center">
+                        <div id="xiao1" style="float:left" class="text-align: center">
+                            <button id="food" onclick="buyfood()" type="button" class="button button-border button-rounded button-primary">food:</button>
+                        </div>
+                        <div id="xiao2" style="float:right" class="text-align: center">
+                            <button id="money" onclick="workformoney()" class="button  button-border button-rounded button-primary">money:</p>
+                                            </div>
+                                        </div>
+
+                            <div class="text-align: center">
+                                <button id="nextday" onclick="nextday()" class="button button-glow button-border button-rounded button-primary text-align: center">next day</button>
+                        </div>
+                </section>
+                </div>
+        </main>
+        </div>
+
+        <script src="js/production/materialMenu.min.js"></script>
+        <script src="version.js"></script>
+
+        <script>
+            var cat1, cat2, cat3, cat4, cat5;
+            var catd1, catd2, catd3, catd4, catd5;
+            var day = 1;
+            var hunger = 100;
+            var food, money;
+
+            var catselected;
+            var hunger1, hunger2;
+            var hungerstatus1, hungerstatus2;
+            var lovestatus1, lovestatus2;
+            var life1, life2;
+            var name1, name2;
+            var age1, age2;
+
+
+            function onload() {
+                var version = "15.08.19";
+                document.getElementById("version").innerHTML = version;
+                cat1 = getCookie("cat1");
+                cat2 = getCookie("cat2");
+                cat3 = getCookie("cat3");
+                cat4 = getCookie("cat4");
+                cat5 = getCookie("cat5");
+
+                hungerstatus1 = getCookie("hungerstatus1");
+                hungerstatus2 = getCookie("hungerstatus2");
+
+                lovestatus1 = getCookie("lovestatus1");
+                lovestatus2 = getCookie("lovestatus2");
+
+                age1 = getCookie("age1");
+                age2 = getCookie("age2");
+
+
+                food = getCookie("food");
+                money = getCookie("money");
+
+                day = getCookie("day");
+
+
+                //测试用，实际cookie需要注释
+                hungerstatus1 = 100;
+                hungerstatus2 = 100;
+                food = 500;
+                money = 1000;
+                day = 1;
+                lovestatus1 = 0;
+                lovestatus2 = 0;
+                age1 = 0;
+                age2 = 0;
+
+
+
+                // if (cat1 == null || cat1 == "") {
+                //     var sure;
+                //     while (sure == null || sure == false) {
+                //         cat1 = prompt("no cats are found! Please initial your first cat:", "自主性,活跃度,健康值,名字");
+                //         sure = confirm("are you sure with this value:" + cat1);
+                //         catd1 = cat1.split(",");
+                //         var sum = parseInt(catd1[0]) + parseInt(catd1[1]) + parseInt(catd1[2]);
+                //         if (sum > 30) {
+                //             alert("sum must less than 30");
+                //             sure = false;
+                //         } else {
+
+                //         }
+                //     }
+                // }
+
+                cat1 = "5,10,15,Lukas";
+                cat2 = "10,10,10,Alma";
+
+
+                catd1 = cat1.split(",");
+                catd2 = cat2.split(",");
+                catd3 = cat3.split(",");
+                catd4 = cat4.split(",");
+                catd5 = cat5.split(",");
+
+
+
+                hunger1 = parseInt(catd1[2]) * 2.5;
+                life1 = parseInt(catd1[2]) * 10;
+                name1 = catd1[3];
+
+                hunger2 = parseInt(catd2[2]) * 2.5;
+                life2 = parseInt(catd2[2]) * 10;
+                name2 = catd2[3];
+
+                document.getElementById("cat1").innerHTML = name1;
+                document.getElementById("cat2").innerHTML = name2;
+
+                document.getElementById("day").innerHTML = "day:" + day;
+                document.getElementById("food").innerHTML = "剩余食物:" + food;
+                document.getElementById("money").innerHTML = "剩余金钱:" + money;
+
+
+
+            }
+
+            function loadcat() {
+
+            }
+
+            function nextday() {
+                day++;
+                age1++;
+                age2++;
+                hungerstatus1 = parseInt(hungerstatus1) - hunger1;
+                hungerstatus2 = parseInt(hungerstatus2) - hunger2;
+                lovestatus1 = parseInt(lovestatus1) - 2;
+                lovestatus2 = parseInt(lovestatus2) - 2;
+
+                if (hungerstatus1 <= 0) {
+                    catd1[2] = parseInt(catd1[2]) - 2; //j健康度-2
+                    catd1[1] = parseInt(catd1[1]) - 2; //j活跃度-2
+                    hunger1 = parseInt(hunger1) + 1; //每日消耗增加
+                    if (catd1[2] <= 0) {
+                        alert(name1 + " dead!");
+
+                    }
+                }
+
+                if (hungerstatus2 <= 0) {
+                    catd2[2] = parseInt(catd2[2]) - 2; //j健康度-2
+                    catd2[1] = parseInt(catd2[1]) - 2; //j活跃度-2
+                    hunger2 = parseInt(hunger2) + 1; //每日消耗增加
+                    if (catd2[2] <= 0) {
+                        alert(name2 + " dead!");
+                    }
+                }
+
+                if (lovestatus1 >= 100) { //全属性+1
+                    catd1[0] = parseInt(catd1[0]) + 1;
+                    catd1[1] = parseInt(catd1[1]) + 1;
+                    catd1[2] = parseInt(catd1[2]) + 1;
+                    lovestatus1 = lovestatus1 - 100;
+                    hunger1 = parseInt(catd1[2]) * 2.5;
+                    life1 = parseInt(catd1[2]) * 10;
+                }
+                if (lovestatus2 >= 100) { //全属性+1
+                    catd2[0] = parseInt(catd2[0]) + 1;
+                    catd2[1] = parseInt(catd2[1]) + 1;
+                    catd2[2] = parseInt(catd2[2]) + 1;
+                    lovestatus2 = lovestatus2 - 100;
+                    hunger2 = parseInt(catd2[2]) * 2.5;
+                    life2 = parseInt(catd2[2]) * 10;
+                }
+
+                life1 = parseInt(catd1[2]) * 10;
+                life2 = parseInt(catd2[2]) * 10;
+
+
+
+                document.getElementById("day").innerHTML = "day:" + day;
+                setCookie("day", day, 1);
+                if (catselected == 1) {
+                    catselect1();
+                } else if (catselected == 2) {
+                    catselect2();
+                }
+            }
+
+            function buyfood() {
+                var sure;
+                sure = confirm("花费1000购买猫粮100");
+                if (sure == true) {
+                    if (money >= 1000) {
+                        food = parseInt(food) + 100;
+                        money = parseInt(money) - 1000;
+                        document.getElementById("food").innerHTML = "剩余食物:" + food;
+                        document.getElementById("money").innerHTML = "剩余金钱:" + money;
+                    } else {
+                        alert("你这么穷还是先去打工挣钱吧！")
+                    }
+                }
+            }
+
+            function workformoney() {
+                var sure;
+                sure = confirm("打工挣钱将自动跳过一天！");
+                if (sure == true) {
+                    nextday();
+                    nextday();
+                    money = parseInt(money) + 1000;
+                    document.getElementById("money").innerHTML = "剩余金钱:" + money;
+                }
+
+            }
+
+            function feedfunction() {
+                food = parseInt(food) - 50;
+                if (catselected == 1) {
+                    hungerstatus1 = parseInt(hungerstatus1) + 100;
+                    if (hungerstatus1 > 100) {
+                        hungerstatus1 = 100;
+                        lovestatus1 = parseInt(lovestatus1) + 5;
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus1 + "/100";
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus1;
+                } else if (catselected == 2) {
+                    hungerstatus2 = parseInt(hungerstatus2) + 100;
+                    if (hungerstatus2 > 100) {
+                        hungerstatus2 = 100;
+                        lovestatus2 = parseInt(lovestatus2) + 5;
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus2 + "/100";
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus2;
+                }
+
+                document.getElementById("food").innerHTML = "剩余食物:" + food;
+            }
+
+            function playwithcat() {
+                if (catselected == 1 && life1 >= 50) {
+                    lovestatus1 = parseInt(lovestatus1) + 10;
+                    life1 = parseInt(life1) - 50;
+                    document.getElementById("life").innerHTML = "体力值:" + life1 + "/" + parseInt(catd1[2]) * 10;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus1;
+                } else if (catselected == 2 && life2 >= 50) {
+                    lovestatus2 = parseInt(lovestatus2) + 10;
+                    life2 = parseInt(life2) - 50;
+                    document.getElementById("life").innerHTML = "体力值:" + life2 + "/" + parseInt(catd2[2]) * 10;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus2;
+                }
+            }
+
+            function catselect1() {
+                document.getElementById("catselect").innerHTML = name1;
+                document.getElementById("life").innerHTML = "体力值:" + life1 + "/" + parseInt(catd1[2]) * 10;
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus1 + "/100";
+                document.getElementById("love").innerHTML = "好感度:" + lovestatus1;
+                document.getElementById("status").innerHTML = "自主性:" + catd1[0] + " | " + "活跃度:" + catd1[1] + " | " + "健康值:" + catd1[2] + "<br>每日消耗食物" + hunger1;
+                catselected = 1;
+            }
+
+            function catselect2() {
+                document.getElementById("catselect").innerHTML = name2;
+                document.getElementById("life").innerHTML = "体力值:" + life2 + "/" + parseInt(catd2[2]) * 10;
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus2 + "/100";
+                document.getElementById("love").innerHTML = "好感度:" + lovestatus2;
+                document.getElementById("status").innerHTML = "自主性:" + catd2[0] + " | " + "活跃度:" + catd2[1] + " | " + "健康值:" + catd2[2] + "<br>每日消耗食物" + hunger2;
+                catselected = 2;
+            }
+
+            function catselsect3() {
+                document.getElementById("catselect").innerHTML = name3;
+            }
+
+            function catselect4() {
+                document.getElementById("catselect").innerHTML = name4;
+            }
+
+            function catselect5() {
+                document.getElementById("catselect").innerHTML = name5;
+            }
+
+
+
+            function deadand() { //传递信息给安卓的java 
+                //var text=document.getElementById("text").value;  
+                window.location = "javascript:window.android.deadand()";
+            }
+        </script>
+</body>
+
+</html>
