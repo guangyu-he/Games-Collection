@@ -35,41 +35,16 @@
         }
     </style>
 
-    <script>
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires=" + d.toGMTString();
-            document.cookie = cname + "=" + cvalue + "; " + expires;
-        }
-
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i].trim();
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-
-        function delCookie(cname) {
-            document.cookie = cname + "=" + ";expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-    </script>
-
     <!-- Buttons 库的核心文件 -->
     <link rel="stylesheet" href="css/buttons.css">
 
     <!-- 当需要使用带下拉菜单的按钮时才需要加载下面的 JavaScript 文件 -->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
 
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
-    <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 
 
 </head>
@@ -79,7 +54,7 @@
 
     <div id="wrapper" class="wrapper;text-align: center">
         <header class="header htmleaf-header">
-            <h1>CATS!<span>beta:<text id="version"></text><br><a href="https://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
+            <h1>CATS!<span>alpha:<text id="version"></text><br><a href="https://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
         </header>
         <main>
             <div class="container;text-align: center">
@@ -99,14 +74,27 @@
                             </button>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a id="cat1" onclick="catselect1()" href="#"></a>
+                                <a id="cat1" href="javascript:catselect1()"></a>
                             </li>
                             <li>
-                                <a id="cat2" onclick="catselect2()" href="#"></a>
+                                <a id="cat2" href="javascript:catselect2()"></a>
                             </li>
-                            <li><a href="#">其他</a></li>
+                            <li>
+                                <a id="cat3" href="javascript:catselect3()"></a>
+                            </li>
+                            <li>
+                                <a id="cat4" href="javascript:catselect4()"></a>
+                            </li>
+                            <li>
+                                <a id="cat5" href="javascript:catselect5()"></a>
+                            </li>
                             <li class="divider"></li>
-                            <li><a href="#">分离的链接</a></li>
+                            <li>
+                                <a href="javascript:restart()">删除存档！</a>
+                            </li>
+                            <li>
+                                <a href="javascript:test()">测试！</a>
+                            </li>
                         </ul>
                     </div>
 
@@ -125,20 +113,21 @@
                             </button>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a id="" onclick="">项目1</a>
+                                <a id="" href="javascript:void(0)">项目1</a>
                             </li>
                             <li>
-                                <a id="" onclick="">项目2</a>
+                                <a id="" href="javascript:void(0)">项目2</a>
                             </li>
-                            <li><a href="#">其他</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">分离的链接</a></li>
+                            <li>
+                                <a href=""></a>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="button-group;text-align: center">
-                        <button type="button" class="button button-pill button-action">买猫</button>
-                        <button type="button" class="button button-pill button-action">卖猫</button>
+                        <button type="button" onclick="buycat()" class="button button-pill button-action">买猫</button>
+                        <button type="button" onclick="sellcat()" class="button button-pill button-action">卖猫</button>
                         <button type="button" class="button button-pill button-action">交配猫</button>
                     </div>
 
@@ -169,135 +158,512 @@
         <script src="version.js"></script>
 
         <script>
+            var localStorage = window.localStorage;
+
+            var catstr, cat;
+
+
             var cat1, cat2, cat3, cat4, cat5;
-            var catd1, catd2, catd3, catd4, catd5;
-            var day = 1;
-            var hunger = 100;
+            var catd1 = [0, 0, 0, 0];
+            var catd2 = [0, 0, 0, 0];
+            var catd3 = [0, 0, 0, 0];
+            var catd4 = [0, 0, 0, 0];
+            var catd5 = [0, 0, 0, 0]; // "自主性,活跃度,健康值,名字,年龄,体力值,好感度,最大饥饿度,饥饿值,饥饿消耗"
+            var day;
+            var hunger;
             var food, money;
 
+            var hungerlimit = -25;
+
             var catselected;
-            var hunger1, hunger2;
-            var hungerstatus1, hungerstatus2;
-            var lovestatus1, lovestatus2;
-            var life1, life2;
-            var name1, name2;
-            var age1, age2;
+            var hunger1, hunger2, hunger3, hunger4, hunger5;
+            var hungerstatus1, hungerstatus2, hungerstatus3, hungerstatus4, hungerstatus5;
+            var hungermax1, hungermax2, hungermax3, hungermax4, hungermax5;
+            var lovestatus1, lovestatus2, lovestatus3, lovestatus4, lovestatus5;
+            var life1, life2, life3, life4, life5;
+            var name1, name2, name3, name4, name5;
+            var age1, age2, age3, age4, age5;
 
+            function restart() {
+                var sure;
+                sure = confirm("确认删除存档吗！?")
+                if (sure == true) {
+                    localStorage.clear();
+                    location.reload();
+                } else {}
+            }
 
-            function onload() {
-                var version = "15.08.19";
-                document.getElementById("version").innerHTML = version;
-                cat1 = getCookie("cat1");
-                cat2 = getCookie("cat2");
-                cat3 = getCookie("cat3");
-                cat4 = getCookie("cat4");
-                cat5 = getCookie("cat5");
-
-                hungerstatus1 = getCookie("hungerstatus1");
-                hungerstatus2 = getCookie("hungerstatus2");
-
-                lovestatus1 = getCookie("lovestatus1");
-                lovestatus2 = getCookie("lovestatus2");
-
-                age1 = getCookie("age1");
-                age2 = getCookie("age2");
-
-
-                food = getCookie("food");
-                money = getCookie("money");
-
-                day = getCookie("day");
-
-
-                //测试用，实际cookie需要注释
+            function test() {
+                //测试用
+                lovestatus1 = 0;
                 hungerstatus1 = 100;
                 hungerstatus2 = 100;
                 food = 500;
                 money = 1000;
                 day = 1;
-                lovestatus1 = 0;
-                lovestatus2 = 0;
-                age1 = 0;
-                age2 = 0;
-
-
-
-                // if (cat1 == null || cat1 == "") {
-                //     var sure;
-                //     while (sure == null || sure == false) {
-                //         cat1 = prompt("no cats are found! Please initial your first cat:", "自主性,活跃度,健康值,名字");
-                //         sure = confirm("are you sure with this value:" + cat1);
-                //         catd1 = cat1.split(",");
-                //         var sum = parseInt(catd1[0]) + parseInt(catd1[1]) + parseInt(catd1[2]);
-                //         if (sum > 30) {
-                //             alert("sum must less than 30");
-                //             sure = false;
-                //         } else {
-
-                //         }
-                //     }
-                // }
-
+                age1 = 29;
+                age2 = 29;
                 cat1 = "5,10,15,Lukas";
                 cat2 = "10,10,10,Alma";
+                cat3 = "" + "," + "" + "," + "" + "," + "";
+                cat4 = "" + "," + "" + "," + "" + "," + "";
+                cat5 = "" + "," + "" + "," + "" + "," + "";
+                save();
+                onload();
+                location.reload();
+            }
 
+            function load() {
+                catstr = localStorage.getItem("catstr");
+                cat = JSON.parse(catstr);
 
+                if (cat == null || cat == "") {
+
+                } else {
+
+                    hungerstatus1 = cat.hungerstatus1;
+                    hungerstatus2 = cat.hungerstatus2;
+                    hungerstatus3 = cat.hungerstatus3;
+                    hungerstatus4 = cat.hungerstatus4;
+                    hungerstatus5 = cat.hungerstatus5;
+
+                    lovestatus1 = cat.lovestatus1;
+                    lovestatus2 = cat.lovestatus2;
+                    lovestatus3 = cat.lovestatus3;
+                    lovestatus4 = cat.lovestatus4;
+                    lovestatus5 = cat.lovestatus5;
+
+                    age1 = cat.age1;
+                    age2 = cat.age2;
+                    age3 = cat.age3;
+                    age4 = cat.age4;
+                    age5 = cat.age5;
+
+                    food = cat.food;
+                    money = cat.money;
+                    day = cat.day;
+
+                    catd1[0] = cat.zizhu1;
+                    catd1[1] = cat.huoyue1;
+                    catd1[2] = cat.jiankang1;
+                    catd1[3] = cat.name1;
+
+                    catd2[0] = cat.zizhu2;
+                    catd2[1] = cat.huoyue2;
+                    catd2[2] = cat.jiankang2;
+                    catd2[3] = cat.name2;
+
+                    catd3[0] = cat.zizhu3;
+                    catd3[1] = cat.huoyue3;
+                    catd3[2] = cat.jiankang3;
+                    catd3[3] = cat.name3;
+
+                    catd4[0] = cat.zizhu4;
+                    catd4[1] = cat.huoyue4;
+                    catd4[2] = cat.jiankang4;
+                    catd4[3] = cat.name4;
+
+                    catd5[0] = cat.zizhu5;
+                    catd5[1] = cat.huoyue5;
+                    catd5[2] = cat.jiankang5;
+                    catd5[3] = cat.name5;
+
+                    cat1 = catd1[0] + "," + catd1[1] + "," + catd1[2] + "," + catd1[3];
+                    cat2 = catd2[0] + "," + catd2[1] + "," + catd2[2] + "," + catd2[3];
+                    cat3 = catd3[0] + "," + catd3[1] + "," + catd3[2] + "," + catd3[3];
+                    cat4 = catd4[0] + "," + catd4[1] + "," + catd4[2] + "," + catd4[3];
+                    cat5 = catd5[0] + "," + catd5[1] + "," + catd5[2] + "," + catd5[3];
+                }
+            }
+
+            function save() {
+                // localStorage
                 catd1 = cat1.split(",");
                 catd2 = cat2.split(",");
                 catd3 = cat3.split(",");
                 catd4 = cat4.split(",");
                 catd5 = cat5.split(",");
 
+                cat = {
+                    zizhu1: "",
+                    huoyue1: "",
+                    jiankang1: "",
+                    name1: "",
+                    age1: "",
+                    life1: "",
+                    lovestatus1: "",
+                    hungermax1: "",
+                    hungerstatus1: "",
+                    hunger1: "",
+                    zizhu2: "",
+                    huoyue2: "",
+                    jiankang2: "",
+                    name2: "",
+                    age2: "",
+                    life2: "",
+                    lovestatus2: "",
+                    hungermax2: "",
+                    hungerstatus2: "",
+                    hunger2: "",
+                    zizhu3: "",
+                    huoyue3: "",
+                    jiankang3: "",
+                    name3: "",
+                    age3: "",
+                    life3: "",
+                    lovestatus3: "",
+                    hungermax3: "",
+                    hungerstatus3: "",
+                    hunger3: "",
+                    zizhu4: "",
+                    huoyue4: "",
+                    jiankang4: "",
+                    name4: "",
+                    age4: "",
+                    life4: "",
+                    lovestatus4: "",
+                    hungermax4: "",
+                    hungerstatus4: "",
+                    hunger4: "",
+                    zizhu5: "",
+                    huoyue5: "",
+                    jiankang5: "",
+                    name5: "",
+                    age5: "",
+                    life5: "",
+                    lovestatus5: "",
+                    hungermax5: "",
+                    hungerstatus5: "",
+                    hunger5: "",
+                    food: "",
+                    money: "",
+                    day: ""
+                }
+
+                cat.zizhu1 = catd1[0];
+                cat.zizhu2 = catd2[0];
+                cat.zizhu3 = catd3[0];
+                cat.zizhu4 = catd4[0];
+                cat.zizhu5 = catd5[0];
+
+                cat.huoyue1 = catd1[1];
+                cat.huoyue2 = catd2[1];
+                cat.huoyue3 = catd3[1];
+                cat.huoyue4 = catd4[1];
+                cat.huoyue5 = catd5[1];
+
+                cat.jiankang1 = catd1[2];
+                cat.jiankang2 = catd2[2];
+                cat.jiankang3 = catd3[2];
+                cat.jiankang4 = catd4[2];
+                cat.jiankang5 = catd5[2];
+
+                cat.name1 = catd1[3];
+                cat.name2 = catd2[3];
+                cat.name3 = catd3[3];
+                cat.name4 = catd4[3];
+                cat.name5 = catd5[3];
+
+                cat.age1 = age1;
+                cat.age2 = age2;
+                cat.age3 = age3;
+                cat.age4 = age4;
+                cat.age5 = age5;
+
+                cat.life1 = life1;
+                cat.life2 = life2;
+                cat.life3 = life3;
+                cat.life4 = life4;
+                cat.life5 = life5;
+
+                cat.lovestatus1 = lovestatus1;
+                cat.lovestatus2 = lovestatus2;
+                cat.lovestatus3 = lovestatus3;
+                cat.lovestatus4 = lovestatus4;
+                cat.lovestatus5 = lovestatus5;
+
+                cat.hungermax1 = hungermax1;
+                cat.hungermax2 = hungermax2;
+                cat.hungermax3 = hungermax3;
+                cat.hungermax4 = hungermax4;
+                cat.hungermax5 = hungermax5;
+
+                cat.hungerstatus1 = hungerstatus1;
+                cat.hungerstatus2 = hungerstatus2;
+                cat.hungerstatus3 = hungerstatus3;
+                cat.hungerstatus4 = hungerstatus4;
+                cat.hungerstatus5 = hungerstatus5;
+
+                cat.hunger1 = hunger1;
+                cat.hunger2 = hunger2;
+                cat.hunger3 = hunger3;
+                cat.hunger4 = hunger4;
+                cat.hunger5 = hunger5;
+
+                cat.food = food;
+                cat.money = money;
+                cat.day = day;
+
+                catstr = JSON.stringify(cat);
+                localStorage.setItem("catstr", catstr);
+            }
+
+            function onload() {
+                var version = "17.08.19";
+                document.getElementById("version").innerHTML = version;
+
+                load();
+
+                if (cat == null || cat == "") {
+                    var sure;
+                    while (sure == null || sure == false) {
+                        cat1 = prompt("no cats are found! Please initial your first cat:", "自主性,活跃度,健康值,名字");
+                        sure = confirm("are you sure with this value:" + cat1);
+                        catd1 = cat1.split(",");
+                        var sum = parseInt(catd1[0]) + parseInt(catd1[1]) + parseInt(catd1[2]);
+                        if (sum > 30) {
+                            alert("sum must less than 30");
+                            sure = false;
+                        }
+                    }
+                    cat2 = "" + "," + "" + "," + "" + "," + "";
+                    cat3 = "" + "," + "" + "," + "" + "," + "";
+                    cat4 = "" + "," + "" + "," + "" + "," + "";
+                    cat5 = "" + "," + "" + "," + "" + "," + "";
+                    age1 = 0;
+                    hungerstatus1 = 100;
+                    lovestatus1 = 0;
+                    day = 1;
+                    money = 2000;
+                    food = 500;
+                    save();
+                } else {
+                    catd1[0] = cat.zizhu1;
+                    catd1[1] = cat.huoyue1;
+                    catd1[2] = cat.jiankang1;
+                    catd1[3] = cat.name1;
+                }
+
+                if (catd1[0] == "") {
+                    document.getElementById("cat1").innerHTML = "null";
+                } else {
+                    hunger1 = parseInt(catd1[2]) * 2.5;
+                    life1 = parseInt(catd1[2]) * 10;
+                    name1 = catd1[3];
+                    if (age1 < 30) {
+                        hungermax1 = 100;
+                    } else if (age1 >= 30 && age1 < 60) {
+                        hungermax1 = 200;
+                    } else {
+                        hungermax1 = 150;
+                    }
+                    document.getElementById("cat1").innerHTML = name1 + "," + age1;
+                }
+                if (catd2[0] == "") {
+                    document.getElementById("cat2").innerHTML = "null";
+                } else {
+                    catd2[0] = cat.zizhu2;
+                    catd2[1] = cat.huoyue2;
+                    catd2[2] = cat.jiankang2;
+                    catd2[3] = cat.name2;
+                    hunger2 = parseInt(catd2[2]) * 2.5;
+                    life2 = parseInt(catd2[2]) * 10;
+                    name2 = catd2[3];
+                    if (age2 < 30) {
+                        hungermax2 = 100;
+                    } else if (age2 >= 30 && age2 < 60) {
+                        hungermax2 = 200;
+                    } else {
+                        hungermax2 = 150;
+                    }
+                    lovestatus2 = 0;
+                    document.getElementById("cat2").innerHTML = name2 + "," + age2;
+                }
+
+                if (catd3[0] == "") {
+                    document.getElementById("cat3").innerHTML = "null";
+
+                } else {
+                    catd3[0] = cat.zizhu3;
+                    catd3[1] = cat.huoyue3;
+                    catd3[2] = cat.jiankang3;
+                    catd3[3] = cat.name3;
+                    hunger3 = parseInt(catd3[2]) * 2.5;
+                    life3 = parseInt(catd3[2]) * 10;
+                    name3 = catd3[3];
+                    if (age3 < 30) {
+                        hungermax3 = 100;
+                    } else if (age3 >= 30 && age3 < 60) {
+                        hungermax3 = 200;
+                    } else {
+                        hungermax3 = 150;
+                    }
+                    lovestatus3 = 0;
+                    document.getElementById("cat3").innerHTML = name3 + "," + age3;
+                }
 
 
-                hunger1 = parseInt(catd1[2]) * 2.5;
-                life1 = parseInt(catd1[2]) * 10;
-                name1 = catd1[3];
+                if (catd4[0] == "") {
+                    document.getElementById("cat4").innerHTML = "null";
 
-                hunger2 = parseInt(catd2[2]) * 2.5;
-                life2 = parseInt(catd2[2]) * 10;
-                name2 = catd2[3];
+                } else {
+                    catd4[0] = cat.zizhu4;
+                    catd4[1] = cat.huoyue4;
+                    catd4[2] = cat.jiankang4;
+                    catd4[3] = cat.name4;
+                    hunger4 = parseInt(catd4[2]) * 2.5;
+                    life4 = parseInt(catd4[2]) * 10;
+                    name4 = catd4[3];
+                    if (age4 < 30) {
+                        hungermax4 = 100;
+                    } else if (age4 >= 30 && age4 < 60) {
+                        hungermax4 = 200;
+                    } else {
+                        hungermax4 = 150;
+                    }
+                    lovestatus4 = 0;
+                    document.getElementById("cat4").innerHTML = name4 + "," + age4;
+                }
 
-                document.getElementById("cat1").innerHTML = name1;
-                document.getElementById("cat2").innerHTML = name2;
+
+                if (catd5[0] == "") {
+                    document.getElementById("cat5").innerHTML = "null";
+
+                } else {
+                    catd5[0] = cat.zizhu5;
+                    catd5[1] = cat.huoyue5;
+                    catd5[2] = cat.jiankang5;
+                    catd5[3] = cat.name5;
+                    hunger5 = parseInt(catd5[2]) * 2.5;
+                    life5 = parseInt(catd5[2]) * 10;
+                    name5 = catd5[3];
+                    if (age5 < 30) {
+                        hungermax5 = 100;
+                    } else if (age5 >= 30 && age5 < 60) {
+                        hungermax5 = 200;
+                    } else {
+                        hungermax5 = 150;
+                    }
+                    lovestatus5 = 0;
+                    document.getElementById("cat5").innerHTML = name5 + "," + age5;
+                }
+
 
                 document.getElementById("day").innerHTML = "day:" + day;
                 document.getElementById("food").innerHTML = "剩余食物:" + food;
                 document.getElementById("money").innerHTML = "剩余金钱:" + money;
 
-
-
-            }
-
-            function loadcat() {
-
             }
 
             function nextday() {
                 day++;
-                age1++;
-                age2++;
-                hungerstatus1 = parseInt(hungerstatus1) - hunger1;
-                hungerstatus2 = parseInt(hungerstatus2) - hunger2;
-                lovestatus1 = parseInt(lovestatus1) - 2;
-                lovestatus2 = parseInt(lovestatus2) - 2;
 
-                if (hungerstatus1 <= 0) {
+                if (name1 != null && name1 != "") {
+                    age1++;
+                    hungerstatus1 = parseInt(hungerstatus1) - hunger1;
+                    lovestatus1 = parseInt(lovestatus1) - 2;
+                }
+                if (name2 != null && name2 != "") {
+                    age2++;
+                    hungerstatus2 = parseInt(hungerstatus2) - hunger2;
+                    lovestatus2 = parseInt(lovestatus2) - 2;
+                }
+                if (name3 != null && name3 != "") {
+                    age3++;
+                    hungerstatus3 = parseInt(hungerstatus3) - hunger3;
+                    lovestatus3 = parseInt(lovestatus3) - 2;
+                }
+                if (name4 != null && name4 != "") {
+                    age4++;
+                    hungerstatus4 = parseInt(hungerstatus4) - hunger4;
+                    lovestatus4 = parseInt(lovestatus4) - 2;
+                }
+                if (name5 != null && name5 != "") {
+                    age5++;
+                    hungerstatus5 = parseInt(hungerstatus5) - hunger5;
+                    lovestatus5 = parseInt(lovestatus5) - 2;
+                }
+
+                document.getElementById("day").innerHTML = "day:" + day;
+
+                if (age1 >= 30 && age1 < 60) {
+                    hungermax1 = 200;
+                } else if (age1 >= 60) {
+                    hungermax1 = 150;
+                } else if (age1 == 100) {
+                    alert(name1 + " dead!");
+                }
+                if (age2 >= 30 && age2 < 60) {
+                    hungermax2 = 200;
+                } else if (age2 >= 60) {
+                    hungermax2 = 150;
+                } else if (age2 == 100) {
+                    alert(name2 + " dead!");
+                }
+                if (age3 >= 30 && age3 < 60) {
+                    hungermax3 = 200;
+                } else if (age3 >= 60) {
+                    hungermax3 = 150;
+                } else if (age3 == 100) {
+                    alert(name3 + " dead!");
+                }
+                if (age4 >= 30 && age4 < 60) {
+                    hungermax4 = 200;
+                } else if (age4 >= 60) {
+                    hungermax4 = 150;
+                } else if (age4 == 100) {
+                    alert(name4 + " dead!");
+                }
+                if (age5 >= 30 && age5 < 60) {
+                    hungermax5 = 200;
+                } else if (age5 >= 60) {
+                    hungermax5 = 150;
+                } else if (age5 == 100) {
+                    alert(name5 + " dead!");
+                }
+
+                if (hungerstatus1 <= hungerlimit) {
                     catd1[2] = parseInt(catd1[2]) - 2; //j健康度-2
                     catd1[1] = parseInt(catd1[1]) - 2; //j活跃度-2
                     hunger1 = parseInt(hunger1) + 1; //每日消耗增加
                     if (catd1[2] <= 0) {
                         alert(name1 + " dead!");
-
                     }
                 }
 
-                if (hungerstatus2 <= 0) {
+                if (hungerstatus2 <= hungerlimit) {
                     catd2[2] = parseInt(catd2[2]) - 2; //j健康度-2
                     catd2[1] = parseInt(catd2[1]) - 2; //j活跃度-2
                     hunger2 = parseInt(hunger2) + 1; //每日消耗增加
                     if (catd2[2] <= 0) {
                         alert(name2 + " dead!");
+                    }
+                }
+
+                if (hungerstatus3 <= hungerlimit) {
+                    catd3[2] = parseInt(catd3[2]) - 2; //j健康度-2
+                    catd3[1] = parseInt(catd3[1]) - 2; //j活跃度-2
+                    hunger3 = parseInt(hunger3) + 1; //每日消耗增加
+                    if (catd3[2] <= 0) {
+                        alert(name3 + " dead!");
+                    }
+                }
+
+                if (hungerstatus4 <= hungerlimit) {
+                    catd4[2] = parseInt(catd4[2]) - 2; //j健康度-2
+                    catd4[1] = parseInt(catd4[1]) - 2; //j活跃度-2
+                    hunger4 = parseInt(hunger4) + 1; //每日消耗增加
+                    if (catd4[2] <= 0) {
+                        alert(name4 + " dead!");
+                    }
+                }
+
+                if (hungerstatus5 <= hungerlimit) {
+                    catd5[2] = parseInt(catd5[2]) - 2; //j健康度-2
+                    catd5[1] = parseInt(catd5[1]) - 2; //j活跃度-2
+                    hunger5 = parseInt(hunger5) + 1; //每日消耗增加
+                    if (catd5[2] <= 0) {
+                        alert(name5 + " dead!");
                     }
                 }
 
@@ -317,19 +683,87 @@
                     hunger2 = parseInt(catd2[2]) * 2.5;
                     life2 = parseInt(catd2[2]) * 10;
                 }
+                if (lovestatus3 >= 100) { //全属性+1
+                    catd3[0] = parseInt(catd3[0]) + 1;
+                    catd3[1] = parseInt(catd3[1]) + 1;
+                    catd3[2] = parseInt(catd3[2]) + 1;
+                    lovestatus3 = lovestatus3 - 100;
+                    hunger3 = parseInt(catd3[2]) * 2.5;
+                    life3 = parseInt(catd3[2]) * 10;
+                }
+                if (lovestatus4 >= 100) { //全属性+1
+                    catd4[0] = parseInt(catd4[0]) + 1;
+                    catd4[1] = parseInt(catd4[1]) + 1;
+                    catd4[2] = parseInt(catd4[2]) + 1;
+                    lovestatus4 = lovestatus4 - 100;
+                    hunger4 = parseInt(catd4[2]) * 2.5;
+                    life4 = parseInt(catd4[2]) * 10;
+                }
+                if (lovestatus5 >= 100) { //全属性+1
+                    catd5[0] = parseInt(catd5[0]) + 1;
+                    catd5[1] = parseInt(catd5[1]) + 1;
+                    catd5[2] = parseInt(catd5[2]) + 1;
+                    lovestatus5 = lovestatus5 - 100;
+                    hunger5 = parseInt(catd5[2]) * 2.5;
+                    life5 = parseInt(catd5[2]) * 10;
+                }
 
                 life1 = parseInt(catd1[2]) * 10;
                 life2 = parseInt(catd2[2]) * 10;
+                life3 = parseInt(catd3[2]) * 10;
+                life4 = parseInt(catd4[2]) * 10;
+                life5 = parseInt(catd5[2]) * 10;
 
+                cat1 = catd1[0] + "," + catd1[1] + "," + catd1[2] + "," + name1;
+                cat2 = catd2[0] + "," + catd2[1] + "," + catd2[2] + "," + name2;
+                cat3 = catd3[0] + "," + catd3[1] + "," + catd3[2] + "," + name3;
+                cat4 = catd4[0] + "," + catd4[1] + "," + catd4[2] + "," + name4;
+                cat5 = catd5[0] + "," + catd5[1] + "," + catd5[2] + "," + name5;
 
+                if (catd1[0] != "") {
+                    document.getElementById("cat1").innerHTML = name1 + "," + age1;
+                } else {
+                    document.getElementById("cat1").innerHTML = "null";
 
-                document.getElementById("day").innerHTML = "day:" + day;
-                setCookie("day", day, 1);
+                }
+                if (catd2[0] != "") {
+                    document.getElementById("cat2").innerHTML = name2 + "," + age2;
+                } else {
+                    document.getElementById("cat2").innerHTML = "null";
+
+                }
+                if (catd3[0] != "") {
+                    document.getElementById("cat3").innerHTML = name3 + "," + age3;
+                } else {
+                    document.getElementById("cat3").innerHTML = "null";
+
+                }
+                if (catd4[0] != "") {
+                    document.getElementById("cat4").innerHTML = name4 + "," + age4;
+                } else {
+                    document.getElementById("cat4").innerHTML = "null";
+
+                }
+                if (catd5[0] != "") {
+                    document.getElementById("cat5").innerHTML = name5 + "," + age5;
+                } else {
+                    document.getElementById("cat5").innerHTML = "null";
+
+                }
+
                 if (catselected == 1) {
                     catselect1();
                 } else if (catselected == 2) {
                     catselect2();
+                } else if (catselected == 3) {
+                    catselect3();
+                } else if (catselected == 4) {
+                    catselect4();
+                } else if (catselected == 5) {
+                    catselect5();
                 }
+
+                save();
             }
 
             function buyfood() {
@@ -341,10 +775,12 @@
                         money = parseInt(money) - 1000;
                         document.getElementById("food").innerHTML = "剩余食物:" + food;
                         document.getElementById("money").innerHTML = "剩余金钱:" + money;
+                        //save();
                     } else {
                         alert("你这么穷还是先去打工挣钱吧！")
                     }
                 }
+
             }
 
             function workformoney() {
@@ -355,6 +791,7 @@
                     nextday();
                     money = parseInt(money) + 1000;
                     document.getElementById("money").innerHTML = "剩余金钱:" + money;
+                    save();
                 }
 
             }
@@ -367,7 +804,12 @@
                         hungerstatus1 = 100;
                         lovestatus1 = parseInt(lovestatus1) + 5;
                     }
-                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus1 + "/100";
+                    if (parseInt(hungerstatus1) - hunger1 <= hungerlimit) {
+                        document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                    } else {
+                        document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus1 + "/" + hungermax1;
                     document.getElementById("love").innerHTML = "好感度:" + lovestatus1;
                 } else if (catselected == 2) {
                     hungerstatus2 = parseInt(hungerstatus2) + 100;
@@ -375,11 +817,57 @@
                         hungerstatus2 = 100;
                         lovestatus2 = parseInt(lovestatus2) + 5;
                     }
-                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus2 + "/100";
+                    if (parseInt(hungerstatus2) - hunger2 <= hungerlimit) {
+                        document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                    } else {
+                        document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus2 + "/" + hungermax2;
                     document.getElementById("love").innerHTML = "好感度:" + lovestatus2;
+                } else if (catselected == 3) {
+                    hungerstatus3 = parseInt(hungerstatus3) + 100;
+                    if (hungerstatus3 > 100) {
+                        hungerstatus3 = 100;
+                        lovestatus3 = parseInt(lovestatus3) + 5;
+                    }
+                    if (parseInt(hungerstatus3) - hunger3 <= hungerlimit) {
+                        document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                    } else {
+                        document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus3 + "/" + hungermax3;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus3;
+                } else if (catselected == 4) {
+                    hungerstatus3 = parseInt(hungerstatus3) + 100;
+                    if (hungerstatus3 > 100) {
+                        hungerstatus3 = 100;
+                        lovestatus3 = parseInt(lovestatus3) + 5;
+                    }
+                    if (parseInt(hungerstatus3) - hunger3 <= hungerlimit) {
+                        document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                    } else {
+                        document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus3 + "/" + hungermax3;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus3;
+                } else if (catselected == 5) {
+                    hungerstatus5 = parseInt(hungerstatus5) + 100;
+                    if (hungerstatus5 > 100) {
+                        hungerstatus5 = 100;
+                        lovestatus5 = parseInt(lovestatus5) + 5;
+                    }
+                    if (parseInt(hungerstatus5) - hunger5 <= hungerlimit) {
+                        document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                    } else {
+                        document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                    }
+                    document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus5 + "/" + hungermax5;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus5;
                 }
 
                 document.getElementById("food").innerHTML = "剩余食物:" + food;
+                //save();
+
             }
 
             function playwithcat() {
@@ -388,44 +876,252 @@
                     life1 = parseInt(life1) - 50;
                     document.getElementById("life").innerHTML = "体力值:" + life1 + "/" + parseInt(catd1[2]) * 10;
                     document.getElementById("love").innerHTML = "好感度:" + lovestatus1;
+                    if (parseInt(life1) - 50 < 0) {
+                        document.getElementById("life").className = "button-border button-rounded button-caution";
+                    }
+
                 } else if (catselected == 2 && life2 >= 50) {
                     lovestatus2 = parseInt(lovestatus2) + 10;
                     life2 = parseInt(life2) - 50;
                     document.getElementById("life").innerHTML = "体力值:" + life2 + "/" + parseInt(catd2[2]) * 10;
                     document.getElementById("love").innerHTML = "好感度:" + lovestatus2;
+                    if (parseInt(life2) - 50 < 0) {
+                        document.getElementById("life").className = "button-border button-rounded button-caution";
+                    }
+                } else if (catselected == 3 && life3 >= 50) {
+                    lovestatus3 = parseInt(lovestatus3) + 10;
+                    life3 = parseInt(life3) - 50;
+                    document.getElementById("life").innerHTML = "体力值:" + life3 + "/" + parseInt(catd3[2]) * 10;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus3;
+                    if (parseInt(life3) - 50 < 0) {
+                        document.getElementById("life").className = "button-border button-rounded button-caution";
+                    }
+                } else if (catselected == 4 && life4 >= 50) {
+                    lovestatus4 = parseInt(lovestatus4) + 10;
+                    life4 = parseInt(life4) - 50;
+                    document.getElementById("life").innerHTML = "体力值:" + life4 + "/" + parseInt(catd4[2]) * 10;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus4;
+                    if (parseInt(life4) - 50 < 0) {
+                        document.getElementById("life").className = "button-border button-rounded button-caution";
+                    }
+                } else if (catselected == 5 && life5 >= 50) {
+                    lovestatus5 = parseInt(lovestatus5) + 10;
+                    life5 = parseInt(life5) - 50;
+                    document.getElementById("life").innerHTML = "体力值:" + life5 + "/" + parseInt(catd5[2]) * 10;
+                    document.getElementById("love").innerHTML = "好感度:" + lovestatus5;
+                    if (parseInt(life5) - 50 < 0) {
+                        document.getElementById("life").className = "button-border button-rounded button-caution";
+                    }
                 }
+
+                //save();
+
             }
 
             function catselect1() {
-                document.getElementById("catselect").innerHTML = name1;
+                if (parseInt(hungerstatus1) - hunger1 <= hungerlimit) {
+                    document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                }
+                if (parseInt(life1) - 50 < 0) {
+                    document.getElementById("life").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("life").className = "button-border button-rounded button-primary";
+                }
+                document.getElementById("catselect").innerHTML = name1 + "," + age1;
                 document.getElementById("life").innerHTML = "体力值:" + life1 + "/" + parseInt(catd1[2]) * 10;
-                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus1 + "/100";
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus1 + "/" + hungermax1;
                 document.getElementById("love").innerHTML = "好感度:" + lovestatus1;
                 document.getElementById("status").innerHTML = "自主性:" + catd1[0] + " | " + "活跃度:" + catd1[1] + " | " + "健康值:" + catd1[2] + "<br>每日消耗食物" + hunger1;
                 catselected = 1;
             }
 
             function catselect2() {
-                document.getElementById("catselect").innerHTML = name2;
+                if (parseInt(hungerstatus2) - hunger2 <= hungerlimit) {
+                    document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                }
+                if (parseInt(life2) - 50 < 0) {
+                    document.getElementById("life").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("life").className = "button-border button-rounded button-primary";
+
+                }
+                document.getElementById("catselect").innerHTML = name2 + "," + age2;
                 document.getElementById("life").innerHTML = "体力值:" + life2 + "/" + parseInt(catd2[2]) * 10;
-                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus2 + "/100";
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus2 + "/" + hungermax2;
                 document.getElementById("love").innerHTML = "好感度:" + lovestatus2;
                 document.getElementById("status").innerHTML = "自主性:" + catd2[0] + " | " + "活跃度:" + catd2[1] + " | " + "健康值:" + catd2[2] + "<br>每日消耗食物" + hunger2;
                 catselected = 2;
             }
 
-            function catselsect3() {
-                document.getElementById("catselect").innerHTML = name3;
+            function catselect3() {
+                if (parseInt(hungerstatus3) - hunger3 <= hungerlimit) {
+                    document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                }
+                if (parseInt(life3) - 50 < 0) {
+                    document.getElementById("life").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("life").className = "button-border button-rounded button-primary";
+                }
+                document.getElementById("catselect").innerHTML = name3 + "," + age3;
+                document.getElementById("life").innerHTML = "体力值:" + life3 + "/" + parseInt(catd3[2]) * 10;
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus3 + "/" + hungermax3;
+                document.getElementById("love").innerHTML = "好感度:" + lovestatus3;
+                document.getElementById("status").innerHTML = "自主性:" + catd3[0] + " | " + "活跃度:" + catd3[1] + " | " + "健康值:" + catd3[2] + "<br>每日消耗食物" + hunger3;
+                catselected = 3;
             }
 
             function catselect4() {
-                document.getElementById("catselect").innerHTML = name4;
+                if (parseInt(hungerstatus4) - hunger4 <= hungerlimit) {
+                    document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                }
+                if (parseInt(life4) - 50 < 0) {
+                    document.getElementById("life").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("life").className = "button-border button-rounded button-primary";
+                }
+                document.getElementById("catselect").innerHTML = name4 + "," + age4;
+                document.getElementById("life").innerHTML = "体力值:" + life4 + "/" + parseInt(catd4[2]) * 10;
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus4 + "/" + hungermax4;
+                document.getElementById("love").innerHTML = "好感度:" + lovestatus4;
+                document.getElementById("status").innerHTML = "自主性:" + catd4[0] + " | " + "活跃度:" + catd4[1] + " | " + "健康值:" + catd4[2] + "<br>每日消耗食物" + hunger4;
+                catselected = 4;
             }
 
             function catselect5() {
-                document.getElementById("catselect").innerHTML = name5;
+                if (parseInt(hungerstatus5) - hunger5 <= hungerlimit) {
+                    document.getElementById("hunger").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("hunger").className = "button-border button-rounded button-primary";
+                }
+                if (parseInt(life5) - 50 < 0) {
+                    document.getElementById("life").className = "button-border button-rounded button-caution";
+                } else {
+                    document.getElementById("life").className = "button-border button-rounded button-primary";
+                }
+                document.getElementById("catselect").innerHTML = name5 + "," + age5;
+                document.getElementById("life").innerHTML = "体力值:" + life5 + "/" + parseInt(catd5[2]) * 10;
+                document.getElementById("hunger").innerHTML = "饱食度:" + hungerstatus5 + "/" + hungermax5;
+                document.getElementById("love").innerHTML = "好感度:" + lovestatus5;
+                document.getElementById("status").innerHTML = "自主性:" + catd5[0] + " | " + "活跃度:" + catd5[1] + " | " + "健康值:" + catd5[2] + "<br>每日消耗食物" + hunger5;
+                catselected = 5;
             }
 
+            function sellcat() {
+                var catdel = prompt("卖哪只猫，请输入名字：", "Name");
+                if (catdel == name1) {
+                    catd1 = ["", "", "", ""];
+                    age1 = null;
+                    life1 = null;
+                    lovestatus1 = null;
+                    hunger1 = null;
+                    hungermax1 = null;
+                    hungerstatus1 = null;
+                    document.getElementById("cat1").innerHTML = "null";
+
+                    money = parseInt(money) + 5000; // 测试用数据
+                } else if (catdel == name2) {
+
+                    catd2 = ["", "", "", ""];
+                    age2 = null;
+                    life2 = null;
+                    lovestatus2 = null;
+                    hunger2 = null;
+                    hungermax2 = null;
+                    hungerstatus2 = null;
+                    document.getElementById("cat2").innerHTML = "null";
+
+                    money = parseInt(money) + 5000; // 测试用数据
+                } else if (catdel == name3) {
+
+                    catd3 = ["", "", "", ""];
+                    age3 = null;
+                    life3 = null;
+                    lovestatus3 = null;
+                    hunger3 = null;
+                    hungermax3 = null;
+                    hungerstatus3 = null;
+                    document.getElementById("cat3").innerHTML = "null";
+
+                    money = parseInt(money) + 5000; // 测试用数据
+                } else if (catdel == name4) {
+
+                    catd4 = ["", "", "", ""];
+                    age4 = null;
+                    life4 = null;
+                    lovestatus4 = null;
+                    hunger4 = null;
+                    hungermax4 = null;
+                    hungerstatus4 = null;
+                    document.getElementById("cat4").innerHTML = "null";
+
+                    money = parseInt(money) + 5000; // 测试用数据
+                } else if (catdel == name5) {
+                    catd5 = ["", "", "", ""];
+                    age5 = null;
+                    life5 = null;
+                    lovestatus5 = null;
+                    hunger5 = null;
+                    hungermax5 = null;
+                    hungerstatus5 = null;
+                    document.getElementById("cat5").innerHTML = "null";
+
+                    money = parseInt(money) + 5000; // 测试用数据
+                } else {
+
+                }
+
+                cat1 = catd1[0] + "," + catd1[1] + "," + catd1[2] + "," + catd1[3];
+                cat2 = catd2[0] + "," + catd2[1] + "," + catd2[2] + "," + catd2[3];
+                cat3 = catd3[0] + "," + catd3[1] + "," + catd3[2] + "," + catd3[3];
+                cat4 = catd4[0] + "," + catd4[1] + "," + catd4[2] + "," + catd4[3];
+                cat5 = catd5[0] + "," + catd5[1] + "," + catd5[2] + "," + catd5[3];
+
+                save();
+                location.reload();
+            }
+
+            function buycat() {
+                if (catd1[0] == "" || catd2[0] == "" || catd3[0] == "" || catd4[0] == "" || catd5[0] == "") {
+                    var newcat = prompt("Please enter a cat:", "自主性,活跃度,健康值,名字");
+                    if (catd1[0] == "") {
+                        cat1 = newcat;
+                        lovestatus1 = 0;
+                        hungerstatus1 = 100;
+                        age1 = 0;
+                    } else if (catd2[0] == "") {
+                        cat2 = newcat;
+                        lovestatus2 = 0;
+                        hungerstatus2 = 100;
+                        age2 = 0;
+                    } else if (catd3[0] == "") {
+                        cat3 = newcat;
+                        lovestatus3 = 0;
+                        hungerstatus3 = 100;
+                        age3 = 0;
+                    } else if (catd4[0] == "") {
+                        cat4 = newcat;
+                        lovestatus4 = 0;
+                        hungerstatus4 = 100;
+                        age4 = 0;
+                    } else if (catd5[0] == "") {
+                        cat5 = newcat;
+                        lovestatus5 = 0;
+                        hungerstatus5 = 100;
+                        age5 = 0;
+                    }
+                }
+                money = money - 1000;
+                save();
+                location.reload();
+            }
 
 
             function deadand() { //传递信息给安卓的java 
