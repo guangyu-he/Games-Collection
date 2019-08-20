@@ -2,8 +2,8 @@ function feedfunction() {
     cat.food = parseInt(cat.food) - 50;
     if (catselected == 1) {
         cat.hungerstatus1 = parseInt(cat.hungerstatus1) + 100;
-        if (cat.hungerstatus1 > 100) {
-            cat.hungerstatus1 = 100;
+        if (cat.hungerstatus1 > cat.hungermax1) {
+            cat.hungerstatus1 = cat.hungermax1;
             cat.lovestatus1 = parseInt(cat.lovestatus1) + 5;
         }
         if (parseInt(cat.hungerstatus1) - cat.hunger1 <= hungerlimit) {
@@ -15,8 +15,8 @@ function feedfunction() {
         document.getElementById("love").innerHTML = "好感度:" + cat.lovestatus1;
     } else if (catselected == 2) {
         cat.hungerstatus2 = parseInt(cat.hungerstatus2) + 100;
-        if (cat.hungerstatus2 > 100) {
-            cat.hungerstatus2 = 100;
+        if (cat.hungerstatus2 > cat.hungermax2) {
+            cat.hungerstatus2 = cat.hungermax2;
             cat.lovestatus2 = parseInt(cat.lovestatus2) + 5;
         }
         if (parseInt(cat.hungerstatus2) - cat.hunger2 <= hungerlimit) {
@@ -28,8 +28,8 @@ function feedfunction() {
         document.getElementById("love").innerHTML = "好感度:" + cat.lovestatus2;
     } else if (catselected == 3) {
         cat.hungerstatus3 = parseInt(cat.hungerstatus3) + 100;
-        if (cat.hungerstatus3 > 100) {
-            cat.hungerstatus3 = 100;
+        if (cat.hungerstatus3 > cat.hungermax3) {
+            cat.hungerstatus3 = cat.hungermax3;
             cat.lovestatus3 = parseInt(cat.lovestatus3) + 5;
         }
         if (parseInt(cat.hungerstatus3) - cat.hunger3 <= hungerlimit) {
@@ -41,8 +41,8 @@ function feedfunction() {
         document.getElementById("love").innerHTML = "好感度:" + cat.lovestatus3;
     } else if (catselected == 4) {
         cat.hungerstatus3 = parseInt(cat.hungerstatus3) + 100;
-        if (cat.hungerstatus3 > 100) {
-            cat.hungerstatus3 = 100;
+        if (cat.hungerstatus3 > cat.hungermax4) {
+            cat.hungerstatus3 = cat.hungermax4;
             cat.lovestatus3 = parseInt(cat.lovestatus3) + 5;
         }
         if (parseInt(cat.hungerstatus3) - cat.cat.hunger4 <= hungerlimit) {
@@ -54,8 +54,8 @@ function feedfunction() {
         document.getElementById("love").innerHTML = "好感度:" + cat.lovestatus3;
     } else if (catselected == 5) {
         cat.hungerstatus5 = parseInt(cat.hungerstatus5) + 100;
-        if (cat.hungerstatus5 > 100) {
-            cat.hungerstatus5 = 100;
+        if (cat.hungerstatus5 > cat.hungermax5) {
+            cat.hungerstatus5 = cat.hungermax5;
             cat.lovestatus5 = parseInt(cat.lovestatus5) + 5;
         }
         if (parseInt(cat.hungerstatus5) - cat.hunger5 <= hungerlimit) {
