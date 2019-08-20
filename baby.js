@@ -263,4 +263,5 @@ function baby() {
         alert("猫位已满！");
     }
     save();
+    location.reload();
 }

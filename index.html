@@ -278,7 +278,7 @@
                 var myDate = new Date();
                 var version = myDate.toLocaleString();
 
-                document.getElementById("version").innerHTML = "190820 - 1120";
+                document.getElementById("version").innerHTML = "190820 - 1310";
 
                 load();
 
@@ -292,7 +292,11 @@
                     if (cat.name1 == "") {
                         document.getElementById("cat1").innerHTML = "null";
                     } else {
-                        cat.hunger1 = parseInt(cat.huoyue1) * 2.5;
+                        if (cat.pstate1 == 1) {
+                            cat.hunger1 = parseInt(cat.huoyue1) * 2.5 * 1.5;
+                        } else {
+                            cat.hunger1 = parseInt(cat.huoyue1) * 2.5;
+                        }
                         if (cat.hunger1 > 100) {
                             cat.hunger1 = 100;
                         }
@@ -310,7 +314,11 @@
                     if (cat.name2 == "") {
                         document.getElementById("cat2").innerHTML = "null";
                     } else {
-                        cat.hunger2 = parseInt(cat.huoyue2) * 2.5;
+                        if (cat.pstate2 == 1) {
+                            cat.hunger2 = parseInt(cat.huoyue2) * 2.5 * 1.5;
+                        } else {
+                            cat.hunger2 = parseInt(cat.huoyue2) * 2.5;
+                        }
                         if (cat.hunger2 > 100) {
                             cat.hunger2 = 100;
                         }
@@ -328,7 +336,11 @@
                     if (cat.name3 == "") {
                         document.getElementById("cat3").innerHTML = "null";
                     } else {
-                        cat.hunger3 = parseInt(cat.huoyue3) * 2.5;
+                        if (cat.pstate3 == 1) {
+                            cat.hunger3 = parseInt(cat.huoyue3) * 2.5 * 1.5;
+                        } else {
+                            cat.hunger3 = parseInt(cat.huoyue3) * 2.5;
+                        }
                         if (cat.hunger3 > 100) {
                             cat.hunger3 = 100;
                         }
@@ -347,7 +359,11 @@
                     if (cat.name4 == "") {
                         document.getElementById("cat4").innerHTML = "null";
                     } else {
-                        cat.hunger4 = parseInt(cat.huoyue4) * 2.5;
+                        if (cat.pstate4 == 1) {
+                            cat.hunger4 = parseInt(cat.huoyue4) * 2.5 * 1.5;
+                        } else {
+                            cat.hunger4 = parseInt(cat.huoyue4) * 2.5;
+                        }
                         if (cat.hunger4 > 100) {
                             cat.hunger4 = 100;
                         }
@@ -366,7 +382,11 @@
                     if (cat.name5 == "") {
                         document.getElementById("cat5").innerHTML = "null";
                     } else {
-                        cat.hunger5 = parseInt(cat.huoyue5) * 2.5;
+                        if (cat.pstate5 == 1) {
+                            cat.hunger5 = parseInt(cat.huoyue5) * 2.5 * 1.5;
+                        } else {
+                            cat.hunger5 = parseInt(cat.huoyue5) * 2.5;
+                        }
                         if (cat.hunger5 > 100) {
                             cat.hunger5 = 100;
                         }
@@ -730,7 +750,7 @@
 <script src="baby.js"></script>
 <script src="train.js"></script>
 <script src="activity.js"></script>
-
+<script src="random.js"></script>
 
 
 
