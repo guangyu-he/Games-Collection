@@ -224,7 +224,11 @@
                 pstate5: "",
                 food: "",
                 money: "",
-                day: ""
+                day: "",
+                pday: "",
+                newzizhu: "",
+                newhuoyue: "",
+                newjiankang: ""
             };
 
             // "自主性,活跃度,健康值,名字,年龄,体力值,好感度,最大饥饿度,饥饿值,饥饿消耗"
@@ -274,7 +278,7 @@
                 var myDate = new Date();
                 var version = myDate.toLocaleString();
 
-                document.getElementById("version").innerHTML = "190820 - 1000";
+                document.getElementById("version").innerHTML = "190820 - 1120";
 
                 load();
 
@@ -417,7 +421,109 @@
             }
 
             function nextday() {
+                var confirm1, confirm2, confirm3, confirm4, confirm5;
+                if (cat.hungerstatus1 <= hungerlimit) {
+                    catselect1();
+                    var sure = confirm(cat.name1 + "太饿了!取消继续下一天，确认返回")
+                    if (sure == true) {
+                        return;
+                    } else {
+                        confirm1 = 1;
+                    }
+                }
+                if (cat.hungerstatus2 <= hungerlimit) {
+                    catselect2();
+                    var sure;
+                    sure = confirm(cat.name2 + "太饿了!取消继续下一天，确认返回")
+                    if (sure == true) {
+                        return;
+                    } else {
+                        confirm2 = 1;
+                    }
+                }
+                if (cat.hungerstatus3 <= hungerlimit) {
+                    catselect3();
+                    var sure;
+                    sure = confirm(cat.name3 + "太饿了!取消继续下一天，确认返回")
+                    if (sure == true) {
+                        return;
+                    } else {
+                        confirm3 = 1;
+                    }
+                }
+                if (cat.hungerstatus4 <= hungerlimit) {
+                    catselect4();
+                    var sure;
+                    sure = confirm(cat.name4 + "太饿了!取消继续下一天，确认返回")
+                    if (sure == true) {
+                        return;
+                    } else {
+                        confirm4 = 1;
+                    }
+                }
+                if (cat.hungerstatus5 <= hungerlimit) {
+                    catselect5();
+                    var sure;
+                    sure = confirm(cat.name5 + "太饿了!取消继续下一天，确认返回")
+                    if (sure == true) {
+                        return;
+                    } else {
+                        confirm5 = 1;
+                    }
+                }
+
                 cat.day++;
+
+                if (confirm1 == 1) {
+                    cat.jiankang1 = parseInt(cat.jiankang1) - 2; //j健康度-2
+                    cat.huoyue1 = parseInt(cat.huoyue1 - 2); //j活跃度-2
+                    cat.hunger1 = parseInt(cat.hunger1) + 1; //每日消耗增加
+                    if (cat.jiankang1 <= 0) {
+                        alert(cat.name1 + " dead!");
+                        confirm1 = 0;
+                    }
+                }
+                if (confirm2 == 1) {
+                    cat.jiankang2 = parseInt(cat.jiankang2) - 2; //j健康度-2
+                    cat.huoyue2 = parseInt(cat.huoyue2) - 2; //j活跃度-2
+                    cat.hunger2 = parseInt(cat.hunger2) + 1; //每日消耗增加
+                    if (cat.jiankang2 <= 0) {
+                        alert(cat.name2 + " dead!");
+                    }
+                    confirm2 = 0;
+                }
+                if (confirm3 == 1) {
+                    cat.jiankang3 = parseInt(cat.jiankang3) - 2; //j健康度-2
+                    cat.huoyue3 = parseInt(cat.huoyue3) - 2; //j活跃度-2
+                    cat.hunger3 = parseInt(cat.hunger3) + 1; //每日消耗增加
+                    if (cat.jiankang3 <= 0) {
+                        alert(cat.name3 + " dead!");
+                    }
+                    confirm3 = 0;
+                }
+                if (confirm4 == 1) {
+                    cat.jiankang4 = parseInt(cat.jiankang4) - 2; //j健康度-2
+                    cat.huoyue4 = parseInt(cat.huoyue4) - 2; //j活跃度-2
+                    cat.hunger4 = parseInt(cat.hunger4) + 1; //每日消耗增加
+                    if (cat.jiankang4 <= 0) {
+                        alert(cat.name4 + " dead!");
+                        confirm4 = 0;
+                    }
+                }
+                if (confirm5 == 1) {
+                    cat.jiankang5 = parseInt(cat.jiankang5) - 2; //j健康度-2
+                    cat.huoyue5 = parseInt(cat.huoyue5) - 2; //j活跃度-2
+                    cat.hunger5 = parseInt(cat.hunger5) + 1; //每日消耗增加
+                    if (cat.jiankang5 <= 0) {
+                        alert(cat.name5 + " dead!");
+                    }
+                    confirm5 = 0;
+                }
+
+                if (cat.pday >= 1) { //怀孕天数
+                    cat.pday++;
+                }
+
 
                 if (cat.name1 != null && cat.name1 != "") {
                     cat.age1++;
@@ -448,7 +554,7 @@
                 document.getElementById("day").innerHTML = "day:" + cat.day;
 
 
-                if (cat.age1 >= 30 && cat.age1 < 60) {
+                if (cat.age1 >= 30 && cat.age1 < 60) { //年龄影响
                     cat.hungermax1 = 200;
                 } else if (cat.age1 >= 60) {
                     cat.hungermax1 = 150;
@@ -513,51 +619,6 @@
                     cat.jiankang5 = parseInt(cat.huoyue5) + 1;
                 }
 
-                if (cat.hungerstatus1 <= hungerlimit) {
-                    cat.jiankang1 = parseInt(cat.jiankang1) - 2; //j健康度-2
-                    cat.huoyue1 = parseInt(cat.huoyue1 - 2); //j活跃度-2
-                    cat.hunger1 = parseInt(cat.hunger1) + 1; //每日消耗增加
-                    if (cat.jiankang1 <= 0) {
-                        alert(cat.name1 + " dead!");
-                    }
-                }
-
-                if (cat.hungerstatus2 <= hungerlimit) {
-                    cat.jiankang2 = parseInt(cat.jiankang2) - 2; //j健康度-2
-                    cat.huoyue2 = parseInt(cat.huoyue2) - 2; //j活跃度-2
-                    cat.hunger2 = parseInt(cat.hunger2) + 1; //每日消耗增加
-                    if (cat.jiankang2 <= 0) {
-                        alert(cat.name2 + " dead!");
-                    }
-                }
-
-                if (cat.hungerstatus3 <= hungerlimit) {
-                    cat.jiankang3 = parseInt(cat.jiankang3) - 2; //j健康度-2
-                    cat.huoyue3 = parseInt(cat.huoyue3) - 2; //j活跃度-2
-                    cat.hunger3 = parseInt(cat.hunger3) + 1; //每日消耗增加
-                    if (cat.jiankang3 <= 0) {
-                        alert(cat.name3 + " dead!");
-                    }
-                }
-
-                if (cat.hungerstatus4 <= hungerlimit) {
-                    cat.jiankang4 = parseInt(cat.jiankang4) - 2; //j健康度-2
-                    cat.huoyue4 = parseInt(cat.huoyue4) - 2; //j活跃度-2
-                    cat.hunger4 = parseInt(cat.hunger4) + 1; //每日消耗增加
-                    if (cat.jiankang4 <= 0) {
-                        alert(cat.name4 + " dead!");
-                    }
-                }
-
-                if (cat.hungerstatus5 <= hungerlimit) {
-                    cat.jiankang5 = parseInt(cat.jiankang5) - 2; //j健康度-2
-                    cat.huoyue5 = parseInt(cat.huoyue5) - 2; //j活跃度-2
-                    cat.hunger5 = parseInt(cat.hunger5) + 1; //每日消耗增加
-                    if (cat.jiankang5 <= 0) {
-                        alert(cat.name5 + " dead!");
-                    }
-                }
-
                 if (cat.lovestatus1 >= 100) { //全属性+1
                     cat.zizhu1 = parseInt(cat.zizhu1) + 1;
                     cat.huoyue1 = parseInt(cat.huoyue1) + 1;
@@ -604,6 +665,8 @@
                 cat.life3 = parseInt(cat.jiankang3) * 10;
                 cat.life4 = parseInt(cat.jiankang4) * 10;
                 cat.life5 = parseInt(cat.jiankang5) * 10;
+
+                birth();
 
                 if (cat.name1 != "") {
                     document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1 + "," + cat.sex1;

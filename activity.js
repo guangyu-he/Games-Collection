@@ -36,7 +36,7 @@ function findfood() {
                 random = 1;
             }
 
-            cat.life2 = parseInt(cat.life2) - 0;
+            cat.life2 = 0;
 
             if (random == 0) {
                 alert("觅食失败!");
