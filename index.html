@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/style.min.css">
     <style>
         body {
-            width: auto;
+            width: -moz-fit-content;
+            width: -webkit-fit-content;
+            width: fit-content;
             margin: 0px auto;
             -moz-user-select: none;
             /*火狐*/
@@ -27,6 +29,7 @@
             margin: 20px;
             border: 0;
             padding: 0;
+            width: auto;
         }
         
         .lastResult {
@@ -49,696 +52,696 @@
 
 </head>
 
-<body onload="onload()">
+<body onload="onload()" class="text-align: center">
 
 
-    <div id="wrapper" class="wrapper;text-align: center">
+    <div id="wrapper" class="wrapper">
         <header class="header htmleaf-header">
             <h1>CATS!<span>alpha:<text id="version"></text><br><a href="https://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
         </header>
         <main>
-            <div class="container;text-align: center">
+            <div class="container">
                 <section>
 
-
-                    <div class="text-align: center">
+                    <div>
                         <p id="day" class="button-border button-rounded button-primary">day:</p>
                     </div>
 
+                    <div>
+                        <div class="btn-group">
+                            <button type="button" id="catselect" class=" button button-rounded" data-toggle="dropdown">
+                选择猫<span class="caret"></span>
+            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a id="cat1" href="javascript:catselect1()"></a>
+                                </li>
+                                <li>
+                                    <a id="cat2" href="javascript:catselect2()"></a>
+                                </li>
+                                <li>
+                                    <a id="cat3" href="javascript:catselect3()"></a>
+                                </li>
+                                <li>
+                                    <a id="cat4" href="javascript:catselect4()"></a>
+                                </li>
+                                <li>
+                                    <a id="cat5" href="javascript:catselect5()"></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:restart()">删除存档！</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:test()">测试！</a>
+                                </li>
+                            </ul>
+                        </div>
 
-
-
-                    <div class="btn-group">
-                        <button type="button" id="catselect" class=" button button-rounded" data-toggle="dropdown">
-                                选择猫<span class="caret"></span>
-                            </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a id="cat1" href="javascript:catselect1()"></a>
-                            </li>
-                            <li>
-                                <a id="cat2" href="javascript:catselect2()"></a>
-                            </li>
-                            <li>
-                                <a id="cat3" href="javascript:catselect3()"></a>
-                            </li>
-                            <li>
-                                <a id="cat4" href="javascript:catselect4()"></a>
-                            </li>
-                            <li>
-                                <a id="cat5" href="javascript:catselect5()"></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:restart()">删除存档！</a>
-                            </li>
-                            <li>
-                                <a href="javascript:test()">测试！</a>
-                            </li>
-                        </ul>
+                        <div class="btn-group">
+                            <button type="button" id="" class=" button button-rounded" data-toggle="dropdown">
+                活动猫<span class="caret"></span>
+            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a id="" href="javascript:trainhuoyue()">训练活跃度</a>
+                                </li>
+                                <li>
+                                    <a id="" href="javascript:trainzizhu()">训练自主性</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="" href="javascript:findfood()">外出觅食</a>
+                                    <a id="" href="javascript:findmoney()">外出挣钱</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="text-align: center">
+                    <div>
                         <p id="status" class="button-border button-rounded button-primary"></p>
                     </div>
 
-                    <div class="button-group;text-align: center">
-                        <button type="button" onclick="feedfunction()" class="button button-primary">喂猫</button>
-                        <button type="button" onclick="playwithcat()" class="button button-primary">逗猫</button>
+                    <div>
+                        <div class="button-group">
+                            <button type="button" onclick="feedfunction()" style="display: inline" class="button button-primary">喂猫</button>
+                            <button type="button" onclick="playwithcat()" style="display: inline" class="button button-primary">逗猫</button>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" onclick="buycat()" style="display: inline" class="button button-pill button-action">买猫</button>
+                            <button type="button" onclick="sellcat()" style="display: inline" class="button button-pill button-action">卖猫</button>
+                            <button type="button" onclick="baby()" style="display: inline" class="button button-pill button-action">交配猫</button>
+                        </div>
                     </div>
 
-                    <div class="btn-group">
-                        <button type="button" id="" class=" button button-rounded" data-toggle="dropdown">
-                                活动猫<span class="caret"></span>
-                            </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a id="" href="javascript:trainhuoyue()">训练活跃度</a>
-                            </li>
-                            <li>
-                                <a id="" href="javascript:trainzizhu()">训练自主性</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a id="" href="javascript:findfood()">外出觅食</a>
-                                <a id="" href="javascript:findmoney()">外出挣钱</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="button-group;text-align: center">
-                        <button type="button" onclick="buycat()" class="button button-pill button-action">买猫</button>
-                        <button type="button" onclick="sellcat()" class="button button-pill button-action">卖猫</button>
-                        <button type="button" onclick="baby()" class="button button-pill button-action">交配猫</button>
-                    </div>
-
-                    <div class="text-align: center">
+                    <div>
                         <p id="hunger" class="button-border button-rounded button-primary">饱食度:</p>
                         <p id="life" class="button-border button-rounded button-primary">体力值:</p>
                         <p id="love" class="button-border button-rounded button-primary">好感度:</p>
                     </div>
 
-                    <div id="da" style="overflow:hidden" class="text-align: center">
-                        <div id="xiao1" style="float:left" class="text-align: center">
-                            <button id="food" onclick="buyfood()" type="button" class="button button-border button-rounded button-primary">food:</button>
+                    <div style="overflow:hidden">
+                        <div style="float:left">
+                            <button id="food" onclick="buyfood()" class="button button-border button-rounded button-primary">food:</button>
                         </div>
-                        <div id="xiao2" style="float:right" class="text-align: center">
-                            <button id="money" onclick="workformoney()" class="button  button-border button-rounded button-primary">money:</p>
-                                            </div>
-                                        </div>
+                        <div style="float:right">
+                            <button id="money" onclick="workformoney()" class="button  button-border button-rounded button-primary">money:</button>
+                        </div>
+                    </div>
 
-                            <div class="text-align: center">
-                                <button id="nextday" onclick="nextday()" class="button button-glow button-border button-rounded button-primary text-align: center">next day</button>
-                        </div>
+                    <div>
+                        <button id="nextday" onclick="nextday()" class="button button-glow button-border button-rounded button-primary text-align: center">next day</button>
+                    </div>
                 </section>
-                </div>
+            </div>
         </main>
-        </div>
+    </div>
 
-        <script src="js/production/materialMenu.min.js"></script>
+    <script src="js/production/materialMenu.min.js"></script>
 
-        <script>
-            var localStorage = window.localStorage;
+    <script>
+        var localStorage = window.localStorage;
 
-            var catstr;
-            var cat = {
-                zizhu1: "",
-                huoyue1: "",
-                jiankang1: "",
-                name1: "",
-                sex1: "",
-                age1: "",
-                life1: "",
-                lovestatus1: "",
-                hungermax1: "",
-                hungerstatus1: "",
-                hunger1: "",
-                pstate1: "",
-                zizhu2: "",
-                huoyue2: "",
-                jiankang2: "",
-                name2: "",
-                sex2: "",
-                age2: "",
-                life2: "",
-                lovestatus2: "",
-                hungermax2: "",
-                hungerstatus2: "",
-                hunger2: "",
-                pstate2: "",
-                zizhu3: "",
-                huoyue3: "",
-                jiankang3: "",
-                name3: "",
-                sex3: "",
-                age3: "",
-                life3: "",
-                lovestatus3: "",
-                hungermax3: "",
-                hungerstatus3: "",
-                hunger3: "",
-                pstate3: "",
-                zizhu4: "",
-                huoyue4: "",
-                jiankang4: "",
-                name4: "",
-                sex4: "",
-                age4: "",
-                life4: "",
-                lovestatus4: "",
-                hungermax4: "",
-                hungerstatus4: "",
-                hunger4: "",
-                pstate4: "",
-                zizhu5: "",
-                huoyue5: "",
-                jiankang5: "",
-                name5: "",
-                sex5: "",
-                age5: "",
-                life5: "",
-                lovestatus5: "",
-                hungermax5: "",
-                hungerstatus5: "",
-                hunger5: "",
-                pstate5: "",
-                food: "",
-                money: "",
-                day: "",
-                pday: "",
-                newzizhu: "",
-                newhuoyue: "",
-                newjiankang: ""
-            };
+        var catstr;
+        var cat = {
+            zizhu1: "",
+            huoyue1: "",
+            jiankang1: "",
+            name1: "",
+            sex1: "",
+            age1: "",
+            life1: "",
+            lovestatus1: "",
+            hungermax1: "",
+            hungerstatus1: "",
+            hunger1: "",
+            pstate1: "",
+            zizhu2: "",
+            huoyue2: "",
+            jiankang2: "",
+            name2: "",
+            sex2: "",
+            age2: "",
+            life2: "",
+            lovestatus2: "",
+            hungermax2: "",
+            hungerstatus2: "",
+            hunger2: "",
+            pstate2: "",
+            zizhu3: "",
+            huoyue3: "",
+            jiankang3: "",
+            name3: "",
+            sex3: "",
+            age3: "",
+            life3: "",
+            lovestatus3: "",
+            hungermax3: "",
+            hungerstatus3: "",
+            hunger3: "",
+            pstate3: "",
+            zizhu4: "",
+            huoyue4: "",
+            jiankang4: "",
+            name4: "",
+            sex4: "",
+            age4: "",
+            life4: "",
+            lovestatus4: "",
+            hungermax4: "",
+            hungerstatus4: "",
+            hunger4: "",
+            pstate4: "",
+            zizhu5: "",
+            huoyue5: "",
+            jiankang5: "",
+            name5: "",
+            sex5: "",
+            age5: "",
+            life5: "",
+            lovestatus5: "",
+            hungermax5: "",
+            hungerstatus5: "",
+            hunger5: "",
+            pstate5: "",
+            food: "",
+            money: "",
+            day: "",
+            pday: "",
+            newzizhu: "",
+            newhuoyue: "",
+            newjiankang: ""
+        };
 
-            // "自主性,活跃度,健康值,名字,年龄,体力值,好感度,最大饥饿度,饥饿值,饥饿消耗"
-            var hungerlimit = -25;
+        // "自主性,活跃度,健康值,名字,年龄,体力值,好感度,最大饥饿度,饥饿值,饥饿消耗"
+        var hungerlimit = -25;
 
-            var catselected;
+        var catselected;
 
-            function restart() {
-                var sure;
-                sure = confirm("确认删除存档吗！?")
-                if (sure == true) {
-                    localStorage.clear();
-                    location.reload();
-                } else {}
-            }
-
-            function test() {
-                //测试用
-                cat.name2 = "Alma";
-                cat.sex2 = "girl";
-                cat.zizhu2 = 10;
-                cat.huoyue2 = 10;
-                cat.jiankang2 = 10;
-                cat.age2 = 29;
-                cat.hungerstatus2 = 100;
-                cat.lovestatus2 = 0;
-
-                cat.food = 500;
-                cat.money = 1000;
-                cat.day = 1;
-
-                cat.name1 = "Lukas";
-                cat.sex1 = "boy";
-                cat.zizhu1 = 5;
-                cat.huoyue1 = 10;
-                cat.jiankang1 = 15;
-                cat.age1 = 29;
-                cat.lovestatus1 = 0;
-                cat.hungerstatus1 = 100;
-
-                save();
-                onload();
+        function restart() {
+            var sure;
+            sure = confirm("确认删除存档吗！?")
+            if (sure == true) {
+                localStorage.clear();
                 location.reload();
-            }
+            } else {}
+        }
 
-            function onload() {
-                var myDate = new Date();
-                var version = myDate.toLocaleString();
+        function test() {
+            //测试用
+            cat.name2 = "Alma";
+            cat.sex2 = "girl";
+            cat.zizhu2 = 10;
+            cat.huoyue2 = 10;
+            cat.jiankang2 = 10;
+            cat.age2 = 29;
+            cat.hungerstatus2 = 100;
+            cat.lovestatus2 = 0;
 
-                document.getElementById("version").innerHTML = "190820 - 1310";
+            cat.food = 500;
+            cat.money = 1000;
+            cat.day = 1;
 
-                load();
+            cat.name1 = "Lukas";
+            cat.sex1 = "boy";
+            cat.zizhu1 = 5;
+            cat.huoyue1 = 10;
+            cat.jiankang1 = 15;
+            cat.age1 = 29;
+            cat.lovestatus1 = 0;
+            cat.hungerstatus1 = 100;
 
-                if (cat.day == null || cat.day == "") {
-                    cat.day = 1;
-                    cat.money = 0;
-                    cat.food = 0;
-                    save();
-                } else {
+            save();
+            onload();
+            location.reload();
+        }
 
-                    if (cat.name1 == "") {
-                        document.getElementById("cat1").innerHTML = "null";
-                    } else {
-                        if (cat.pstate1 == 1) {
-                            cat.hunger1 = parseInt(cat.huoyue1) * 2.5 * 1.5;
-                        } else {
-                            cat.hunger1 = parseInt(cat.huoyue1) * 2.5;
-                        }
-                        if (cat.hunger1 > 100) {
-                            cat.hunger1 = 100;
-                        }
-                        cat.life1 = parseInt(cat.jiankang1) * 10;
-                        if (cat.age1 < 30) {
-                            cat.hungermax1 = 100;
-                        } else if (cat.age1 >= 30 && cat.age1 < 60) {
-                            cat.hungermax1 = 200;
-                        } else {
-                            cat.hungermax1 = 150;
-                        }
-                        document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1;
-                    }
+        function onload() {
+            var myDate = new Date();
+            var version = myDate.toLocaleString();
 
-                    if (cat.name2 == "") {
-                        document.getElementById("cat2").innerHTML = "null";
-                    } else {
-                        if (cat.pstate2 == 1) {
-                            cat.hunger2 = parseInt(cat.huoyue2) * 2.5 * 1.5;
-                        } else {
-                            cat.hunger2 = parseInt(cat.huoyue2) * 2.5;
-                        }
-                        if (cat.hunger2 > 100) {
-                            cat.hunger2 = 100;
-                        }
-                        cat.life2 = parseInt(cat.jiankang2) * 10;
-                        if (cat.age2 < 30) {
-                            cat.hungermax2 = 100;
-                        } else if (cat.age2 >= 30 && cat.age2 < 60) {
-                            cat.hungermax2 = 200;
-                        } else {
-                            cat.hungermax2 = 150;
-                        }
-                        document.getElementById("cat2").innerHTML = cat.name2 + "," + cat.age2;
-                    }
+            document.getElementById("version").innerHTML = "190820 - 1310";
 
-                    if (cat.name3 == "") {
-                        document.getElementById("cat3").innerHTML = "null";
-                    } else {
-                        if (cat.pstate3 == 1) {
-                            cat.hunger3 = parseInt(cat.huoyue3) * 2.5 * 1.5;
-                        } else {
-                            cat.hunger3 = parseInt(cat.huoyue3) * 2.5;
-                        }
-                        if (cat.hunger3 > 100) {
-                            cat.hunger3 = 100;
-                        }
-                        cat.life3 = parseInt(cat.jiankang3) * 10;
-                        if (cat.age3 < 30) {
-                            cat.hungermax3 = 100;
-                        } else if (cat.age3 >= 30 && cat.age3 < 60) {
-                            cat.hungermax3 = 200;
-                        } else {
-                            cat.hungermax3 = 150;
-                        }
-                        document.getElementById("cat3").innerHTML = cat.name3 + "," + cat.age3;
-                    }
+            load();
 
-
-                    if (cat.name4 == "") {
-                        document.getElementById("cat4").innerHTML = "null";
-                    } else {
-                        if (cat.pstate4 == 1) {
-                            cat.hunger4 = parseInt(cat.huoyue4) * 2.5 * 1.5;
-                        } else {
-                            cat.hunger4 = parseInt(cat.huoyue4) * 2.5;
-                        }
-                        if (cat.hunger4 > 100) {
-                            cat.hunger4 = 100;
-                        }
-                        cat.life4 = parseInt(cat.jiankang4) * 10;
-                        if (cat.age4 < 30) {
-                            cat.hungermax4 = 100;
-                        } else if (cat.age4 >= 30 && cat.age4 < 60) {
-                            cat.hungermax4 = 200;
-                        } else {
-                            cat.hungermax4 = 150;
-                        }
-                        document.getElementById("cat4").innerHTML = cat.name4 + "," + cat.age4;
-                    }
-
-
-                    if (cat.name5 == "") {
-                        document.getElementById("cat5").innerHTML = "null";
-                    } else {
-                        if (cat.pstate5 == 1) {
-                            cat.hunger5 = parseInt(cat.huoyue5) * 2.5 * 1.5;
-                        } else {
-                            cat.hunger5 = parseInt(cat.huoyue5) * 2.5;
-                        }
-                        if (cat.hunger5 > 100) {
-                            cat.hunger5 = 100;
-                        }
-                        cat.life5 = parseInt(cat.jiankang5) * 10;
-                        if (cat.age5 < 30) {
-                            cat.hungermax5 = 100;
-                        } else if (cat.age5 >= 30 && cat.age5 < 60) {
-                            cat.hungermax5 = 200;
-                        } else {
-                            cat.hungermax5 = 150;
-                        }
-                        document.getElementById("cat5").innerHTML = cat.name5 + "," + cat.age5;
-                    }
-
-                }
-
-                if (cat.name1 != "") {
-                    document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1 + "," + cat.sex1;
-                } else {
-                    document.getElementById("cat1").innerHTML = "null";
-
-                }
-                if (cat.name2 != "") {
-                    document.getElementById("cat2").innerHTML = cat.name2 + "," + cat.age2 + "," + cat.sex2;
-                } else {
-                    document.getElementById("cat2").innerHTML = "null";
-
-                }
-                if (cat.name3 != "") {
-                    document.getElementById("cat3").innerHTML = cat.name3 + "," + cat.age3 + "," + cat.sex3;
-                } else {
-                    document.getElementById("cat3").innerHTML = "null";
-
-                }
-                if (cat.name4 != "") {
-                    document.getElementById("cat4").innerHTML = cat.name4 + "," + cat.age4 + "," + cat.sex4;
-                } else {
-                    document.getElementById("cat4").innerHTML = "null";
-
-                }
-                if (cat.name5 != "") {
-                    document.getElementById("cat5").innerHTML = cat.name5 + "," + cat.age5 + "," + cat.sex5;
-                } else {
-                    document.getElementById("cat5").innerHTML = "null";
-
-                }
-
-                document.getElementById("day").innerHTML = "day:" + cat.day;
-                document.getElementById("food").innerHTML = "剩余食物:" + cat.food;
-                document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
-
-            }
-
-            function nextday() {
-                var confirm1, confirm2, confirm3, confirm4, confirm5;
-                if (cat.hungerstatus1 <= hungerlimit) {
-                    catselect1();
-                    var sure = confirm(cat.name1 + "太饿了!取消继续下一天，确认返回")
-                    if (sure == true) {
-                        return;
-                    } else {
-                        confirm1 = 1;
-                    }
-                }
-                if (cat.hungerstatus2 <= hungerlimit) {
-                    catselect2();
-                    var sure;
-                    sure = confirm(cat.name2 + "太饿了!取消继续下一天，确认返回")
-                    if (sure == true) {
-                        return;
-                    } else {
-                        confirm2 = 1;
-                    }
-                }
-                if (cat.hungerstatus3 <= hungerlimit) {
-                    catselect3();
-                    var sure;
-                    sure = confirm(cat.name3 + "太饿了!取消继续下一天，确认返回")
-                    if (sure == true) {
-                        return;
-                    } else {
-                        confirm3 = 1;
-                    }
-                }
-                if (cat.hungerstatus4 <= hungerlimit) {
-                    catselect4();
-                    var sure;
-                    sure = confirm(cat.name4 + "太饿了!取消继续下一天，确认返回")
-                    if (sure == true) {
-                        return;
-                    } else {
-                        confirm4 = 1;
-                    }
-                }
-                if (cat.hungerstatus5 <= hungerlimit) {
-                    catselect5();
-                    var sure;
-                    sure = confirm(cat.name5 + "太饿了!取消继续下一天，确认返回")
-                    if (sure == true) {
-                        return;
-                    } else {
-                        confirm5 = 1;
-                    }
-                }
-
-                cat.day++;
-
-                if (confirm1 == 1) {
-                    cat.jiankang1 = parseInt(cat.jiankang1) - 2; //j健康度-2
-                    cat.huoyue1 = parseInt(cat.huoyue1 - 2); //j活跃度-2
-                    cat.hunger1 = parseInt(cat.hunger1) + 1; //每日消耗增加
-                    if (cat.jiankang1 <= 0) {
-                        alert(cat.name1 + " dead!");
-                        confirm1 = 0;
-                    }
-                }
-                if (confirm2 == 1) {
-                    cat.jiankang2 = parseInt(cat.jiankang2) - 2; //j健康度-2
-                    cat.huoyue2 = parseInt(cat.huoyue2) - 2; //j活跃度-2
-                    cat.hunger2 = parseInt(cat.hunger2) + 1; //每日消耗增加
-                    if (cat.jiankang2 <= 0) {
-                        alert(cat.name2 + " dead!");
-                    }
-                    confirm2 = 0;
-                }
-                if (confirm3 == 1) {
-                    cat.jiankang3 = parseInt(cat.jiankang3) - 2; //j健康度-2
-                    cat.huoyue3 = parseInt(cat.huoyue3) - 2; //j活跃度-2
-                    cat.hunger3 = parseInt(cat.hunger3) + 1; //每日消耗增加
-                    if (cat.jiankang3 <= 0) {
-                        alert(cat.name3 + " dead!");
-                    }
-                    confirm3 = 0;
-                }
-                if (confirm4 == 1) {
-                    cat.jiankang4 = parseInt(cat.jiankang4) - 2; //j健康度-2
-                    cat.huoyue4 = parseInt(cat.huoyue4) - 2; //j活跃度-2
-                    cat.hunger4 = parseInt(cat.hunger4) + 1; //每日消耗增加
-                    if (cat.jiankang4 <= 0) {
-                        alert(cat.name4 + " dead!");
-                        confirm4 = 0;
-                    }
-                }
-                if (confirm5 == 1) {
-                    cat.jiankang5 = parseInt(cat.jiankang5) - 2; //j健康度-2
-                    cat.huoyue5 = parseInt(cat.huoyue5) - 2; //j活跃度-2
-                    cat.hunger5 = parseInt(cat.hunger5) + 1; //每日消耗增加
-                    if (cat.jiankang5 <= 0) {
-                        alert(cat.name5 + " dead!");
-                    }
-                    confirm5 = 0;
-                }
-
-                if (cat.pday >= 1) { //怀孕天数
-                    cat.pday++;
-                }
-
-
-                if (cat.name1 != null && cat.name1 != "") {
-                    cat.age1++;
-                    cat.hungerstatus1 = parseInt(cat.hungerstatus1) - cat.hunger1;
-                    cat.lovestatus1 = parseInt(cat.lovestatus1) - 2;
-                }
-                if (cat.name2 != null && cat.name2 != "") {
-                    cat.age2++;
-                    cat.hungerstatus2 = parseInt(cat.hungerstatus2) - cat.hunger2;
-                    cat.lovestatus2 = parseInt(cat.lovestatus2) - 2;
-                }
-                if (cat.name3 != null && cat.name3 != "") {
-                    cat.age3++;
-                    cat.hungerstatus3 = parseInt(cat.hungerstatus3) - cat.hunger3;
-                    cat.lovestatus3 = parseInt(cat.lovestatus3) - 2;
-                }
-                if (cat.name4 != null && cat.name4 != "") {
-                    cat.age4++;
-                    cat.hungerstatus4 = parseInt(cat.hungerstatus4) - cat.hunger4;
-                    cat.lovestatus4 = parseInt(cat.lovestatus4) - 2;
-                }
-                if (cat.name5 != null && cat.name5 != "") {
-                    cat.age5++;
-                    cat.hungerstatus5 = parseInt(cat.hungerstatus5) - cat.hunger5;
-                    cat.lovestatus5 = parseInt(cat.lovestatus5) - 2;
-                }
-
-                document.getElementById("day").innerHTML = "day:" + cat.day;
-
-
-                if (cat.age1 >= 30 && cat.age1 < 60) { //年龄影响
-                    cat.hungermax1 = 200;
-                } else if (cat.age1 >= 60) {
-                    cat.hungermax1 = 150;
-                    cat.huoyue1 = parseInt(cat.huoyue1) - 1;
-                    cat.jiankang1 = parseInt(cat.huoyue1) - 1;
-                } else if (cat.age1 == 100) {
-                    alert(cat.name1 + " dead!");
-                } else if (cat.age1 < 30) {
-                    cat.huoyue1 = parseInt(cat.huoyue1) + 1;
-                    cat.jiankang1 = parseInt(cat.huoyue1) + 1;
-                }
-
-                if (cat.age2 >= 30 && cat.age2 < 60) {
-                    cat.hungermax2 = 200;
-                } else if (cat.age2 >= 60) {
-                    cat.hungermax2 = 150;
-                    cat.huoyue2 = parseInt(cat.huoyue2) - 1;
-                    cat.jiankang2 = parseInt(cat.huoyue2) - 1;
-                } else if (cat.age2 == 100) {
-                    alert(cat.name2 + " dead!");
-                } else if (cat.age2 < 30) {
-                    cat.huoyue2 = parseInt(cat.huoyue2) + 1;
-                    cat.jiankang2 = parseInt(cat.huoyue2) + 1;
-                }
-
-                if (cat.age3 >= 30 && cat.age3 < 60) {
-                    cat.hungermax3 = 200;
-                } else if (cat.age3 >= 60) {
-                    cat.hungermax3 = 150;
-                    cat.huoyue3 = parseInt(cat.huoyue3) - 1;
-                    cat.jiankang3 = parseInt(cat.huoyue3) - 1;
-                } else if (cat.age3 == 100) {
-                    alert(cat.name3 + " dead!");
-                } else if (cat.age3 < 30) {
-                    cat.huoyue3 = parseInt(cat.huoyue3) + 1;
-                    cat.jiankang3 = parseInt(cat.huoyue3) + 1;
-                }
-
-                if (cat.age4 >= 30 && cat.age4 < 60) {
-                    cat.hungermax4 = 200;
-                } else if (cat.age4 >= 60) {
-                    cat.hungermax4 = 150;
-                    cat.huoyue4 = parseInt(cat.huoyue4) - 1;
-                    cat.jiankang4 = parseInt(cat.huoyue4) - 1;
-                } else if (cat.age4 == 100) {
-                    alert(cat.name4 + " dead!");
-                } else if (cat.age4 < 30) {
-                    cat.huoyue4 = parseInt(cat.huoyue4) + 1;
-                    cat.jiankang4 = parseInt(cat.huoyue4) + 1;
-                }
-
-                if (cat.age5 >= 30 && cat.age5 < 60) {
-                    cat.hungermax5 = 200;
-                } else if (cat.age5 >= 60) {
-                    cat.hungermax5 = 150;
-                    cat.huoyue5 = parseInt(cat.huoyue5) - 1;
-                    cat.jiankang5 = parseInt(cat.huoyue5) - 1;
-                } else if (cat.age5 == 100) {
-                    alert(cat.name5 + " dead!");
-                } else if (cat.age5 < 30) {
-                    cat.huoyue5 = parseInt(cat.huoyue5) + 1;
-                    cat.jiankang5 = parseInt(cat.huoyue5) + 1;
-                }
-
-                if (cat.lovestatus1 >= 100) { //全属性+1
-                    cat.zizhu1 = parseInt(cat.zizhu1) + 1;
-                    cat.huoyue1 = parseInt(cat.huoyue1) + 1;
-                    cat.jiankang1 = parseInt(cat.jiankang1) + 1;
-                    cat.lovestatus1 = cat.lovestatus1 - 100;
-                    cat.hunger1 = parseInt(cat.jiankang1) * 2.5;
-                    cat.life1 = parseInt(cat.jiankang1) * 10;
-                }
-                if (cat.lovestatus2 >= 100) { //全属性+1
-                    cat.zizhu2 = parseInt(cat.zizhu2) + 1;
-                    cat.huoyue2 = parseInt(cat.huoyue2) + 1;
-                    cat.jiankang2 = parseInt(cat.jiankang2) + 1;
-                    cat.lovestatus2 = cat.lovestatus2 - 100;
-                    cat.hunger2 = parseInt(cat.jiankang2) * 2.5;
-                    cat.life2 = parseInt(cat.jiankang2) * 10;
-                }
-                if (cat.lovestatus3 >= 100) { //全属性+1
-                    cat.zizhu3 = parseInt(cat.zizhu3) + 1;
-                    cat.huoyue3 = parseInt(cat.huoyue3) + 1;
-                    cat.jiankang3 = parseInt(cat.jiankang3) + 1;
-                    cat.lovestatus3 = cat.lovestatus3 - 100;
-                    cat.hunger3 = parseInt(cat.jiankang3) * 2.5;
-                    cat.life3 = parseInt(cat.jiankang3) * 10;
-                }
-                if (cat.lovestatus4 >= 100) { //全属性+1
-                    cat.zizhu4 = parseInt(cat.zizhu4) + 1;
-                    cat.huoyue4 = parseInt(cat.huoyue4) + 1;
-                    cat.jiankang4 = parseInt(cat.jiankang4) + 1;
-                    cat.lovestatus4 = cat.lovestatus4 - 100;
-                    cat.hunger4 = parseInt(cat.jiankang4) * 2.5;
-                    cat.life4 = parseInt(cat.jiankang4) * 10;
-                }
-                if (cat.lovestatus5 >= 100) { //全属性+1
-                    cat.zizhu5 = parseInt(cat.zizhu5) + 1;
-                    cat.huoyue5 = parseInt(cat.huoyue5) + 1;
-                    cat.jiankang5 = parseInt(cat.jiankang5) + 1;
-                    cat.lovestatus5 = cat.lovestatus5 - 100;
-                    cat.hunger5 = parseInt(cat.jiankang5) * 2.5;
-                    cat.life5 = parseInt(cat.jiankang5) * 10;
-                }
-
-                cat.life1 = parseInt(cat.jiankang1) * 10;
-                cat.life2 = parseInt(cat.jiankang2) * 10;
-                cat.life3 = parseInt(cat.jiankang3) * 10;
-                cat.life4 = parseInt(cat.jiankang4) * 10;
-                cat.life5 = parseInt(cat.jiankang5) * 10;
-
-                birth();
-
-                if (cat.name1 != "") {
-                    document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1 + "," + cat.sex1;
-                } else {
-                    document.getElementById("cat1").innerHTML = "null";
-
-                }
-                if (cat.name2 != "") {
-                    document.getElementById("cat2").innerHTML = cat.name2 + "," + cat.age2 + "," + cat.sex2;
-                } else {
-                    document.getElementById("cat2").innerHTML = "null";
-
-                }
-                if (cat.name3 != "") {
-                    document.getElementById("cat3").innerHTML = cat.name3 + "," + cat.age3 + "," + cat.sex3;
-                } else {
-                    document.getElementById("cat3").innerHTML = "null";
-
-                }
-                if (cat.name4 != "") {
-                    document.getElementById("cat4").innerHTML = cat.name4 + "," + cat.age4 + "," + cat.sex4;
-                } else {
-                    document.getElementById("cat4").innerHTML = "null";
-
-                }
-                if (cat.name5 != "") {
-                    document.getElementById("cat5").innerHTML = cat.name5 + "," + cat.age5 + "," + cat.sex5;
-                } else {
-                    document.getElementById("cat5").innerHTML = "null";
-
-                }
-
-                if (catselected == 1) {
-                    catselect1();
-                } else if (catselected == 2) {
-                    catselect2();
-                } else if (catselected == 3) {
-                    catselect3();
-                } else if (catselected == 4) {
-                    catselect4();
-                } else if (catselected == 5) {
-                    catselect5();
-                }
-
+            if (cat.day == null || cat.day == "") {
+                cat.day = 1;
+                cat.money = 0;
+                cat.food = 0;
                 save();
+            } else {
+
+                if (cat.name1 == "") {
+                    document.getElementById("cat1").innerHTML = "null";
+                } else {
+                    if (cat.pstate1 == 1) {
+                        cat.hunger1 = parseInt(cat.huoyue1) * 2.5 * 1.5;
+                    } else {
+                        cat.hunger1 = parseInt(cat.huoyue1) * 2.5;
+                    }
+                    if (cat.hunger1 > 100) {
+                        cat.hunger1 = 100;
+                    }
+                    cat.life1 = parseInt(cat.jiankang1) * 10;
+                    if (cat.age1 < 30) {
+                        cat.hungermax1 = 100;
+                    } else if (cat.age1 >= 30 && cat.age1 < 60) {
+                        cat.hungermax1 = 200;
+                    } else {
+                        cat.hungermax1 = 150;
+                    }
+                    document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1;
+                }
+
+                if (cat.name2 == "") {
+                    document.getElementById("cat2").innerHTML = "null";
+                } else {
+                    if (cat.pstate2 == 1) {
+                        cat.hunger2 = parseInt(cat.huoyue2) * 2.5 * 1.5;
+                    } else {
+                        cat.hunger2 = parseInt(cat.huoyue2) * 2.5;
+                    }
+                    if (cat.hunger2 > 100) {
+                        cat.hunger2 = 100;
+                    }
+                    cat.life2 = parseInt(cat.jiankang2) * 10;
+                    if (cat.age2 < 30) {
+                        cat.hungermax2 = 100;
+                    } else if (cat.age2 >= 30 && cat.age2 < 60) {
+                        cat.hungermax2 = 200;
+                    } else {
+                        cat.hungermax2 = 150;
+                    }
+                    document.getElementById("cat2").innerHTML = cat.name2 + "," + cat.age2;
+                }
+
+                if (cat.name3 == "") {
+                    document.getElementById("cat3").innerHTML = "null";
+                } else {
+                    if (cat.pstate3 == 1) {
+                        cat.hunger3 = parseInt(cat.huoyue3) * 2.5 * 1.5;
+                    } else {
+                        cat.hunger3 = parseInt(cat.huoyue3) * 2.5;
+                    }
+                    if (cat.hunger3 > 100) {
+                        cat.hunger3 = 100;
+                    }
+                    cat.life3 = parseInt(cat.jiankang3) * 10;
+                    if (cat.age3 < 30) {
+                        cat.hungermax3 = 100;
+                    } else if (cat.age3 >= 30 && cat.age3 < 60) {
+                        cat.hungermax3 = 200;
+                    } else {
+                        cat.hungermax3 = 150;
+                    }
+                    document.getElementById("cat3").innerHTML = cat.name3 + "," + cat.age3;
+                }
+
+
+                if (cat.name4 == "") {
+                    document.getElementById("cat4").innerHTML = "null";
+                } else {
+                    if (cat.pstate4 == 1) {
+                        cat.hunger4 = parseInt(cat.huoyue4) * 2.5 * 1.5;
+                    } else {
+                        cat.hunger4 = parseInt(cat.huoyue4) * 2.5;
+                    }
+                    if (cat.hunger4 > 100) {
+                        cat.hunger4 = 100;
+                    }
+                    cat.life4 = parseInt(cat.jiankang4) * 10;
+                    if (cat.age4 < 30) {
+                        cat.hungermax4 = 100;
+                    } else if (cat.age4 >= 30 && cat.age4 < 60) {
+                        cat.hungermax4 = 200;
+                    } else {
+                        cat.hungermax4 = 150;
+                    }
+                    document.getElementById("cat4").innerHTML = cat.name4 + "," + cat.age4;
+                }
+
+
+                if (cat.name5 == "") {
+                    document.getElementById("cat5").innerHTML = "null";
+                } else {
+                    if (cat.pstate5 == 1) {
+                        cat.hunger5 = parseInt(cat.huoyue5) * 2.5 * 1.5;
+                    } else {
+                        cat.hunger5 = parseInt(cat.huoyue5) * 2.5;
+                    }
+                    if (cat.hunger5 > 100) {
+                        cat.hunger5 = 100;
+                    }
+                    cat.life5 = parseInt(cat.jiankang5) * 10;
+                    if (cat.age5 < 30) {
+                        cat.hungermax5 = 100;
+                    } else if (cat.age5 >= 30 && cat.age5 < 60) {
+                        cat.hungermax5 = 200;
+                    } else {
+                        cat.hungermax5 = 150;
+                    }
+                    document.getElementById("cat5").innerHTML = cat.name5 + "," + cat.age5;
+                }
+
             }
 
-            function deadand() { //传递信息给安卓的java 
-                //var text=document.getElementById("text").value;  
-                window.location = "javascript:window.android.deadand()";
+            if (cat.name1 != "") {
+                document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1 + "," + cat.sex1;
+            } else {
+                document.getElementById("cat1").innerHTML = "null";
+
             }
-        </script>
+            if (cat.name2 != "") {
+                document.getElementById("cat2").innerHTML = cat.name2 + "," + cat.age2 + "," + cat.sex2;
+            } else {
+                document.getElementById("cat2").innerHTML = "null";
+
+            }
+            if (cat.name3 != "") {
+                document.getElementById("cat3").innerHTML = cat.name3 + "," + cat.age3 + "," + cat.sex3;
+            } else {
+                document.getElementById("cat3").innerHTML = "null";
+
+            }
+            if (cat.name4 != "") {
+                document.getElementById("cat4").innerHTML = cat.name4 + "," + cat.age4 + "," + cat.sex4;
+            } else {
+                document.getElementById("cat4").innerHTML = "null";
+
+            }
+            if (cat.name5 != "") {
+                document.getElementById("cat5").innerHTML = cat.name5 + "," + cat.age5 + "," + cat.sex5;
+            } else {
+                document.getElementById("cat5").innerHTML = "null";
+
+            }
+
+            document.getElementById("day").innerHTML = "day:" + cat.day;
+            document.getElementById("food").innerHTML = "剩余食物:" + cat.food;
+            document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
+
+        }
+
+        function nextday() {
+            var confirm1, confirm2, confirm3, confirm4, confirm5;
+            if (cat.hungerstatus1 <= hungerlimit) {
+                catselect1();
+                var sure = confirm(cat.name1 + "太饿了!取消继续下一天，确认返回")
+                if (sure == true) {
+                    return;
+                } else {
+                    confirm1 = 1;
+                }
+            }
+            if (cat.hungerstatus2 <= hungerlimit) {
+                catselect2();
+                var sure;
+                sure = confirm(cat.name2 + "太饿了!取消继续下一天，确认返回")
+                if (sure == true) {
+                    return;
+                } else {
+                    confirm2 = 1;
+                }
+            }
+            if (cat.hungerstatus3 <= hungerlimit) {
+                catselect3();
+                var sure;
+                sure = confirm(cat.name3 + "太饿了!取消继续下一天，确认返回")
+                if (sure == true) {
+                    return;
+                } else {
+                    confirm3 = 1;
+                }
+            }
+            if (cat.hungerstatus4 <= hungerlimit) {
+                catselect4();
+                var sure;
+                sure = confirm(cat.name4 + "太饿了!取消继续下一天，确认返回")
+                if (sure == true) {
+                    return;
+                } else {
+                    confirm4 = 1;
+                }
+            }
+            if (cat.hungerstatus5 <= hungerlimit) {
+                catselect5();
+                var sure;
+                sure = confirm(cat.name5 + "太饿了!取消继续下一天，确认返回")
+                if (sure == true) {
+                    return;
+                } else {
+                    confirm5 = 1;
+                }
+            }
+
+            cat.day++;
+
+            if (confirm1 == 1) {
+                cat.jiankang1 = parseInt(cat.jiankang1) - 2; //j健康度-2
+                cat.huoyue1 = parseInt(cat.huoyue1 - 2); //j活跃度-2
+                cat.hunger1 = parseInt(cat.hunger1) + 1; //每日消耗增加
+                if (cat.jiankang1 <= 0) {
+                    alert(cat.name1 + " dead!");
+                    confirm1 = 0;
+                }
+            }
+            if (confirm2 == 1) {
+                cat.jiankang2 = parseInt(cat.jiankang2) - 2; //j健康度-2
+                cat.huoyue2 = parseInt(cat.huoyue2) - 2; //j活跃度-2
+                cat.hunger2 = parseInt(cat.hunger2) + 1; //每日消耗增加
+                if (cat.jiankang2 <= 0) {
+                    alert(cat.name2 + " dead!");
+                }
+                confirm2 = 0;
+            }
+            if (confirm3 == 1) {
+                cat.jiankang3 = parseInt(cat.jiankang3) - 2; //j健康度-2
+                cat.huoyue3 = parseInt(cat.huoyue3) - 2; //j活跃度-2
+                cat.hunger3 = parseInt(cat.hunger3) + 1; //每日消耗增加
+                if (cat.jiankang3 <= 0) {
+                    alert(cat.name3 + " dead!");
+                }
+                confirm3 = 0;
+            }
+            if (confirm4 == 1) {
+                cat.jiankang4 = parseInt(cat.jiankang4) - 2; //j健康度-2
+                cat.huoyue4 = parseInt(cat.huoyue4) - 2; //j活跃度-2
+                cat.hunger4 = parseInt(cat.hunger4) + 1; //每日消耗增加
+                if (cat.jiankang4 <= 0) {
+                    alert(cat.name4 + " dead!");
+                    confirm4 = 0;
+                }
+            }
+            if (confirm5 == 1) {
+                cat.jiankang5 = parseInt(cat.jiankang5) - 2; //j健康度-2
+                cat.huoyue5 = parseInt(cat.huoyue5) - 2; //j活跃度-2
+                cat.hunger5 = parseInt(cat.hunger5) + 1; //每日消耗增加
+                if (cat.jiankang5 <= 0) {
+                    alert(cat.name5 + " dead!");
+                }
+                confirm5 = 0;
+            }
+
+            if (cat.pday >= 1) { //怀孕天数
+                cat.pday++;
+            }
+
+
+            if (cat.name1 != null && cat.name1 != "") {
+                cat.age1++;
+                cat.hungerstatus1 = parseInt(cat.hungerstatus1) - cat.hunger1;
+                cat.lovestatus1 = parseInt(cat.lovestatus1) - 2;
+            }
+            if (cat.name2 != null && cat.name2 != "") {
+                cat.age2++;
+                cat.hungerstatus2 = parseInt(cat.hungerstatus2) - cat.hunger2;
+                cat.lovestatus2 = parseInt(cat.lovestatus2) - 2;
+            }
+            if (cat.name3 != null && cat.name3 != "") {
+                cat.age3++;
+                cat.hungerstatus3 = parseInt(cat.hungerstatus3) - cat.hunger3;
+                cat.lovestatus3 = parseInt(cat.lovestatus3) - 2;
+            }
+            if (cat.name4 != null && cat.name4 != "") {
+                cat.age4++;
+                cat.hungerstatus4 = parseInt(cat.hungerstatus4) - cat.hunger4;
+                cat.lovestatus4 = parseInt(cat.lovestatus4) - 2;
+            }
+            if (cat.name5 != null && cat.name5 != "") {
+                cat.age5++;
+                cat.hungerstatus5 = parseInt(cat.hungerstatus5) - cat.hunger5;
+                cat.lovestatus5 = parseInt(cat.lovestatus5) - 2;
+            }
+
+            document.getElementById("day").innerHTML = "day:" + cat.day;
+
+
+            if (cat.age1 >= 30 && cat.age1 < 60) { //年龄影响
+                cat.hungermax1 = 200;
+            } else if (cat.age1 >= 60) {
+                cat.hungermax1 = 150;
+                cat.huoyue1 = parseInt(cat.huoyue1) - 1;
+                cat.jiankang1 = parseInt(cat.huoyue1) - 1;
+            } else if (cat.age1 == 100) {
+                alert(cat.name1 + " dead!");
+            } else if (cat.age1 < 30) {
+                cat.huoyue1 = parseInt(cat.huoyue1) + 1;
+                cat.jiankang1 = parseInt(cat.huoyue1) + 1;
+            }
+
+            if (cat.age2 >= 30 && cat.age2 < 60) {
+                cat.hungermax2 = 200;
+            } else if (cat.age2 >= 60) {
+                cat.hungermax2 = 150;
+                cat.huoyue2 = parseInt(cat.huoyue2) - 1;
+                cat.jiankang2 = parseInt(cat.huoyue2) - 1;
+            } else if (cat.age2 == 100) {
+                alert(cat.name2 + " dead!");
+            } else if (cat.age2 < 30) {
+                cat.huoyue2 = parseInt(cat.huoyue2) + 1;
+                cat.jiankang2 = parseInt(cat.huoyue2) + 1;
+            }
+
+            if (cat.age3 >= 30 && cat.age3 < 60) {
+                cat.hungermax3 = 200;
+            } else if (cat.age3 >= 60) {
+                cat.hungermax3 = 150;
+                cat.huoyue3 = parseInt(cat.huoyue3) - 1;
+                cat.jiankang3 = parseInt(cat.huoyue3) - 1;
+            } else if (cat.age3 == 100) {
+                alert(cat.name3 + " dead!");
+            } else if (cat.age3 < 30) {
+                cat.huoyue3 = parseInt(cat.huoyue3) + 1;
+                cat.jiankang3 = parseInt(cat.huoyue3) + 1;
+            }
+
+            if (cat.age4 >= 30 && cat.age4 < 60) {
+                cat.hungermax4 = 200;
+            } else if (cat.age4 >= 60) {
+                cat.hungermax4 = 150;
+                cat.huoyue4 = parseInt(cat.huoyue4) - 1;
+                cat.jiankang4 = parseInt(cat.huoyue4) - 1;
+            } else if (cat.age4 == 100) {
+                alert(cat.name4 + " dead!");
+            } else if (cat.age4 < 30) {
+                cat.huoyue4 = parseInt(cat.huoyue4) + 1;
+                cat.jiankang4 = parseInt(cat.huoyue4) + 1;
+            }
+
+            if (cat.age5 >= 30 && cat.age5 < 60) {
+                cat.hungermax5 = 200;
+            } else if (cat.age5 >= 60) {
+                cat.hungermax5 = 150;
+                cat.huoyue5 = parseInt(cat.huoyue5) - 1;
+                cat.jiankang5 = parseInt(cat.huoyue5) - 1;
+            } else if (cat.age5 == 100) {
+                alert(cat.name5 + " dead!");
+            } else if (cat.age5 < 30) {
+                cat.huoyue5 = parseInt(cat.huoyue5) + 1;
+                cat.jiankang5 = parseInt(cat.huoyue5) + 1;
+            }
+
+            if (cat.lovestatus1 >= 100) { //全属性+1
+                cat.zizhu1 = parseInt(cat.zizhu1) + 1;
+                cat.huoyue1 = parseInt(cat.huoyue1) + 1;
+                cat.jiankang1 = parseInt(cat.jiankang1) + 1;
+                cat.lovestatus1 = cat.lovestatus1 - 100;
+                cat.hunger1 = parseInt(cat.jiankang1) * 2.5;
+                cat.life1 = parseInt(cat.jiankang1) * 10;
+            }
+            if (cat.lovestatus2 >= 100) { //全属性+1
+                cat.zizhu2 = parseInt(cat.zizhu2) + 1;
+                cat.huoyue2 = parseInt(cat.huoyue2) + 1;
+                cat.jiankang2 = parseInt(cat.jiankang2) + 1;
+                cat.lovestatus2 = cat.lovestatus2 - 100;
+                cat.hunger2 = parseInt(cat.jiankang2) * 2.5;
+                cat.life2 = parseInt(cat.jiankang2) * 10;
+            }
+            if (cat.lovestatus3 >= 100) { //全属性+1
+                cat.zizhu3 = parseInt(cat.zizhu3) + 1;
+                cat.huoyue3 = parseInt(cat.huoyue3) + 1;
+                cat.jiankang3 = parseInt(cat.jiankang3) + 1;
+                cat.lovestatus3 = cat.lovestatus3 - 100;
+                cat.hunger3 = parseInt(cat.jiankang3) * 2.5;
+                cat.life3 = parseInt(cat.jiankang3) * 10;
+            }
+            if (cat.lovestatus4 >= 100) { //全属性+1
+                cat.zizhu4 = parseInt(cat.zizhu4) + 1;
+                cat.huoyue4 = parseInt(cat.huoyue4) + 1;
+                cat.jiankang4 = parseInt(cat.jiankang4) + 1;
+                cat.lovestatus4 = cat.lovestatus4 - 100;
+                cat.hunger4 = parseInt(cat.jiankang4) * 2.5;
+                cat.life4 = parseInt(cat.jiankang4) * 10;
+            }
+            if (cat.lovestatus5 >= 100) { //全属性+1
+                cat.zizhu5 = parseInt(cat.zizhu5) + 1;
+                cat.huoyue5 = parseInt(cat.huoyue5) + 1;
+                cat.jiankang5 = parseInt(cat.jiankang5) + 1;
+                cat.lovestatus5 = cat.lovestatus5 - 100;
+                cat.hunger5 = parseInt(cat.jiankang5) * 2.5;
+                cat.life5 = parseInt(cat.jiankang5) * 10;
+            }
+
+            cat.life1 = parseInt(cat.jiankang1) * 10;
+            cat.life2 = parseInt(cat.jiankang2) * 10;
+            cat.life3 = parseInt(cat.jiankang3) * 10;
+            cat.life4 = parseInt(cat.jiankang4) * 10;
+            cat.life5 = parseInt(cat.jiankang5) * 10;
+
+            birth();
+
+            if (cat.name1 != "") {
+                document.getElementById("cat1").innerHTML = cat.name1 + "," + cat.age1 + "," + cat.sex1;
+            } else {
+                document.getElementById("cat1").innerHTML = "null";
+
+            }
+            if (cat.name2 != "") {
+                document.getElementById("cat2").innerHTML = cat.name2 + "," + cat.age2 + "," + cat.sex2;
+            } else {
+                document.getElementById("cat2").innerHTML = "null";
+
+            }
+            if (cat.name3 != "") {
+                document.getElementById("cat3").innerHTML = cat.name3 + "," + cat.age3 + "," + cat.sex3;
+            } else {
+                document.getElementById("cat3").innerHTML = "null";
+
+            }
+            if (cat.name4 != "") {
+                document.getElementById("cat4").innerHTML = cat.name4 + "," + cat.age4 + "," + cat.sex4;
+            } else {
+                document.getElementById("cat4").innerHTML = "null";
+
+            }
+            if (cat.name5 != "") {
+                document.getElementById("cat5").innerHTML = cat.name5 + "," + cat.age5 + "," + cat.sex5;
+            } else {
+                document.getElementById("cat5").innerHTML = "null";
+
+            }
+
+            if (catselected == 1) {
+                catselect1();
+            } else if (catselected == 2) {
+                catselect2();
+            } else if (catselected == 3) {
+                catselect3();
+            } else if (catselected == 4) {
+                catselect4();
+            } else if (catselected == 5) {
+                catselect5();
+            }
+
+            save();
+        }
+
+        function deadand() { //传递信息给安卓的java 
+            //var text=document.getElementById("text").value;  
+            window.location = "javascript:window.android.deadand()";
+        }
+    </script>
 </body>
 
 <script src="tradesystem.js"></script>
