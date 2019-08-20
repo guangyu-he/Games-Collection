@@ -141,13 +141,10 @@
                         <p id="love" class="button-border button-rounded button-primary">好感度:</p>
                     </div>
 
-                    <div style="overflow:hidden">
-                        <div style="float:left">
-                            <button id="food" onclick="buyfood()" class="button button-border button-rounded button-primary">food:</button>
-                        </div>
-                        <div style="float:right">
-                            <button id="money" onclick="workformoney()" class="button  button-border button-rounded button-primary">money:</button>
-                        </div>
+                    <div>
+                        <button id="food" style="display: inline" onclick="buyfood()" class="button button-border button-rounded button-primary">food:</button>
+                        <button id="money" style="display: inline" onclick="workformoney()" class="button  button-border button-rounded button-primary">money:</button>
+                        <a id="card" style="display: inline" href="card/index.html" class="button  button-border button-rounded button-primary">card</a>
                     </div>
 
                     <div>
@@ -163,6 +160,7 @@
     <script>
         var localStorage = window.localStorage;
 
+        var cardstr;
         var catstr;
         var cat = {
             zizhu1: "",
@@ -435,6 +433,11 @@
             } else {
                 document.getElementById("cat5").innerHTML = "null";
 
+            }
+
+            cardstr = localStorage.getItem("cardstr");
+            if (cardstr == "" || cardstr == null) {} else {
+                cat.money = parseInt(cat.money) + parseInt(cardstr);
             }
 
             document.getElementById("day").innerHTML = "day:" + cat.day;

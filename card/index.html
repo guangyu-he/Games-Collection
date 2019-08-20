@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
+    <title>Boundary Cards beta</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <style>
+        body {
+            width: -moz-fit-content;
+            width: -webkit-fit-content;
+            width: fit-content;
+            margin: 0px auto;
+            -moz-user-select: none;
+            /*火狐*/
+            -webkit-user-select: none;
+            /*webkit浏览器*/
+            -ms-user-select: none;
+            /*IE10*/
+            -khtml-user-select: none;
+            /*早期浏览器*/
+            user-select: none;
+        }
+        
+        div {
+            margin: 20px;
+            border: 0;
+            padding: 0;
+        }
+        
+        .lastResult {
+            color: white;
+            padding: 3px;
+        }
+    </style>
+
+    <!-- Buttons 库的核心文件 -->
+    <link rel="stylesheet" href="css/buttons.css">
+
+    <!-- 当需要使用带下拉菜单的按钮时才需要加载下面的 JavaScript 文件 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function delCookie(cname) {
+            document.cookie = cname + "=" + ";expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+        //function checkCookie(){
+        //var user=getCookie("username");
+        //if (user!=""){
+        //	alert("欢迎 " + user + " 再次访问");
+        //}
+        //else {
+        //	user = prompt("请输入你的名字:","");
+        //	if (user!="" && user!=null){
+        //    setCookie("username",user,30);
+        //	}
+        //}
+        //}
+    </script>
+
+</head>
+
+<body onload="version()" class="text-align: center">
+    <div id="wrapper" class="wrapper">
+        <header class="header htmleaf-header">
+            <h1>Boundary Cards<span>beta:<text id="version"></text><br><a href="http://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
+        </header>
+        <main>
+            <div id="container">
+                <section>
+
+                    <div>
+                        <p style="display: inline" class="button-border button-rounded button-primary" id="deckbalance"></p>
+                        <div style="display: inline" class="btn-group">
+                            <button type="button" id="deck" class=" button button-rounded" data-toggle="dropdown">
+                                                模式选择<span class="caret"></span>
+                                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a id="" href="javascript:deckstart()">套牌及游戏模式选择</a>
+                                </li>
+                                <li>
+                                    <a id="" href="javascript:void(0)">现开模式</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="" href="javascript:void(0)">删除存档</a>
+                                    <a id="" href="javascript:void(0)">测试</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <table id="deckoption" style="display:none">
+                        <td><input name="diffcult" type="radio" onclick="deck()">构筑</td>
+                        <td><input name="diffcult" type="radio" onclick="limit()">现开</td>
+                    </table>
+
+                    <div class="button-border button-rounded button-primary">游戏模式：<text id="gamemode"></text></div>
+
+                    <table id="decksel" style="display:none">
+                        <tr>
+                            <td><input name="deck" type="radio" onclick="yiyid()">1|1|d</td>
+                            <td><input name="deck" type="radio" onclick="yiyi()">1|1</td>
+                            <td><input name="deck" type="radio" onclick="erer()">2|2</td>
+                            <td><input name="deck" type="radio" onclick="sansan()">3|3</td>
+                            <td><input name="deck" type="radio" onclick="sisi()">4|4</td>
+                            <td><input name="deck" type="radio" onclick="jianer()">-2-2</td>
+                            <td><input name="deck" type="radio" onclick="jianyi()">-1-1</td>
+                        </tr>
+                        <tr>
+                            <td><input name="deck" type="radio" onclick="decmana()">mana</td>
+                            <td><input name="deck" type="radio" onclick="defaultdeck()">默认套牌</td>
+                        </tr>
+                    </table>
+
+                    <table id="decksaving" style="display:none;">
+                        <tr>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving1"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving2"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving3"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving4"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving5"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving6"></text></td>
+                        </tr>
+                        <tr>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving7"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving8"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving9"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving10"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving11"></text></td>
+                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving12"></text></td>
+                        </tr>
+                    </table>
+
+                    <table id="limitsaving" style="display:none;">
+                        <tr>
+                            <td><text id="limitsaving1"></text></td>
+                            <td><text id="limitsaving2"></text></td>
+                            <td><text id="limitsaving3"></text></td>
+                            <td><text id="limitsaving4"></text></td>
+                            <td><text id="limitsaving5"></text></td>
+                            <td><text id="limitsaving6"></text></td>
+                        </tr>
+                        <tr>
+                            <td><text id="limitsaving7"></text></td>
+                            <td><text id="limitsaving8"></text></td>
+                            <td><text id="limitsaving9"></text></td>
+                            <td><text id="limitsaving10"></text></td>
+                            <td><text id="limitsaving11"></text></td>
+                            <td><text id="limitsaving12"></text></td>
+                        </tr>
+                    </table>
+
+                    <p id="deckdis" style="display:none;width:auto"></p>
+                    <br>
+
+                    <table id="deckbought" style="display:none">
+                        <td><text id="decknumber"></text></td>
+                    </table>
+
+                    <table id="deckopenradio" style="display:none;">
+                        <td><input name="deckopen" type="radio" onclick="deckopen1()"><text id="deckopen1"></text></td>
+                        <td><input name="deckopen" type="radio" onclick="deckopen2()"><text id="deckopen2"></text></td>
+                        <td><input name="deckopen" type="radio" onclick="deckopen3()"><text id="deckopen3"></text></td>
+                    </table>
+
+                    <table id="decklimit" style="display:none">
+                        <td><input type="button" id="deckopen" value="打开卡包" onclick="deckopen()"></td>
+                        <td><input type="button" id="deckbuy" value="购买卡包" onclick="deckbuy()"></td>
+                        <td><input type="button" id="deckpay" value="重置余额和卡包数（测试用）" onclick="deckdefault()"></td>
+                    </table>
+
+                    </table>
+                    <table id="deckbutton">
+                        <td><input type="button" style="display:none;" id="decksure" value="确定" onclick="decksure()"></td>
+                        <td><input type="button" style="display:none;" id="deckdel" value="删除" onclick="deckdel()"></td>
+                        <!-- <td><input type="button" style="display:none;" id="deckdisplay" value="显示当前存储套牌" onclick="decksaved()"></td> -->
+                        <td><input type="button" style="display:none;" id="deckback" value="返回" onclick="deckback()"></td>
+                    </table>
+
+                    <div id="cstatus">
+                        <p style="display:inline" class="button-border button-rounded button-primary"><b>电脑法力：</b><text id="cmana">0</text></p>
+                        <p style="display:inline" class="button-border button-rounded button-primary"><b>电脑生命：</b><text id="clife">0</text></p>
+                    </div>
+
+                    <p id="chdis" style="display:none;width:auto"><b>电脑手牌：</b></p>
+                    <table id="chtdis" style="display:none;width:auto">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p id="chand1">null</p>
+                                </td>
+                                <td>
+                                    <p id="chand2">null</p>
+                                </td>
+                                <td>
+                                    <p id="chand3">null</p>
+                                </td>
+                                <td>
+                                    <p id="chand4">null</p>
+                                </td>
+                                <td>
+                                    <p id="chand5">null</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <p id="pb"><b>战场格：</b></p>
+                        <table id="pbt" style="width: 60%;margin:auto">
+                            <tbody>
+                                <tr>
+                                    <td class="button-border button-rounded button-jumbo"><img id="cbp1" src="null.gif" onclick="instantblock1(battlecard)"></td>
+                                    <td class="button-border button-rounded button-jumbo"><img id="cbp2" src="null.gif" onclick="instantblock2(battlecard)"></td>
+                                    <td class="button-border button-rounded button-jumbo"><img id="cbp3" src="null.gif" onclick="instantblock3(battlecard)"></td>
+                                </tr>
+                                <tr>
+                                    <td class="button-border button-rounded button-jumbo"><img id="pbp1" src="null.gif" onclick="pbattleblock1(battlecard)"></td>
+                                    <td class="button-border button-rounded button-jumbo"><img id="pbp2" src="null.gif" onclick="pbattleblock2(battlecard)"></td>
+                                    <td class="button-border button-rounded button-jumbo"><img id="pbp3" src="null.gif" onclick="pbattleblock3(battlecard)"></td>
+                                </tr>
+                                <tr>
+                                    <td class="button-border button-rounded button-jumbo"><input id="pac1" type="checkbox"></td>
+                                    <td class="button-border button-rounded button-jumbo"><input id="pac2" type="checkbox"></td>
+                                    <td class="button-border button-rounded button-jumbo"><input id="pac3" type="checkbox"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="status">
+                        <p style="display:inline" class="button-border button-rounded button-action"><b>你的法力：</b><text id="mana">0</text></p>
+                        <p style="display:inline" class="button-border button-rounded button-action"><b>你的生命：</b><text id="life">0</text></p>
+                    </div>
+
+                    <p id="hdis" style="display:none;width:auto"><b>手牌：</b></p>
+                    <table id="htdis" style="display:none;width:auto">
+                        <tbody>
+                            <tr>
+                                <td><img id="ph1" src="null.gif" onclick="pcre1()">
+                                    <p style="display:none" id="phand1">null</p>
+                                </td>
+                                <td><img id="ph2" src="null.gif" onclick="pcre2()">
+                                    <p style="display:none" id="phand2">null</p>
+                                </td>
+                                <td><img id="ph3" src="null.gif" onclick="pcre3()">
+                                    <p style="display:none" id="phand3">null</p>
+                                </td>
+                                <td><img id="ph4" src="null.gif" onclick="pcre4()">
+                                    <p style="display:none" id="phand4">null</p>
+                                </td>
+                                <td><img id="ph5" src="null.gif" onclick="pcre5()">
+                                    <p style="display:none" id="phand5">null</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <input class="button button-3d button-primary button-rounded" type="button" id="start" style="height:60px;width:120px" value="开始" onclick="start()">
+                        <input class="button button-3d button-primary button-rounded" type="button" id="button1" style="display:none;height:60px;width:120px" value="电脑回合" onclick="main1()">
+                        <input class="button button-3d button-primary button-rounded" type="button" id="button2" style="display:none;height:60px;width:120px" value="战斗结算" onclick="main2()">
+                        <input class="button button-3d button-primary button-rounded" type="button" id="button3" style="display:none;height:60px;width:120px" value="你的回合" onclick="main3()">
+                        <input class="button button-3d button-primary button-rounded" type="button" id="button4" style="display:none;height:60px;width:120px" value="战斗选择" onclick="main4()">
+                        <input class="button button-3d button-primary button-rounded" type="button" id="restart" style="display:none;height:60px;width:120px" value="重新开始" onclick="restart()">
+                        <a id="cat" href="http://cat.heguangyu.net" class="button  button-border button-rounded button-primary">cat</a>
+                    </div>
+
+                </section>
+            </div>
+        </main>
+    </div>
+
+
+    <script src="pcard.js"></script>
+    <script src="pdraw.js"></script>
+    <script src="main.js"></script>
+    <script src="newbattle.js"></script>
+    <script src="battleblock.js"></script>
+    <script src="choosecreature.js"></script>
+    <script src="cdraw.js"></script>
+    <script src="chand.js"></script>
+    <script src="manaenough.js"></script>
+    <script src="battlecard.js"></script>
+    <script src="version.js"></script>
+    <script src="instantblock.js"></script>
+    <script src="intro.js"></script>
+    <script src="deck.js"></script>
+    <script src="cardpicture.js"></script>
+    <script src="limit.js"></script>
+    <script src="display.js"></script>
+
+    <script>
+        var mana = 0;
+        var cmana = 0;
+        var life = 10;
+        var clife = 10;
+        var oldmana = 0;
+        document.getElementById("life").innerHTML = life;
+        document.getElementById("clife").innerHTML = clife;
+        document.getElementById("mana").innerHTML = mana;
+        document.getElementById("cmana").innerHTML = cmana;
+
+        //网页版Android无联动
+        function deadand() {
+
+        }
+    </script>
+
+
+</body>
+
+</html>
