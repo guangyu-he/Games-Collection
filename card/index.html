@@ -97,7 +97,7 @@
                 <section>
 
                     <div>
-                        <p style="display: inline" class="button-border button-rounded button-primary" onclick="savemoney()" id="deckbalance"></p>
+                        <p style="display: inline" class="button-border button-rounded button-primary" onclick="savemoney()" id="deckmoney"></p>
                         <div style="display: inline" class="btn-group">
                             <button type="button" id="deck" class=" button button-rounded" data-toggle="dropdown">
                                                 模式选择<span class="caret"></span>
@@ -111,7 +111,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a id="" href="javascript:void(0)">删除存档</a>
+                                    <a id="" href="javascript:savecard()">保存</a>
                                     <a id="" href="javascript:void(0)">测试</a>
                                 </li>
                             </ul>
@@ -300,6 +300,8 @@
     </div>
 
 
+    <script src="js/production/materialMenu.min.js"></script>
+
     <script src="pcard.js"></script>
     <script src="pdraw.js"></script>
     <script src="main.js"></script>
@@ -317,6 +319,8 @@
     <script src="cardpicture.js"></script>
     <script src="limit.js"></script>
     <script src="display.js"></script>
+    <script src="storage.js"></script>
+
 
     <script>
         var mana = 0;
@@ -329,11 +333,9 @@
         document.getElementById("mana").innerHTML = mana;
         document.getElementById("cmana").innerHTML = cmana;
 
-        var localStorage = window.localStorage;
-
         function savemoney() {
-            cardstr = deckbalance;
-            localStorage.setItem("cardstr", cardstr);
+            cardmoney = cardstatus.deckbalance;
+            localStorage.setItem("cardmoney", cardmoney);
         }
         //网页版Android无联动
         function deadand() {

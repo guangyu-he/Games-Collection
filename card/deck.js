@@ -3,17 +3,17 @@ function deckstart() {
 }
 
 function deck() {
-    if (mode == 1) {
+    if (cardstatus.mode == 1) {
         var r = confirm("切换游戏模式将删除原模式下套牌！")
         if (r == true) {
             deldeck();
         } else {
-
+            return;
         }
     }
 
-    mode = 0;
-    setCookie("mode", mode, 30);
+    cardstatus.mode = 0;
+    savecard();
     builddisplay();
 }
 
@@ -48,8 +48,6 @@ var cardtot = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function defaultdeck() {
     cardtot = ["mana", "mana", "mana", "mana", "mana", "1|1|d", "1|1", "2|2", "3|3", "4|4", "-2-2", "-1-1"];
-
-
 
     deckdisplay();
 }
@@ -144,50 +142,22 @@ function deckdisplay() {
 }
 
 function decksaved() {
-    cardtot[0] = getCookie("cardtot0");
-    cardtot[1] = getCookie("cardtot1");
-    cardtot[2] = getCookie("cardtot2");
-    cardtot[3] = getCookie("cardtot3");
-    cardtot[4] = getCookie("cardtot4");
-    cardtot[5] = getCookie("cardtot5");
-    cardtot[6] = getCookie("cardtot6");
-    cardtot[7] = getCookie("cardtot7");
-    cardtot[8] = getCookie("cardtot8");
-    cardtot[9] = getCookie("cardtot9");
-    cardtot[10] = getCookie("cardtot10");
-    cardtot[11] = getCookie("cardtot11");
+    cardtot = localStorage.getItem("cardtot");
+    if (cardtot == "" || cardtot == null) {
+        cardtot = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    } else {
+        cardtot = cardtot.split(",");
+    }
     document.getElementById("deckdis").innerHTML = cardtot;
 }
 
 function decksaving() {
-    setCookie("cardtot0", cardtot[0], 30);
-    setCookie("cardtot1", cardtot[1], 30);
-    setCookie("cardtot2", cardtot[2], 30);
-    setCookie("cardtot3", cardtot[3], 30);
-    setCookie("cardtot4", cardtot[4], 30);
-    setCookie("cardtot5", cardtot[5], 30);
-    setCookie("cardtot6", cardtot[6], 30);
-    setCookie("cardtot7", cardtot[7], 30);
-    setCookie("cardtot8", cardtot[8], 30);
-    setCookie("cardtot9", cardtot[9], 30);
-    setCookie("cardtot10", cardtot[10], 30);
-    setCookie("cardtot11", cardtot[11], 30);
+    localStorage.setItem("cardtot", cardtot);
 }
 
 function deldeck() {
-    delCookie("cardtot0");
-    delCookie("cardtot1");
-    delCookie("cardtot2");
-    delCookie("cardtot3");
-    delCookie("cardtot4");
-    delCookie("cardtot5");
-    delCookie("cardtot6");
-    delCookie("cardtot7");
-    delCookie("cardtot8");
-    delCookie("cardtot9");
-    delCookie("cardtot10");
-    delCookie("cardtot11");
     cardtot = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    localStorage.setItem("cardtot", cardtot);
     deckdisplay();
 }
 

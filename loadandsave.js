@@ -1,3 +1,5 @@
+var cardmoney;
+
 function load() {
     catstr = localStorage.getItem("catstr");
 
@@ -17,14 +19,14 @@ function load() {
         cat.money = parseInt(cat.money);
         cat.food = parseInt(cat.food);
 
-        cardstr = localStorage.getItem("cardstr");
-        alert(cardstr);
+        cardmoney = localStorage.getItem("cardmoney");
 
-        if (cardstr == "" || cardstr == null) {
-            cardstr = 0;
+        if ((cardmoney == "" || cardmoney == null) && cat.money == "") {
+            cardmoney = 0;
+        } else if ((cardmoney == "" || cardmoney == null) && cat.money != "") {
+
         } else {
-            alert(cardstr + "!!!");
-            cat.money = parseInt(cardstr);
+            cat.money = parseInt(cardmoney);
         }
         save();
     }
@@ -34,6 +36,6 @@ function save() {
     catstr = JSON.stringify(cat);
     localStorage.setItem("catstr", catstr);
 
-    cardstr = cat.money;
-    localStorage.setItem("cardstr", cardstr);
+    cardmoney = cat.money;
+    localStorage.setItem("cardmoney", cardmoney);
 }
