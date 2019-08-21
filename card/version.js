@@ -2,7 +2,7 @@ var localStorage = window.localStorage;
 var card;
 
 function version() {
-    var version = "07.02.19.1350";
+    var version = "19.08.21-1700";
     document.getElementById("version").innerHTML = version;
     mode = getCookie("mode");
     decksaved();
@@ -18,6 +18,7 @@ function version() {
         cat = JSON.parse(catstr);
         alert(cat.money);
     }
+
     setCookie("deckbalance", cat.money, 30);
     deckbalance = getCookie("deckbalance");
     document.getElementById("deckbalance").innerHTML = "金币数：" + deckbalance;

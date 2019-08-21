@@ -161,6 +161,7 @@
         var localStorage = window.localStorage;
 
         var cardstr;
+
         var catstr;
         var cat = {
             zizhu1: "",
@@ -433,11 +434,6 @@
             } else {
                 document.getElementById("cat5").innerHTML = "null";
 
-            }
-
-            cardstr = localStorage.getItem("cardstr");
-            if (cardstr == "" || cardstr == null) {} else {
-                cat.money = parseInt(cat.money) + parseInt(cardstr);
             }
 
             document.getElementById("day").innerHTML = "day:" + cat.day;

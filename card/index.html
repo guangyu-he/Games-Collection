@@ -97,7 +97,7 @@
                 <section>
 
                     <div>
-                        <p style="display: inline" class="button-border button-rounded button-primary" id="deckbalance"></p>
+                        <p style="display: inline" class="button-border button-rounded button-primary" onclick="savemoney()" id="deckbalance"></p>
                         <div style="display: inline" class="btn-group">
                             <button type="button" id="deck" class=" button button-rounded" data-toggle="dropdown">
                                                 模式选择<span class="caret"></span>
@@ -329,6 +329,12 @@
         document.getElementById("mana").innerHTML = mana;
         document.getElementById("cmana").innerHTML = cmana;
 
+        var localStorage = window.localStorage;
+
+        function savemoney() {
+            cardstr = deckbalance;
+            localStorage.setItem("cardstr", cardstr);
+        }
         //网页版Android无联动
         function deadand() {
 

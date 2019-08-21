@@ -49,6 +49,8 @@ var cardtot = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 function defaultdeck() {
     cardtot = ["mana", "mana", "mana", "mana", "mana", "1|1|d", "1|1", "2|2", "3|3", "4|4", "-2-2", "-1-1"];
 
+
+
     deckdisplay();
 }
 

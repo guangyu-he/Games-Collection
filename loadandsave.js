@@ -17,11 +17,23 @@ function load() {
         cat.money = parseInt(cat.money);
         cat.food = parseInt(cat.food);
 
+        cardstr = localStorage.getItem("cardstr");
+        alert(cardstr);
 
+        if (cardstr == "" || cardstr == null) {
+            cardstr = 0;
+        } else {
+            alert(cardstr + "!!!");
+            cat.money = parseInt(cardstr);
+        }
+        save();
     }
 }
 
 function save() {
     catstr = JSON.stringify(cat);
     localStorage.setItem("catstr", catstr);
+
+    cardstr = cat.money;
+    localStorage.setItem("cardstr", cardstr);
 }
