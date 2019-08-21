@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="css/style.min.css">
     <style>
         body {
-            width: -moz-fit-content;
-            width: -webkit-fit-content;
-            width: fit-content;
-            margin: 0px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
             -moz-user-select: none;
             /*火狐*/
             -webkit-user-select: none;
@@ -113,6 +113,7 @@
                                 <li>
                                     <a id="" href="javascript:findfood()">外出觅食</a>
                                     <a id="" href="javascript:findmoney()">外出挣钱</a>
+                                    <a id="" href="card/index.html">去打牌</a>
                                 </li>
                             </ul>
                         </div>
@@ -144,7 +145,6 @@
                     <div>
                         <button id="food" style="display: inline" onclick="buyfood()" class="button button-border button-rounded button-primary">food:</button>
                         <button id="money" style="display: inline" onclick="workformoney()" class="button  button-border button-rounded button-primary">money:</button>
-                        <a id="card" style="display: inline" href="card/index.html" class="button  button-border button-rounded button-primary">card</a>
                     </div>
 
                     <div>
@@ -275,10 +275,13 @@
         }
 
         function onload() {
+
+            document.getElementsByTagName('body')[0].style.zoom = 0.8
+
             var myDate = new Date();
             var version = myDate.toLocaleString();
 
-            document.getElementById("version").innerHTML = "190820 - 1310";
+            document.getElementById("version").innerHTML = "190821 - 2020";
 
             load();
 

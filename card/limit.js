@@ -1,5 +1,3 @@
-var mode;
-
 function limit() {
     if (cardstatus.mode == 0) {
         var r = confirm("切换游戏模式将删除原模式下套牌！")

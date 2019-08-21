@@ -18,21 +18,19 @@ function deck() {
 }
 
 function deckback() {
-    maindisplay();
-
+    location.reload();
 }
 
 
 var decc = 0; //如果等于1不用从cookie读取
 function decksure() {
-    maindisplay();
-
     decksaving();
     decc = 1;
+    location.reload();
 }
 
 function deckdel() {
-    if (mode == 1) {
+    if (cardstatus.mode == 1) {
         var r = confirm("确定删除现开模式套牌？")
         if (r == true) {
             deldeck();
@@ -133,7 +131,7 @@ function decmana() {
 }
 
 function deckdisplay() {
-    if (mode == 1) {
+    if (cardstatus.mode == 1) {
         limitsavingdis();
     } else {
         decksavingdis();

@@ -5,7 +5,7 @@ function start() {
     if (decc != 1) {
         decksaved()
     }
-    if (mode == 1 && cardtot[0] == "") {
+    if (cardstatus.mode == 1 && cardtot[0] == "") {
         alert("在现开模式下，无套牌无法开始游戏");
         return;
     } else {
@@ -189,25 +189,25 @@ function dead() {
 }
 
 function win() {
-    if (mode == 1) {
+    if (cardstatus.mode == 1) {
         alert("你赢了！获得5金币");
         cardstatus.deckbalance = parseInt(cardstatus.deckbalance) + 5;
         cardstatus.wintimes++;
     }
 
-    if (mode == 0) {
+    if (cardstatus.mode == 0) {
         alert("你赢了！获得1金币");
         cardstatus.deckbalance++;
     }
 }
 
 function loss() {
-    if (mode == 1) {
+    if (cardstatus.mode == 1) {
         alert("你输了！损失1金币");
         cardstatus.deckbalance = parseInt(cardstatus.deckbalance) - 1;
         cardstatus.losetimes++;
     }
-    if (mode == 0) {
+    if (cardstatus.mode == 0) {
         alert("你输了！");
     }
 }

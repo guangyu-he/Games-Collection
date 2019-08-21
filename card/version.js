@@ -2,16 +2,14 @@ var localStorage = window.localStorage;
 
 var cardmoney;
 
+var cardstr;
 var cardstatus = {
     deckbalance: "",
     mode: "",
     wintimes: "",
     losetimes: "",
-    decknum: ""
+    decknum: "",
 };
-
-var cardstr;
-
 
 function savecard() {
     cardstr = JSON.stringify(cardstatus);
@@ -19,35 +17,38 @@ function savecard() {
 }
 
 function version() {
-    var version = "19.08.21-1700";
+    document.getElementsByTagName('body')[0].style.zoom = 0.75
+    var version = "19.08.21-2020";
     document.getElementById("version").innerHTML = version;
 
-    cardmoney = parseInt(localStorage.getItem("cardmoney"));
+    cardstr = localStorage.getItem("cardstr");
 
-    if (cardmoney == null || cardmoney == "") {
+    if (typeof(cardstr) == "object") {
+        cardstatus.mode = 0;
+        cardstatus.wintimes = 0;
+        cardstatus.losetimes = 0;
+        cardstatus.decknum = 0;
+        savecard();
+    } else {
+        cardstatus = JSON.parse(cardstr);
+        cardstatus.mode = parseInt(cardstatus.mode);
+        cardstatus.wintimes = parseInt(cardstatus.wintimes);
+        cardstatus.losetimes = parseInt(cardstatus.losetimes);
+        cardstatus.decknum = parseInt(cardstatus.decknum);
+    }
+
+    cardmoney = parseInt(localStorage.getItem("cardmoney"));
+    if (isNaN(cardmoney)) {
         cardstatus.deckbalance = 0;
+        savecard();
     } else {
         cardstatus.deckbalance = cardmoney;
         savecard();
     }
 
-    cardstr = localStorage.getItem("cardstr");
-    if (cardstr == null || cardstr == "") {
-        mode = 0;
-        wintimes = 0;
-        losetimes = 0;
-        decknum = 0;
-    } else {
-        cardstatus = JSON.parse(cardstr);
-        mode = parseInt(cardstatus.mode);
-        wintimes = parseInt(cardstatus.wintimes);
-        losetimes = parseInt(cardstatus.losetimes);
-        decknum = parseInt(cardstatus.decknum);
-    }
-
     decksaved();
 
-    if (mode == 1) {
+    if (cardstatus.mode == 1) {
         document.getElementById("gamemode").innerHTML = "现开模式";
     } else {
         document.getElementById("gamemode").innerHTML = "构筑模式";
@@ -55,7 +56,7 @@ function version() {
 
     document.getElementById("deckmoney").innerHTML = "金币数：" + cardstatus.deckbalance;
 
-    if (wintimes == "2") {
+    if (cardstatus.wintimes == "2") {
         alert("现开赛BO3胜利，奖励1卡包");
         cardstatus.decknum++;
         deldeck();
@@ -63,7 +64,7 @@ function version() {
         cardstatus.wintimes = 0;
         savecard();
     }
-    if (losetimes == "2") {
+    if (cardstatus.losetimes == "2") {
         alert("现开赛BO3失败，奖励1卡包");
         cardstatus.decknum++;
         deldeck();

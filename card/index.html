@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.5,maximum-scale=2">
     <title>Boundary Cards beta</title>
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" href="css/style.min.css">
     <style>
         body {
-            width: -moz-fit-content;
-            width: -webkit-fit-content;
-            width: fit-content;
-            margin: 0px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
             -moz-user-select: none;
             /*火狐*/
             -webkit-user-select: none;
@@ -104,15 +104,19 @@
                                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a id="" href="javascript:deckstart()">套牌及游戏模式选择</a>
+                                    <a id="" href="javascript:void(0)">套牌及游戏模式选择</a>
                                 </li>
                                 <li>
-                                    <a id="" href="javascript:void(0)">现开模式</a>
+                                    <a id="" href="javascript:deck()">构筑模式</a>
+                                </li>
+                                <li>
+                                    <a id="" href="javascript:limit()">现开模式</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
                                     <a id="" href="javascript:savecard()">保存</a>
-                                    <a id="" href="javascript:void(0)">测试</a>
+                                    <a href="javascript:cardrestart()">删除存档！</a>
+                                    <a id="" href="../index.html">回到Cats!</a>
                                 </li>
                             </ul>
                         </div>
@@ -124,86 +128,88 @@
 
                     <div class="button-border button-rounded button-primary">游戏模式：<text id="gamemode"></text></div>
 
-                    <table id="decksel" style="display:none">
-                        <tr>
-                            <td><input name="deck" type="radio" onclick="yiyid()">1|1|d</td>
-                            <td><input name="deck" type="radio" onclick="yiyi()">1|1</td>
-                            <td><input name="deck" type="radio" onclick="erer()">2|2</td>
-                            <td><input name="deck" type="radio" onclick="sansan()">3|3</td>
-                            <td><input name="deck" type="radio" onclick="sisi()">4|4</td>
-                            <td><input name="deck" type="radio" onclick="jianer()">-2-2</td>
-                            <td><input name="deck" type="radio" onclick="jianyi()">-1-1</td>
-                        </tr>
-                        <tr>
-                            <td><input name="deck" type="radio" onclick="decmana()">mana</td>
-                            <td><input name="deck" type="radio" onclick="defaultdeck()">默认套牌</td>
-                        </tr>
-                    </table>
+                    <div class="vertical-align:middle;display:table-cell">
+                        <table id="decksel" style="display:none">
+                            <tr>
+                                <td><input name="deck" type="radio" onclick="yiyid()">1|1|d</td>
+                                <td><input name="deck" type="radio" onclick="yiyi()">1|1</td>
+                                <td><input name="deck" type="radio" onclick="erer()">2|2</td>
+                                <td><input name="deck" type="radio" onclick="sansan()">3|3</td>
+                                <td><input name="deck" type="radio" onclick="sisi()">4|4</td>
+                                <td><input name="deck" type="radio" onclick="jianer()">-2-2</td>
+                                <td><input name="deck" type="radio" onclick="jianyi()">-1-1</td>
+                            </tr>
+                            <tr>
+                                <td><input name="deck" type="radio" onclick="decmana()">mana</td>
+                                <td><input name="deck" type="radio" onclick="defaultdeck()">默认套牌</td>
+                            </tr>
+                        </table>
 
-                    <table id="decksaving" style="display:none;">
-                        <tr>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving1"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving2"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving3"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving4"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving5"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving6"></text></td>
-                        </tr>
-                        <tr>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving7"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving8"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving9"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving10"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving11"></text></td>
-                            <td><input name="decksaving" type="radio" onclick=""><text id="decksaving12"></text></td>
-                        </tr>
-                    </table>
+                        <table id="decksaving" style="display:none;">
+                            <tr>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving1"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving2"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving3"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving4"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving5"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving6"></text></td>
+                            </tr>
+                            <tr>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving7"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving8"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving9"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving10"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving11"></text></td>
+                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving12"></text></td>
+                            </tr>
+                        </table>
 
-                    <table id="limitsaving" style="display:none;">
-                        <tr>
-                            <td><text id="limitsaving1"></text></td>
-                            <td><text id="limitsaving2"></text></td>
-                            <td><text id="limitsaving3"></text></td>
-                            <td><text id="limitsaving4"></text></td>
-                            <td><text id="limitsaving5"></text></td>
-                            <td><text id="limitsaving6"></text></td>
-                        </tr>
-                        <tr>
-                            <td><text id="limitsaving7"></text></td>
-                            <td><text id="limitsaving8"></text></td>
-                            <td><text id="limitsaving9"></text></td>
-                            <td><text id="limitsaving10"></text></td>
-                            <td><text id="limitsaving11"></text></td>
-                            <td><text id="limitsaving12"></text></td>
-                        </tr>
-                    </table>
+                        <table id="limitsaving" style="display:none;">
+                            <tr>
+                                <td><text id="limitsaving1"></text></td>
+                                <td><text id="limitsaving2"></text></td>
+                                <td><text id="limitsaving3"></text></td>
+                                <td><text id="limitsaving4"></text></td>
+                                <td><text id="limitsaving5"></text></td>
+                                <td><text id="limitsaving6"></text></td>
+                            </tr>
+                            <tr>
+                                <td><text id="limitsaving7"></text></td>
+                                <td><text id="limitsaving8"></text></td>
+                                <td><text id="limitsaving9"></text></td>
+                                <td><text id="limitsaving10"></text></td>
+                                <td><text id="limitsaving11"></text></td>
+                                <td><text id="limitsaving12"></text></td>
+                            </tr>
+                        </table>
 
-                    <p id="deckdis" style="display:none;width:auto"></p>
-                    <br>
+                        <p id="deckdis" style="display:none;width:auto"></p>
+                        <br>
 
-                    <table id="deckbought" style="display:none">
-                        <td><text id="decknumber"></text></td>
-                    </table>
+                        <table id="deckbought" style="display:none">
+                            <td><text id="decknumber"></text></td>
+                        </table>
 
-                    <table id="deckopenradio" style="display:none;">
-                        <td><input name="deckopen" type="radio" onclick="deckopen1()"><text id="deckopen1"></text></td>
-                        <td><input name="deckopen" type="radio" onclick="deckopen2()"><text id="deckopen2"></text></td>
-                        <td><input name="deckopen" type="radio" onclick="deckopen3()"><text id="deckopen3"></text></td>
-                    </table>
+                        <table id="deckopenradio" style="display:none;">
+                            <td><input name="deckopen" type="radio" onclick="deckopen1()"><text id="deckopen1"></text></td>
+                            <td><input name="deckopen" type="radio" onclick="deckopen2()"><text id="deckopen2"></text></td>
+                            <td><input name="deckopen" type="radio" onclick="deckopen3()"><text id="deckopen3"></text></td>
+                        </table>
 
-                    <table id="decklimit" style="display:none">
-                        <td><input type="button" id="deckopen" value="打开卡包" onclick="deckopen()"></td>
-                        <td><input type="button" id="deckbuy" value="购买卡包" onclick="deckbuy()"></td>
-                        <td><input type="button" id="deckpay" value="重置余额和卡包数（测试用）" onclick="deckdefault()"></td>
-                    </table>
+                        <table id="decklimit" style="display:none">
+                            <td><input type="button" id="deckopen" value="打开卡包" onclick="deckopen()"></td>
+                            <td><input type="button" id="deckbuy" value="购买卡包" onclick="deckbuy()"></td>
+                            <td><input type="button" id="deckpay" value="重置余额和卡包数（测试用）" onclick="deckdefault()"></td>
+                        </table>
 
-                    </table>
-                    <table id="deckbutton">
-                        <td><input type="button" style="display:none;" id="decksure" value="确定" onclick="decksure()"></td>
-                        <td><input type="button" style="display:none;" id="deckdel" value="删除" onclick="deckdel()"></td>
-                        <!-- <td><input type="button" style="display:none;" id="deckdisplay" value="显示当前存储套牌" onclick="decksaved()"></td> -->
-                        <td><input type="button" style="display:none;" id="deckback" value="返回" onclick="deckback()"></td>
-                    </table>
+                        </table>
+                        <table id="deckbutton">
+                            <td><input type="button" style="display:none;" id="decksure" value="确定" onclick="decksure()"></td>
+                            <td><input type="button" style="display:none;" id="deckdel" value="删除" onclick="deckdel()"></td>
+                            <!-- <td><input type="button" style="display:none;" id="deckdisplay" value="显示当前存储套牌" onclick="decksaved()"></td> -->
+                            <td><input type="button" style="display:none;" id="deckback" value="返回" onclick="deckback()"></td>
+                        </table>
+                    </div>
 
                     <div id="cstatus">
                         <p style="display:inline" class="button-border button-rounded button-primary"><b>电脑法力：</b><text id="cmana">0</text></p>
@@ -291,7 +297,6 @@
                         <input class="button button-3d button-primary button-rounded" type="button" id="button3" style="display:none;height:60px;width:120px" value="你的回合" onclick="main3()">
                         <input class="button button-3d button-primary button-rounded" type="button" id="button4" style="display:none;height:60px;width:120px" value="战斗选择" onclick="main4()">
                         <input class="button button-3d button-primary button-rounded" type="button" id="restart" style="display:none;height:60px;width:120px" value="重新开始" onclick="restart()">
-                        <a id="cat" href="http://cat.heguangyu.net" class="button  button-border button-rounded button-primary">cat</a>
                     </div>
 
                 </section>
@@ -319,8 +324,6 @@
     <script src="cardpicture.js"></script>
     <script src="limit.js"></script>
     <script src="display.js"></script>
-    <script src="storage.js"></script>
-
 
     <script>
         var mana = 0;
@@ -336,6 +339,15 @@
         function savemoney() {
             cardmoney = cardstatus.deckbalance;
             localStorage.setItem("cardmoney", cardmoney);
+        }
+
+        function cardrestart() {
+            var sure;
+            sure = confirm("确认删除存档吗！?")
+            if (sure == true) {
+                localStorage.clear();
+                location.reload();
+            } else {}
         }
         //网页版Android无联动
         function deadand() {
