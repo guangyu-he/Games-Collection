@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Cards</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <style>
+        body {
+            -moz-user-select: none;
+            /*火狐*/
+            -webkit-user-select: none;
+            /*webkit浏览器*/
+            -ms-user-select: none;
+            /*IE10*/
+            -khtml-user-select: none;
+            /*早期浏览器*/
+            user-select: none;
+        }
+    </style>
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function delCookie(cname) {
+            document.cookie = cname + "=" + ";expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    </script>
+</head>
+
+<body onload="counterdisplayfromand(and)">
+    <div id="wrapper" class="wrapper">
+        <header class="header htmleaf-header">
+            <h1>Math Cards<span>version:<text id="version"></text><br><a href="http://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
+            <!--<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/html5/html5muban/201508022345.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>-->
+        </header>
+        <main>
+            <div class="container">
+                <section>
+                    <table>
+                        <tr>
+                            <text>initial: </text><text id="initial"></text>
+                        </tr>
+                        <tr>
+                            <text>quest: </text><text id="quest"></text>
+                        </tr>
+                    </table>
+                    <p><text>counter: </text><text id="counter"></text><text>  used-counter: </text><text id="usedcounter"></text></p>
+                    <p><text>rest turn: </text><text id="restturn"></text></p>
+
+                    <table>
+                        <tr>
+                            <td><text id="">number: </text></td>
+                            <td><input type="button" id="" value="0" onclick="zero()"></td>
+                            <td><input type="button" id="" value="1" onclick="one()"></td>
+                            <td><input type="button" id="" value="2" onclick="two()"></td>
+                            <td><input type="button" id="" value="3" onclick="three()"></td>
+                            <td><input type="button" id="" value="4" onclick="four()"></td>
+                            <td><input type="button" id="" value="5" onclick="five()"></td>
+                            <td><input type="button" id="" value="6" onclick="six()"></td>
+                            <td><input type="button" id="" value="7" onclick="seven()"></td>
+                            <td><input type="button" id="" value="8" onclick="eight()"></td>
+                            <td><input type="button" id="" value="9" onclick="nine()"></td>
+                        </tr>
+                        <tr>
+                            <td><text>free to use: </text></td>
+                            <td><text id="n0">0</text></td>
+                            <td><text id="n1">0</text></td>
+                            <td><text id="n2">0</text></td>
+                            <td><text id="n3">0</text></td>
+                            <td><text id="n4">0</text></td>
+                            <td><text id="n5">0</text></td>
+                            <td><text id="n6">0</text></td>
+                            <td><text id="n7">0</text></td>
+                            <td><text id="n8">0</text></td>
+                            <td><text id="n9">0</text></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="initable" style="display: none;">
+                        <tr>
+                            <td><input type="button" id="inibutton" onclick="ininum()"></td>
+                            <td><text id="initimes"></text></td>
+                        </tr>
+                        <tr>
+                            <td><input type="button" id="cbutton1" style="display: none;" onclick="cnum1()"></td>
+                            <td><input type="button" id="cbutton2" style="display: none;" onclick="cnum2()"></td>
+                            <td><input type="button" id="cbutton3" style="display: none;" onclick="cnum3()"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <table>
+
+                        <tr>
+                            <td><input type="button" id="" value="+" onclick="plus()"></td>
+                            <td><input type="button" id="" value="-" onclick="minus()"></td>
+                            <td><input type="button" id="" value="x" onclick="time()"></td>
+                            <td><input type="button" id="" value="÷" onclick="divi()"></td>
+                            <td><input type="button" id="" value="√" onclick="sqrt()"></td>
+                            <td><input type="button" id="" value="²" onclick="pow()"></td>
+
+                        </tr>
+                        <tr>
+                            <td><text id="plus"></text></td>
+                            <td><text id="minus"></text></td>
+                            <td><text id="time"></text></td>
+                            <td><text id="divi"></text></td>
+                            <td><text id="sqrt"></text></td>
+                            <td><text id="pow"></text></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        <tr>
+                            <td><text>special: </text></td>
+                            <td><input type="button" id="" value="undo" onclick="undo()"></td>
+                            <td><input type="button" id="" value="joint()" onclick="joint()"></td>
+                        </tr>
+
+                        <tr>
+                            <td><text>free to use: </text></td>
+                            <td><text id="undo"></text></td>
+                            <td><text id="joint"></text></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <table id="gametable" style="display: none;">
+                        <tr>
+                            <td onclick="pcal1()"><text id="cal1"></text></td>
+                            <td><text id=" "></text></td>
+                            <td onclick="pcal2()"><text id="cal2"></text></td>
+                            <td><text id=" "></text></td>
+                            <td onclick="pcal3()"><text id="cal3"></text></td>
+                            <td><text id=" "></text></td>
+                            <td><input type="button" id="" value="=" onclick="calculate()"></td>
+                            <td><text id=" "></text></td>
+                            <td><text id="result"></text><input type="button" id="csave" style="display: none;" value="save" onclick="csave()"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input type="button" id="start" value="start" onclick="main()">
+                    <table id="gamestart" style="display: none;">
+                        <tr>
+                            <td><input type="button" id="giveup" value="give up" onclick="giveup()"></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+    <!-- /wrapper -->
+
+    <button id="mm-menu-toggle" class="mm-menu-toggle">Toggle Menu</button>
+    <nav id="mm-menu" class="mm-menu">
+        <div class="mm-menu__header">
+            <h2 class="mm-menu__title">说明</h2>
+        </div>
+        <ul class="mm-menu__items">
+            <input type="button" id="test" value="test" onclick="test()">
+            <input type="button" id="packs" value="packs" onclick="packs()">
+            <br>
+            <p>游戏目的：利用最少的counter得到quest要求的数字；设置initial能够帮助你（你可以使用它），越小的initial游戏难度越低，不设置最难</p>
+            <p>所有数字耗费该数字个counter，运算符号耗费的counter显示在对应按钮下方。</p>
+            <p>点击计算版中元素可将其删除，但不退还counter</p>
+            <p>特殊按钮只能从开包（packs）中获得（每包10counter）：joint()表示将两个数字直接拼接；undo表示将计算板中所有元素返还：符号将退还费用</p>
+            <p>若counter为0将自动赠送50个</p>
+            <p>获胜后奖励counter等于剩余回合数乘你设置的初始值，若未设置初始值（输入时取消）则等于剩余回合乘任务</p>
+            <p>失败不获得counter，放弃获得counter等于初始值除剩余回合，未设置初始值（输入时取消）则等于任务除剩余回合</p>
+            <p>反馈：<a href="mailto:me@heguangyu.net">me@heguangyu.net</a></p>
+
+            <!--<li class="mm-menu__item">
+	      <a class="mm-menu__link" href="#">
+	        <span class="mm-menu__link-text"><i class="md md-home"></i> Home</span>
+	      </a>
+	    </li>
+	    <li class="mm-menu__item">
+	      <a class="mm-menu__link" href="#">
+	        <span class="mm-menu__link-text"><i class="md md-person"></i> Profile</span>
+	      </a>
+	    </li>
+	    <li class="mm-menu__item">
+	      <a class="mm-menu__link" href="#">
+	        <span class="mm-menu__link-text"><i class="md md-inbox"></i> Inbox</span>
+	      </a>
+	    </li>
+	    <li class="mm-menu__item">
+	      <a class="mm-menu__link" href="#">
+	        <span class="mm-menu__link-text"><i class="md md-favorite"></i> Favourites</span>
+	      </a>
+	    </li>
+	    <li class="mm-menu__item">
+	      <a class="mm-menu__link" href="#">
+	        <span class="mm-menu__link-text"><i class="md md-settings"></i> Settings</span>
+	      </a>
+	    </li>-->
+
+        </ul>
+    </nav>
+    <!-- /nav -->
+
+    <script src="js/production/materialMenu.min.js"></script>
+    <script src="number.js"></script>
+    <script src="math.js"></script>
+    <script src="result.js"></script>
+    <script src="joint.js"></script>
+    <script src="undo.js"></script>
+
+    <script>
+        var menu = new Menu;
+
+        var max;
+        var min = 0;
+
+        var initial;
+        var quest;
+        var restturn;
+        var counter=0;
+        var usedcounter = 0;
+        var gamemode = 0;
+
+        var initotal;
+
+        var mathcost = [1, 1, 2, 2, 2, 2]; //initial math cost
+        var numberleft = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //initial number left
+
+        function main() {
+            document.getElementById("test").style.display = "none";
+            document.getElementById("packs").style.display = "none";
+
+            usedcounter = 0;
+            document.getElementById("usedcounter").innerHTML = usedcounter;
+
+            if (counter <= 0) {
+                counter = 50;
+                document.getElementById("counter").innerHTML = counter;
+            }
+
+            initial = prompt("input initial value, cancel gives 0 initial and random quest from 0~999", "2");
+            if (initial == null) {
+                initial = 0;
+            }
+            document.getElementById("initial").innerHTML = initial;
+            if (initial < 10 && initial > 0) {
+                max = Math.ceil(initial / 10) * 10;
+            } else if (initial >= 10 && initial < 100) {
+                max = Math.ceil(initial / 10) * 100;
+            } else if (initial == 0) {
+                max = 999;
+            } else {
+                alert("invalid initial number!");
+                return;
+            }
+            //alert(max);
+
+            parseInt(Math.random() * (max - min + 1) + min, 10);
+            quest = Math.floor(Math.random() * (max - min + 1) + min);
+            if (quest == 0) {
+                quest++;
+            }
+            document.getElementById("quest").innerHTML = quest;
+
+            if (initial == 0) {
+                restturn = 10;
+            } else {
+                restturn = Math.ceil(quest / initial);
+            }
+            document.getElementById("restturn").innerHTML = restturn;
+
+            document.getElementById("initable").style.display = "block";
+            document.getElementById("inibutton").value = initial;
+
+            initotal = Number(restturn);
+            document.getElementById("initimes").innerHTML = initotal;
+
+            document.getElementById("start").style.display = "none";
+            document.getElementById("gamestart").style.display = "block";
+            document.getElementById("gametable").style.display = "block";
+
+            mathcostdisplay();
+            numberleftdisplay();
+
+
+
+
+
+            gamemode = 1; //game start
+        }
+
+        var version;
+
+        function load() {
+            version = "26.12.18";
+            document.getElementById("version").innerHTML = version;
+            counterdisplay();
+            numberleftdisplay();
+        }
+
+        function numberleftdisplay() {
+            document.getElementById("n0").innerHTML = numberleft[0];
+            document.getElementById("n1").innerHTML = numberleft[1];
+            document.getElementById("n2").innerHTML = numberleft[2];
+            document.getElementById("n3").innerHTML = numberleft[3];
+            document.getElementById("n4").innerHTML = numberleft[4];
+            document.getElementById("n5").innerHTML = numberleft[5];
+            document.getElementById("n6").innerHTML = numberleft[6];
+            document.getElementById("n7").innerHTML = numberleft[7];
+            document.getElementById("n8").innerHTML = numberleft[8];
+            document.getElementById("n9").innerHTML = numberleft[9];
+            document.getElementById("undo").innerHTML = numberleft[10];
+            document.getElementById("joint").innerHTML = numberleft[11];
+        }
+
+        function display() {
+            document.getElementById("cal1").innerHTML = cal1;
+            document.getElementById("cal2").innerHTML = cal2;
+            document.getElementById("cal3").innerHTML = cal3;
+        }
+
+        function resultdisply() {
+            document.getElementById("result").innerHTML = result;
+            document.getElementById("csave").style.display = "block";
+        }
+
+        function mathcostdisplay() {
+            document.getElementById("plus").innerHTML = mathcost[0];
+            document.getElementById("minus").innerHTML = mathcost[1];
+            document.getElementById("time").innerHTML = mathcost[2];
+            document.getElementById("divi").innerHTML = mathcost[3];
+            document.getElementById("sqrt").innerHTML = mathcost[4];
+            document.getElementById("pow").innerHTML = mathcost[5];
+        }
+
+        function counterdisplay() {
+            counter = getCookie("counter");
+            counter = Number(counter);
+            document.getElementById("counter").innerHTML = counter;
+        }
+
+        var and=0;
+        function counterdisplayfromand(and) {
+            version = "26.12.18";
+            document.getElementById("version").innerHTML = version;
+            numberleftdisplay();
+
+            //alert(and);
+            counter = Number(and);
+            //alert(counter);
+            document.getElementById("counter").innerHTML = counter;
+        }
+
+        var cc;
+
+        function counterchange(cc) {
+            counter = counter - Number(cc);
+            usedcounter = usedcounter + Number(cc);
+            setCookie("counter", counter, "30");
+            document.getElementById("counter").innerHTML = counter;
+            document.getElementById("usedcounter").innerHTML = usedcounter;
+            window.location="javascript:window.android.mc('"+counter+"')";
+        }
+
+        function test() {
+            var testcode = prompt("testcode:");
+            testcode = Number(testcode);
+            //alert(testcode);
+            if (testcode == 100) {
+                counter = counter + 100;
+                 alert(counter);
+                document.getElementById("counter").innerHTML = counter;
+                //setCookie("counter", counter, "30");
+                window.location="javascript:window.android.mc('"+counter+"')";
+            } else if (testcode == null) {
+
+            } else {
+                for (var i = 0; i < 12; i++) {
+                    numberleft[i] = numberleft[i] + testcode;
+                }
+                numberleftdisplay();
+            }
+        }
+
+        var i1 = 0; //cal1 empty
+        var i2 = 0; //cal2 empty
+        var i3 = 0; //cal3 empty
+
+        var cal1, cal2, cal3;
+        cal1 = "";
+        cal2 = "";
+        cal3 = "";
+
+        var result;
+
+        function pcal1() {
+            cal1 = "";
+            i1 = 0;
+            display();
+        }
+
+        function pcal2() {
+            cal2 = "";
+            i2 = 0;
+            display();
+        }
+
+        function pcal3() {
+            cal3 = "";
+            i3 = 0;
+            display();
+        }
+
+        var cs1 = 0; //saved results
+        var cs2 = 0;
+        var cs3 = 0;
+
+
+        function csave() {
+            if (document.getElementById("cbutton1").style.display == "none") {
+                cs1 = result;
+                document.getElementById("cbutton1").style.display = "block";
+                document.getElementById("cbutton1").value = cs1;
+                result = "";
+                resultdisply();
+                document.getElementById("csave").style.display = "none";
+            } else if (document.getElementById("cbutton2").style.display == "none") {
+                cs2 = result;
+                document.getElementById("cbutton2").style.display = "block";
+                document.getElementById("cbutton2").value = cs2;
+                result = "";
+                resultdisply();
+                document.getElementById("csave").style.display = "none";
+            } else if (document.getElementById("cbutton3").style.display == "none") {
+                cs3 = result;
+                document.getElementById("cbutton3").style.display = "block";
+                document.getElementById("cbutton3").value = cs3;
+                result = "";
+                resultdisply();
+                document.getElementById("csave").style.display = "none";
+            } else {
+                alert("saved slots are full!");
+            }
+        }
+
+        function giveup() {
+            lose();
+
+            cal1 = "";
+            i1 = 0;
+            cal2 = "";
+            i2 = 0;
+            cal3 = "";
+            i3 = 0;
+            display();
+
+            result = "";
+            resultdisply();
+
+            document.getElementById("csave").style.display = "none";
+            document.getElementById("initable").style.display = "none";
+
+            mathcost = [1, 1, 2, 2, 2, 2, 1, 5];
+            mathcostdisplay();
+
+            document.getElementById("start").style.display = "block";
+            document.getElementById("gamestart").style.display = "none";
+
+            usedcounter = 0;
+            document.getElementById("usedcounter").innerHTML = usedcounter;
+
+            //document.getElementById("test").style.display = "block";
+            document.getElementById("packs").style.display = "block";
+
+
+        }
+
+        function packs() {
+            //if (counter <= 0) {
+            //    return;
+            //}
+            counterchange(10);
+            var deckopened = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+            var deckopenning = [0, 0, 0];
+            var ii, iii;
+            for (var i = 0; i < 3; i++) {
+                ii = Math.floor((Math.random() * deckopened.length));
+                if (ii == 10 || ii == 11) {
+                    iii = Math.floor((Math.random() * 10));
+                    //alert(iii);
+                    if (iii == 0) {
+                        deckopenning[i] = deckopened[ii];
+                        numberleft[ii]++;
+                    } else {
+                        numberleft[iii]++;
+                    }
+                } else {
+                    deckopenning[i] = deckopened[ii];
+                    numberleft[ii]++;
+                }
+
+            }
+            //alert(deckopenning);
+            numberleftdisplay();
+        }
+    </script>
+</body>
+
+</html>

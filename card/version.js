@@ -17,8 +17,8 @@ function savecard() {
 }
 
 function version() {
-    document.getElementsByTagName('body')[0].style.zoom = 0.75
-    var version = "19.08.21-2020";
+    document.getElementsByTagName('body')[0].style.zoom = 1;
+    var version = "19.08.21-1820";
     document.getElementById("version").innerHTML = version;
 
     cardstr = localStorage.getItem("cardstr");

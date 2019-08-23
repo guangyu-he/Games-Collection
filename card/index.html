@@ -4,16 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.5,maximum-scale=2">
-    <title>Boundary Cards beta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
+    <title>Boundary Cards</title>
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" href="css/style.min.css">
     <style>
         body {
-            display: flex;
-            justify-content: center;
             align-items: center;
-            margin: auto;
+            margin: 0 auto;
             -moz-user-select: none;
             /*火狐*/
             -webkit-user-select: none;
@@ -90,7 +88,7 @@
 <body onload="version()" class="text-align: center">
     <div id="wrapper" class="wrapper">
         <header class="header htmleaf-header">
-            <h1>Boundary Cards<span>beta:<text id="version"></text><br><a href="http://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
+            <h1>Boundary Cards<span>alpha:<text id="version"></text><br><a href="http://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
         </header>
         <main>
             <div id="container">
@@ -183,7 +181,7 @@
                             </tr>
                         </table>
 
-                        <p id="deckdis" style="display:none;width:auto"></p>
+                        <p id="deckdis" style="display:none"></p>
                         <br>
 
                         <table id="deckbought" style="display:none">
@@ -216,8 +214,8 @@
                         <p style="display:inline" class="button-border button-rounded button-primary"><b>电脑生命：</b><text id="clife">0</text></p>
                     </div>
 
-                    <p id="chdis" style="display:none;width:auto"><b>电脑手牌：</b></p>
-                    <table id="chtdis" style="display:none;width:auto">
+                    <p id="chdis" style="display:none"><b>电脑手牌：</b></p>
+                    <table id="chtdis" style="display:none">
                         <tbody>
                             <tr>
                                 <td>
@@ -241,30 +239,30 @@
 
                     <div>
                         <p id="pb"><b>战场格：</b></p>
-                        <table id="pbt" style="width: 60%;margin:auto">
+                        <table id="pbt" style="display: flex;justify-content: center;">
                             <tbody>
                                 <tr>
-                                    <td class="button-border button-rounded button-jumbo"><img id="cbp1" src="null.gif" onclick="instantblock1(battlecard)"></td>
-                                    <td class="button-border button-rounded button-jumbo"><img id="cbp2" src="null.gif" onclick="instantblock2(battlecard)"></td>
-                                    <td class="button-border button-rounded button-jumbo"><img id="cbp3" src="null.gif" onclick="instantblock3(battlecard)"></td>
+                                    <td class="button-border button-rounded"><img id="cbp1" src="null.gif" onclick="instantblock1(battlecard)"></td>
+                                    <td class="button-border button-rounded"><img id="cbp2" src="null.gif" onclick="instantblock2(battlecard)"></td>
+                                    <td class="button-border button-rounded"><img id="cbp3" src="null.gif" onclick="instantblock3(battlecard)"></td>
                                 </tr>
                                 <tr>
-                                    <td class="button-border button-rounded button-jumbo"><img id="pbp1" src="null.gif" onclick="pbattleblock1(battlecard)"></td>
-                                    <td class="button-border button-rounded button-jumbo"><img id="pbp2" src="null.gif" onclick="pbattleblock2(battlecard)"></td>
-                                    <td class="button-border button-rounded button-jumbo"><img id="pbp3" src="null.gif" onclick="pbattleblock3(battlecard)"></td>
+                                    <td class="button-border button-rounded"><img id="pbp1" src="null.gif" onclick="pbattleblock1(battlecard)"></td>
+                                    <td class="button-border button-rounded"><img id="pbp2" src="null.gif" onclick="pbattleblock2(battlecard)"></td>
+                                    <td class="button-border button-rounded"><img id="pbp3" src="null.gif" onclick="pbattleblock3(battlecard)"></td>
                                 </tr>
                                 <tr>
-                                    <td class="button-border button-rounded button-jumbo"><input id="pac1" type="checkbox"></td>
-                                    <td class="button-border button-rounded button-jumbo"><input id="pac2" type="checkbox"></td>
-                                    <td class="button-border button-rounded button-jumbo"><input id="pac3" type="checkbox"></td>
+                                    <td class="button-border button-rounded"><input id="pac1" type="checkbox"></td>
+                                    <td class="button-border button-rounded"><input id="pac2" type="checkbox"></td>
+                                    <td class="button-border button-rounded"><input id="pac3" type="checkbox"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div id="status">
-                        <p style="display:inline" class="button-border button-rounded button-action"><b>你的法力：</b><text id="mana">0</text></p>
-                        <p style="display:inline" class="button-border button-rounded button-action"><b>你的生命：</b><text id="life">0</text></p>
+                        <p style="display:inline" class="button-border button-rounded button-caution"><b>你的法力：</b><text id="mana">0</text></p>
+                        <p style="display:inline" class="button-border button-rounded button-caution"><b>你的生命：</b><text id="life">0</text></p>
                     </div>
 
                     <p id="hdis" style="display:none;width:auto"><b>手牌：</b></p>

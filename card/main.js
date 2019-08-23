@@ -9,7 +9,7 @@ function start() {
         alert("在现开模式下，无套牌无法开始游戏");
         return;
     } else {
-        if (cardtot[0] == "") {
+        if (cardtot[0] == "" || cardtot[0] == 0) {
             alert("无已存储套牌，以默认套牌开始:");
             defaultdeck();
         } else {
