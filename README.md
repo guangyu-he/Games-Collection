@@ -1,1 +1,1 @@
-# cats-game
+# Games Collection
