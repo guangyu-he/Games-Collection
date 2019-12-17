@@ -1,4 +1,9 @@
 function sellcat() {
+
+    if (hint == 1) {
+        alert("卖猫时请输入要卖的猫的名字。\n系统将根据算法计算出此猫咪的价值，然后获得该价值的金钱。\n此操作不能撤销(将导致强制存档)，请慎重！");
+    }
+
     var catdel = prompt("卖哪只猫，请输入名字：", "Name");
     var price1, price2, price3, price4, price;
     if (catdel == cat.name1) {
@@ -12,6 +17,8 @@ function sellcat() {
         } else if (cat.age1 < 30) {
             price4 = 1.2;
         }
+
+        newstext(cat.name1 + "被卖掉了");
 
         cat.name1 = ""
         cat.zizhu1 = ""
@@ -39,6 +46,8 @@ function sellcat() {
             price4 = 1.2;
         }
 
+        newstext(cat.name2 + "被卖掉了");
+
         cat.name2 = ""
         cat.zizhu2 = ""
         cat.huoyue2 = ""
@@ -64,6 +73,8 @@ function sellcat() {
         } else if (cat.age3 < 30) {
             price4 = 1.2;
         }
+
+        newstext(cat.name3 + "被卖掉了");
 
         cat.name3 = ""
         cat.zizhu3 = ""
@@ -91,6 +102,8 @@ function sellcat() {
             price4 = 1.2;
         }
 
+        newstext(cat.name4 + "被卖掉了");
+
         cat.name4 = ""
         cat.zizhu4 = ""
         cat.huoyue4 = ""
@@ -117,6 +130,8 @@ function sellcat() {
             price4 = 1.2;
         }
 
+        newstext(cat.name5 + "被卖掉了");
+
         cat.name5 = ""
         cat.zizhu5 = ""
         cat.huoyue5 = ""
@@ -131,10 +146,13 @@ function sellcat() {
         document.getElementById("cat5").innerHTML = "null";
 
     } else {
-
+        newstext(catdel + "不存在");
+        return;
     }
 
-    cat.money = parseInt(cat.money) + Math.round((price1 + price2 + price3) * price4); // 测试用数据
+    catvalue = Math.round((price1 + price2 + price3) * price4);
+    newstext("猫卖了" + catvalue + "金钱");
+    cat.money = parseInt(cat.money) + catvalue; // 测试用数据
 
     save();
     location.reload();
@@ -142,23 +160,33 @@ function sellcat() {
 
 function buycat() {
 
+    if (hint == 1) {
+        alert("花费100金币购买猫咪！弹窗中输入希望猫咪的三围和名字（使用 / 分割）。\n三围总和不得超过30。 \n自主性影响学习能力，活跃度影响活动能力，健康值影响体力和食物消耗。\n此操作不能撤销(将导致强制存档)，请慎重！");
+    }
+
     if (cat.money < 100) {
-        alert("没钱还要养猫？")
+        newstext("没钱还要养猫?");
         return;
     }
 
     if (cat.name1 == "" || cat.name2 == "" || cat.name3 == "" || cat.name4 == "" || cat.name5 == "") {
         var sure;
-        while (sure == null || sure == false) {
-            var newcat = prompt("Please enter a cat:", "自主性,活跃度,健康值,名字");
+        var newcat = prompt("Please enter a cat:", "自主性/活跃度/健康值/名字");
+        if (newcat == null || newcat == "自主性/活跃度/健康值/名字") {
+            return
+        } else {
             sure = confirm("are you sure with this value:" + newcat);
-            var newcatd = newcat.split(",");
-            var sum = parseInt(newcatd[0]) + parseInt(newcatd[1]) + parseInt(newcatd[2]);
-            if (sum > 30) {
-                alert("sum must less than 30");
-                sure = false;
+            if (sure == null || sure == false) {
+                return;
             }
         }
+        var newcatd = newcat.split("/");
+        var sum = parseInt(newcatd[0]) + parseInt(newcatd[1]) + parseInt(newcatd[2]);
+        if (sum > 30) {
+            newstext("三围总和须小于等于30");
+            sure = false;
+        }
+
 
         var sexnum = Math.floor(Math.random() * 10 + 1);
         var sex;
@@ -177,6 +205,8 @@ function buycat() {
             cat.hungerstatus1 = 100;
             cat.age1 = 0;
             cat.sex1 = sex;
+            newstext("欢迎猫咪" + cat.name1 + "回家！");
+
         } else if (cat.name2 == "") {
             cat.zizhu2 = newcatd[0];
             cat.huoyue2 = newcatd[1];
@@ -186,6 +216,8 @@ function buycat() {
             cat.hungerstatus2 = 100;
             cat.age2 = 0;
             cat.sex2 = sex;
+            newstext("欢迎猫咪" + cat.name2 + "回家！");
+
         } else if (cat.name3 == "") {
             cat.zizhu3 = newcatd[0];
             cat.huoyue3 = newcatd[1];
@@ -195,6 +227,8 @@ function buycat() {
             cat.hungerstatus3 = 100;
             cat.age3 = 0;
             cat.sex3 = sex;
+            newstext("欢迎猫咪" + cat.name3 + "回家！");
+
         } else if (cat.name4 == "") {
             cat.zizhu4 = newcatd[0];
             cat.huoyue4 = newcatd[1];
@@ -204,6 +238,8 @@ function buycat() {
             cat.hungerstatus4 = 100;
             cat.age4 = 0;
             cat.sex4 = sex;
+            newstext("欢迎猫咪" + cat.name4 + "回家！");
+
         } else if (cat.name5 == "") {
             cat.zizhu5 = newcatd[0];
             cat.huoyue5 = newcatd[1];
@@ -213,9 +249,11 @@ function buycat() {
             cat.hungerstatus5 = 100;
             cat.age5 = 0;
             cat.sex5 = sex;
+            newstext("欢迎猫咪" + cat.name5 + "回家！");
+
         }
     } else {
-        alert("猫位已满")
+        newstext("猫位已满");
     }
     cat.money = cat.money - 100;
     save();

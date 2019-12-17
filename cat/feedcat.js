@@ -1,4 +1,14 @@
 function feedfunction() {
+
+    if (hint == 1) {
+        alert("喂食将消耗50食物,并增加当前猫咪100的饱食度和5点好感度. 注意,如果过量喂食将有概率导致猫咪吃吐,损失20饱食度,此概率随猫咪超过饱食度上限的增多而增加!");
+    }
+
+    if (cat.food < 50) {
+        newstext("没有猫粮了！");
+        return;
+    }
+
     cat.food = parseInt(cat.food) - 50;
     if (catselected == 1) {
         cat.hungerstatus1 = parseInt(cat.hungerstatus1) + 100;

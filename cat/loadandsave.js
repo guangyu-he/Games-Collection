@@ -1,6 +1,13 @@
 var cardmoney;
 
 function load() {
+    newstr = localStorage.getItem("newstr");
+    if (newstr == null) {
+        newstr = "";
+    } else {
+        news = JSON.parse(newstr);
+        savenews();
+    }
     catstr = localStorage.getItem("catstr");
 
     if (catstr == null || catstr == "") {
@@ -28,7 +35,7 @@ function load() {
         } else {
             cat.money = parseInt(cardmoney);
         }
-        save();
+        //save();
     }
 }
 
@@ -38,4 +45,12 @@ function save() {
 
     cardmoney = cat.money;
     localStorage.setItem("cardmoney", cardmoney);
+
+    newstext("已储存");
+    savenews();
+}
+
+function savenews() {
+    newstr = JSON.stringify(news);
+    localStorage.setItem("newstr", newstr);
 }

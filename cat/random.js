@@ -1,7 +1,7 @@
 function moneyloss(cathuoyue) {
     var randomnum = Math.floor(Math.random() * 100 + 1);
     var random;
-    //alert(cathuoyue + "/" + randomnum);
+    //newstext(cathuoyue + "/" + randomnum);
     if (cathuoyue == "") {
         return;
     }
@@ -11,7 +11,7 @@ function moneyloss(cathuoyue) {
         random = 1;
     }
     if (random == 1) {
-        alert("逗猫的时候打碎瓶子，损失20金钱");
+        newstext("逗猫的时候打碎瓶子，损失20金钱");
         cat.money = cat.money - 20;
     }
     document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
@@ -20,7 +20,7 @@ function moneyloss(cathuoyue) {
 function toomanyfood(name, hungerstatus, hungermax) {
     var randomnum = Math.floor(Math.random() * 100 + 1);
     var random;
-    //alert(cathuoyue + "/" + randomnum);
+    //newstext(cathuoyue + "/" + randomnum);
     if (hungerstatus == "") {
         return;
     }
@@ -30,7 +30,7 @@ function toomanyfood(name, hungerstatus, hungermax) {
         random = 1;
     }
     if (random == 1) {
-        alert("猫咪吃撑了！吐了20食物");
+        newstext("猫咪吃撑了！吐了20食物");
         if (name == cat.name1) {
             cat.hungerstatus1 = cat.hungermax1 - 20;
         } else if (name == cat.name2) {
@@ -55,5 +55,23 @@ function toomanyfood(name, hungerstatus, hungermax) {
             cat.hungerstatus5 = cat.hungermax5;
         }
     }
+}
 
+function earnmoremoney() {
+    var randomnum = Math.floor(Math.random() * 100 + 1);
+    if (randomnum < 10) {
+        cat.money = cat.money + 50;
+        newstext("努力工作!额外获得50金币！");
+    } else if (randomnum > 90) {
+        cat.money = cat.money + 100;
+        newstext("老板开心!额外获得100金币！");
+    }
+}
+
+function getmorefood() {
+    var randomnum = Math.floor(Math.random() * 100 + 1);
+    if (randomnum < 10) {
+        cat.food = parseInt(cat.food) + 100;
+        newstext("遇到宠物店打折，额外获得100猫粮！");
+    }
 }

@@ -1,0 +1,10 @@
+[default]
+name=Default
+runtime=host
+config-opts=
+run-opts=
+prefix=/home/fredhgy/.cache/gnome-builder/install/Games-Collection/host
+app-id=
+postbuild=
+prebuild=
+default=true

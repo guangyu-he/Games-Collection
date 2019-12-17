@@ -64,7 +64,11 @@
                 <section>
 
                     <div>
-                        <p id="day" class="button-border button-rounded button-primary">day:</p>
+                        <p id="day" class="button-border button-rounded button-primary">日期:</p>
+                    </div>
+
+                    <div>
+                        <p id="news" onclick=delnews() class="button-border button-rounded button-primary" style="word-break:break-word;">消息栏: <text id="newstext"></text> </p>
                     </div>
 
                     <div>
@@ -95,6 +99,10 @@
                                 <li>
                                     <a href="javascript:test()">测试！</a>
                                 </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:hintsetting()" id="hintset">关闭提示</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -113,7 +121,11 @@
                                 <li>
                                     <a id="" href="javascript:findfood()">外出觅食</a>
                                     <a id="" href="javascript:findmoney()">外出挣钱</a>
-                                    <a id="" href="card/index.html">去打牌</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="" href="../card/index.html">去打牌</a>
+                                    <a id="" href="javascript:dubo()">赌？</a>
                                 </li>
                             </ul>
                         </div>
@@ -228,8 +240,26 @@
             pday: "",
             newzizhu: "",
             newhuoyue: "",
-            newjiankang: ""
+            newjiankang: "",
         };
+
+        var newstr;
+        var news = {
+            newstext: ""
+        }
+
+        var hint = 1; //用于设置是否需要提醒，默认1为打开，0为关闭
+        function hintsetting() {
+            if (hint == 1) {
+                hint = 0;
+                newstext("游戏提示已关闭")
+                document.getElementById("hintset").innerHTML = "打开提示";
+            } else {
+                hint = 1;
+                newstext("游戏提示已打开")
+                document.getElementById("hintset").innerHTML = "关闭提示";
+            }
+        }
 
         // "自主性,活跃度,健康值,名字,年龄,体力值,好感度,最大饥饿度,饥饿值,饥饿消耗"
         var hungerlimit = -25;
@@ -269,6 +299,9 @@
             cat.lovestatus1 = 0;
             cat.hungerstatus1 = 100;
 
+            news.newstext = "";
+            newstext("已加载测试数据");
+            savenews();
             save();
             onload();
             location.reload();
@@ -281,9 +314,14 @@
             var myDate = new Date();
             var version = myDate.toLocaleString();
 
-            document.getElementById("version").innerHTML = "190821 - 2020";
+            document.getElementById("version").innerHTML = "191217 - 1448";
 
             load();
+
+            if (news.newstext == null) {
+                news.newstext = "";
+            }
+            document.getElementById("newstext").innerHTML = news.newstext;
 
             if (cat.day == null || cat.day == "") {
                 cat.day = 1;
@@ -437,13 +475,14 @@
 
             }
 
-            document.getElementById("day").innerHTML = "day:" + cat.day;
+            document.getElementById("day").innerHTML = "日期:" + cat.day;
             document.getElementById("food").innerHTML = "剩余食物:" + cat.food;
             document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
 
         }
 
         function nextday() {
+
             var confirm1, confirm2, confirm3, confirm4, confirm5;
             if (cat.hungerstatus1 <= hungerlimit) {
                 catselect1();
@@ -574,8 +613,7 @@
                 cat.lovestatus5 = parseInt(cat.lovestatus5) - 2;
             }
 
-            document.getElementById("day").innerHTML = "day:" + cat.day;
-
+            document.getElementById("day").innerHTML = "日期:" + cat.day;
 
             if (cat.age1 >= 30 && cat.age1 < 60) { //年龄影响
                 cat.hungermax1 = 200;
@@ -736,6 +774,22 @@
             save();
         }
 
+        function newstext(text) { //消息栏
+            news.newstext = news.newstext + "||" + text;
+            document.getElementById("newstext").innerHTML = news.newstext;
+        }
+
+        function delnews() {
+            sure = confirm("确定删除消息?");
+            if (sure == null || sure == false) {
+                return;
+            } else {
+                news.newstext = "";
+                document.getElementById("newstext").innerHTML = news.newstext;
+                savenews();
+            }
+        }
+
         function deadand() { //传递信息给安卓的java 
             //var text=document.getElementById("text").value;  
             window.location = "javascript:window.android.deadand()";
@@ -753,7 +807,5 @@
 <script src="train.js"></script>
 <script src="activity.js"></script>
 <script src="random.js"></script>
-
-
 
 </html>

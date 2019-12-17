@@ -93,15 +93,25 @@ function birth() {
 }
 
 function baby() {
+
+    if (hint == 1) {
+        alert("交配猫需要输入猫爸爸和妈妈的名字,交配双方年龄须大于30天\n后代的三围将根据算法产生\n母猫怀孕需要10天才会生产，当家中有猫怀孕时将无法继续交配猫\n此操作不能撤销(将导致强制存档)，请慎重！");
+    }
+
     if (cat.pstate1 == 1 || cat.pstate2 == 1 || cat.pstate3 == 1 || cat.pstate4 == 1 || cat.pstate5 == 1) {
-        alert("已经有猫怀孕了！");
+        newstext("已经有猫怀孕了！");
         return;
     }
     if (cat.name1 == "" || cat.name2 == "" || cat.name3 == "" || cat.name4 == "" || cat.name5 == "") {
 
         var father = prompt("输入爸爸的名字:", "");
+        if (father == "" || father == null) {
+            newstext("未输入！")
+            return;
+        }
         var mother = prompt("输入妈妈的名字:", "");
-        if (father == "" || mother == "" || father == mother) {
+        if (mother == "" || father == mother || mother == null) {
+            newstext("未输入！")
             return;
         }
 
@@ -260,7 +270,7 @@ function baby() {
             return;
         }
     } else {
-        alert("猫位已满！");
+        newstext("猫位已满！");
     }
     save();
     location.reload();

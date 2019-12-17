@@ -1,4 +1,9 @@
 function playwithcat() {
+
+    if (hint == 1) {
+        alert("与当前猫咪一起玩，消耗50体力，获得10好感度");
+    }
+
     if (catselected == 1 && cat.life1 >= 50) {
         cat.lovestatus1 = parseInt(cat.lovestatus1) + 10;
         cat.life1 = parseInt(cat.life1) - 50;
@@ -47,9 +52,42 @@ function playwithcat() {
             document.getElementById("life").className = "button-border button-rounded button-caution";
         }
         moneyloss(cat.huoyue5);
+    } else if (catselected == null) {
+        newstext("未选择猫咪");
+    }
+    //save();
+}
+
+function dubo() {
+    if (hint == 1) {
+        alert("小赌怡情，大赌伤身，强赌灰飞烟灭！\n其实就是猜大小！");
+    }
+    var dumoney = prompt("请输入赌金(整数):", "");
+    if (dumoney == null || dumoney == "") {
+        return;
+    }
+    var duzhu = prompt("请输入赔率(整数：2或5):", "");
+    if (duzhu != "2" && duzhu != "5") {
+        return;
     }
 
-
-    //save();
-
+    if (parseInt(cat.money) < parseInt(dumoney)) {
+        newstext("没有足够的本金！");
+        return;
+    }
+    cat.money = parseInt(cat.money) - parseInt(dumoney);
+    var randomnum = Math.floor(Math.random() * 10 + 1);
+    alert(randomnum + "/10")
+    if (randomnum < 5 && duzhu == 2) {
+        winmoney = parseInt(dumoney) * parseInt(duzhu);
+        cat.money = cat.money + winmoney;
+        newstext("赢了" + winmoney);
+    } else if (randomnum < 2 && duzhu == 5) {
+        winmoney = parseInt(dumoney) * parseInt(duzhu);
+        cat.money = cat.money + winmoney;
+        newstext("赢了" + winmoney);
+    } else {
+        newstext("赌输了！");
+    }
+    document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
 }

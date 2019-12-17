@@ -37,8 +37,8 @@
             padding: 3px;
         }
     </style>
-    
-        <!-- Buttons 库的核心文件 -->
+
+    <!-- Buttons 库的核心文件 -->
     <link rel="stylesheet" href="css/buttons.css">
 
     <!-- 当需要使用带下拉菜单的按钮时才需要加载下面的 JavaScript 文件 -->
@@ -48,10 +48,10 @@
 
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    
+
 </head>
 
-<body  class="text-align: center">
+<body class="text-align: center">
     <div id="wrapper" class="wrapper">
         <header class="header htmleaf-header">
             <h1>Games Collection<span>made by Guangyu He</span></h1>
@@ -60,22 +60,22 @@
             <div class="container">
                 <section>
 
-<div>
-                    <h1>Cats!</h1>
-                    <button onclick="cats()" class="button button-glow button-border button-rounded button-primary text-align: center">Cats!</button>
-</div>
-<div>
-                    <h1>Boundary Cards</h1>
-                    <button onclick="cards()" class="button button-glow button-border button-rounded button-primary text-align: center">Boundary Cards</button>
-</div>
-<div>
-                    <h1>Math Cards</h1>
-                    <button onclick="math()" class="button button-glow button-border button-rounded button-primary text-align: center">Math Cards</button>
-</div>
-<div>
-                    <h1>客户端下载</h1>
-                    <button onclick="android()" class="button button-glow button-border button-rounded button-primary text-align: center">Android</button>
-</div>
+                    <div>
+                        <h1>Cats!</h1>
+                        <button onclick="cats()" class="button button-glow button-border button-rounded button-primary text-align: center">Cats!</button>
+                    </div>
+                    <div>
+                        <h1>Boundary Cards</h1>
+                        <button onclick="cards()" class="button button-glow button-border button-rounded button-primary text-align: center">Boundary Cards</button>
+                    </div>
+                    <div>
+                        <h1>Math Cards</h1>
+                        <button onclick="math()" class="button button-glow button-border button-rounded button-primary text-align: center">Math Cards</button>
+                    </div>
+                    <div>
+                        <h1>客户端下载</h1>
+                        <button onclick="android()" class="button button-glow button-border button-rounded button-primary text-align: center">Android</button>
+                    </div>
 
                 </section>
             </div>
@@ -84,23 +84,26 @@
     <!-- /wrapper -->
     <script src="js/production/materialMenu.min.js"></script>
     <script>
+        function cats() {
+            window.location = "cat/index.html";
+        }
 
-function cats(){
-	window.location = "cat/index.html" ;
-}
-function cards(){
-	window.location = "bc/index.html" ;
-}
-function math(){
-	window.location = "mc/index.html" ;
-}
-function update(){
-	window.location="reload";
-	window.location = "https://game.heguangyu.net/update.html,'_blank'";
-}
-function android(){
-	window.location = "https://game.heguangyu.net/guangyu-game-1908231210.apk";
-}
+        function cards() {
+            window.location = "card/index.html";
+        }
+
+        function math() {
+            window.location = "math/index.html";
+        }
+
+        function update() {
+            window.location = "reload";
+            window.location = "https://game.heguangyu.net/update.html,'_blank'";
+        }
+
+        function android() {
+            window.location = "https://game.heguangyu.net/guangyu-game-1908231210.apk";
+        }
     </script>
 </body>
 
