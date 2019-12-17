@@ -137,14 +137,15 @@
 
                     <div>
                         <div class="button-group">
-                            <button type="button" onclick="feedfunction()" style="display: inline" class="button button-primary">喂猫</button>
-                            <button type="button" onclick="playwithcat()" style="display: inline" class="button button-primary">逗猫</button>
+                            <button id="feedcatbutton" type="button" onclick="feedfunction()" style="display: inline" class="button button-primary">喂猫</button>
+                            <button id="playcatbutton" type="button" onclick="playwithcat()" style="display: inline" class="button button-primary">逗猫</button>
                         </div>
 
                         <div class="button-group">
-                            <button type="button" onclick="buycat()" style="display: inline" class="button button-pill button-action">买猫</button>
-                            <button type="button" onclick="sellcat()" style="display: inline" class="button button-pill button-action">卖猫</button>
-                            <button type="button" onclick="baby()" style="display: inline" class="button button-pill button-action">交配猫</button>
+                            <button id="adoptcatbutton" type="button" onclick="adoptcat()" style="display: inline" class="button button-pill button-action">领养猫</button>
+                            <button id="buycatbutton" type="button" onclick="buycat()" style="display: inline" class="button button-pill button-action">买猫</button>
+                            <button id="sellcatbutton" type="button" onclick="sellcat()" style="display: inline" class="button button-pill button-action">卖猫</button>
+                            <button id="babycatbutton" type="button" onclick="baby()" style="display: inline" class="button button-pill button-action">交配猫</button>
                         </div>
                     </div>
 
@@ -314,7 +315,7 @@
             var myDate = new Date();
             var version = myDate.toLocaleString();
 
-            document.getElementById("version").innerHTML = "191217 - 1448";
+            document.getElementById("version").innerHTML = "191217 - 1816";
 
             load();
 
@@ -479,6 +480,8 @@
             document.getElementById("food").innerHTML = "剩余食物:" + cat.food;
             document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
 
+            buttondisplay();
+
         }
 
         function nextday() {
@@ -614,18 +617,17 @@
             }
 
             document.getElementById("day").innerHTML = "日期:" + cat.day;
-
             if (cat.age1 >= 30 && cat.age1 < 60) { //年龄影响
                 cat.hungermax1 = 200;
             } else if (cat.age1 >= 60) {
                 cat.hungermax1 = 150;
                 cat.huoyue1 = parseInt(cat.huoyue1) - 1;
-                cat.jiankang1 = parseInt(cat.huoyue1) - 1;
-            } else if (cat.age1 == 100) {
+                cat.jiankang1 = parseInt(cat.jiankang1) - 1;
+            } else if (parseInt(cat.jiankang1) <= 0) {
                 alert(cat.name1 + " dead!");
             } else if (cat.age1 < 30) {
                 cat.huoyue1 = parseInt(cat.huoyue1) + 1;
-                cat.jiankang1 = parseInt(cat.huoyue1) + 1;
+                cat.jiankang1 = parseInt(cat.jiankang1) + 1;
             }
 
             if (cat.age2 >= 30 && cat.age2 < 60) {
@@ -633,12 +635,12 @@
             } else if (cat.age2 >= 60) {
                 cat.hungermax2 = 150;
                 cat.huoyue2 = parseInt(cat.huoyue2) - 1;
-                cat.jiankang2 = parseInt(cat.huoyue2) - 1;
-            } else if (cat.age2 == 100) {
+                cat.jiankang2 = parseInt(cat.jiankang2) - 1;
+            } else if (parseInt(cat.jiankang2) <= 0) {
                 alert(cat.name2 + " dead!");
             } else if (cat.age2 < 30) {
                 cat.huoyue2 = parseInt(cat.huoyue2) + 1;
-                cat.jiankang2 = parseInt(cat.huoyue2) + 1;
+                cat.jiankang2 = parseInt(cat.jiankang2) + 1;
             }
 
             if (cat.age3 >= 30 && cat.age3 < 60) {
@@ -646,12 +648,12 @@
             } else if (cat.age3 >= 60) {
                 cat.hungermax3 = 150;
                 cat.huoyue3 = parseInt(cat.huoyue3) - 1;
-                cat.jiankang3 = parseInt(cat.huoyue3) - 1;
-            } else if (cat.age3 == 100) {
+                cat.jiankang3 = parseInt(cat.jiankang3) - 1;
+            } else if (parseInt(cat.jiankang3) <= 0) {
                 alert(cat.name3 + " dead!");
             } else if (cat.age3 < 30) {
                 cat.huoyue3 = parseInt(cat.huoyue3) + 1;
-                cat.jiankang3 = parseInt(cat.huoyue3) + 1;
+                cat.jiankang3 = parseInt(cat.jiankang3) + 1;
             }
 
             if (cat.age4 >= 30 && cat.age4 < 60) {
@@ -659,12 +661,12 @@
             } else if (cat.age4 >= 60) {
                 cat.hungermax4 = 150;
                 cat.huoyue4 = parseInt(cat.huoyue4) - 1;
-                cat.jiankang4 = parseInt(cat.huoyue4) - 1;
-            } else if (cat.age4 == 100) {
+                cat.jiankang4 = parseInt(cat.jiankang4) - 1;
+            } else if (parseInt(cat.jiankang4) <= 0) {
                 alert(cat.name4 + " dead!");
             } else if (cat.age4 < 30) {
                 cat.huoyue4 = parseInt(cat.huoyue4) + 1;
-                cat.jiankang4 = parseInt(cat.huoyue4) + 1;
+                cat.jiankang4 = parseInt(cat.jiankang4) + 1;
             }
 
             if (cat.age5 >= 30 && cat.age5 < 60) {
@@ -672,12 +674,12 @@
             } else if (cat.age5 >= 60) {
                 cat.hungermax5 = 150;
                 cat.huoyue5 = parseInt(cat.huoyue5) - 1;
-                cat.jiankang5 = parseInt(cat.huoyue5) - 1;
-            } else if (cat.age5 == 100) {
+                cat.jiankang5 = parseInt(cat.jiankang5) - 1;
+            } else if (parseInt(cat.jiankang5) <= 0) {
                 alert(cat.name5 + " dead!");
             } else if (cat.age5 < 30) {
                 cat.huoyue5 = parseInt(cat.huoyue5) + 1;
-                cat.jiankang5 = parseInt(cat.huoyue5) + 1;
+                cat.jiankang5 = parseInt(cat.jiankang5) + 1;
             }
 
             if (cat.lovestatus1 >= 100) { //全属性+1
@@ -772,6 +774,7 @@
                 catselect5();
             }
             save();
+            buttondisplay();
         }
 
         function newstext(text) { //消息栏
@@ -787,6 +790,28 @@
                 news.newstext = "";
                 document.getElementById("newstext").innerHTML = news.newstext;
                 savenews();
+            }
+        }
+
+        function buttondisplay() {
+            if (cat.name1 == "" || cat.name1 == null) {
+                document.getElementById("feedcatbutton").style = "display:none";
+                document.getElementById("playcatbutton").style = "display:none";
+                document.getElementById("sellcatbutton").style = "display:none";
+            } else {
+                document.getElementById("feedcatbutton").style = "display:inline";
+                document.getElementById("playcatbutton").style = "display:inline";
+                document.getElementById("sellcatbutton").style = "display:inline";
+            }
+            if (parseInt(cat.age1) >= 30 || parseInt(cat.age2) >= 30 || parseInt(cat.age3) >= 30 || parseInt(cat.age4) >= 30 || parseInt(cat.age5) >= 30) {
+                document.getElementById("babycatbutton").style = "display:inline";
+            } else {
+                document.getElementById("babycatbutton").style = "display:none";
+            }
+            if (cat.money < 100) {
+                document.getElementById("buycatbutton").style = "display:none";
+            } else {
+                document.getElementById("buycatbutton").style = "display:inline";
             }
         }
 

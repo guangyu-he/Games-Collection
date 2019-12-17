@@ -78,11 +78,11 @@ function dubo() {
     cat.money = parseInt(cat.money) - parseInt(dumoney);
     var randomnum = Math.floor(Math.random() * 10 + 1);
     alert(randomnum + "/10")
-    if (randomnum < 5 && duzhu == 2) {
+    if (randomnum <= 5 && duzhu == 2) {
         winmoney = parseInt(dumoney) * parseInt(duzhu);
         cat.money = cat.money + winmoney;
         newstext("赢了" + winmoney);
-    } else if (randomnum < 2 && duzhu == 5) {
+    } else if (randomnum <= 2 && duzhu == 5) {
         winmoney = parseInt(dumoney) * parseInt(duzhu);
         cat.money = cat.money + winmoney;
         newstext("赢了" + winmoney);

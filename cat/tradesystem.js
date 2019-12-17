@@ -259,3 +259,108 @@ function buycat() {
     save();
     location.reload();
 }
+
+function adoptcat() {
+    if (hint == 1) {
+        alert("收养一只猫\n弹窗中输入你希望收养猫的名字，年龄（不小于30天）（天数）和性别（m:男，w:女）（使用 / 分割）\n收养猫的三围将根据年龄随机生成\n此操作不能撤销(将导致强制存档)，请慎重！");
+    }
+    if (cat.name1 == "" || cat.name2 == "" || cat.name3 == "" || cat.name4 == "" || cat.name5 == "") {
+        var sure;
+        var newcat = prompt("Please enter a cat:", "名字/年龄(>=30)/性别(m/w)");
+        if (newcat == null || newcat == "名字/年龄(>=30)/性别(m/w)") {
+            return
+        } else {
+            sure = confirm("are you sure with this value:" + newcat);
+            if (sure == null || sure == false) {
+                return;
+            }
+        }
+        var adoptcatd = newcat.split("/");
+        if (parseInt(adoptcatd[1]) < 30 || (adoptcatd[2] != "m" && adoptcatd[2] != "w")) {
+            newstext("输入非法！");
+            return;
+        }
+        var randomnum = Math.floor(Math.random() * 100 + 1);
+        var adoptvalue = Math.floor(Math.random() * 10 + 1);
+        var random;
+        if (randomnum <= 50) {
+            random = 1;
+        } else {
+            random = 0;
+        }
+        if (random == 1) {
+            adoptvalue = 0 - parseInt(adoptvalue);
+        } else {
+            adoptvalue = parseInt(adoptvalue);
+        }
+        var sex;
+        if (adoptcatd[2] == "m") {
+            sex = "boy";
+        } else {
+            sex = "girl";
+        }
+
+
+        if (cat.name1 == "") {
+            cat.zizhu1 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.huoyue1 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.jiankang1 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.name1 = adoptcatd[0];
+            cat.lovestatus1 = 0;
+            cat.hungerstatus1 = 100;
+            cat.age1 = parseInt(adoptcatd[1]);
+            cat.sex1 = sex;
+            newstext("欢迎猫咪" + cat.name1 + "回家！");
+
+        } else if (cat.name2 == "") {
+            cat.zizhu2 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.huoyue2 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.jiankang2 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.name2 = adoptcatd[0];
+            cat.lovestatus2 = 0;
+            cat.hungerstatus2 = 100;
+            cat.age2 = parseInt(adoptcatd[1]);
+            cat.sex2 = sex;
+            newstext("欢迎猫咪" + cat.name2 + "回家！");
+
+        } else if (cat.name3 == "") {
+            cat.zizhu3 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.huoyue3 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.jiankang3 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.name3 = adoptcatd[0];
+            cat.lovestatus3 = 0;
+            cat.hungerstatus3 = 100;
+            cat.age3 = parseInt(adoptcatd[1]);
+            cat.sex3 = sex;
+            newstext("欢迎猫咪" + cat.name3 + "回家！");
+
+        } else if (cat.name4 == "") {
+            cat.zizhu4 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.huoyue4 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.jiankang4 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.name4 = adoptcatd[0];
+            cat.lovestatus4 = 0;
+            cat.hungerstatus4 = 100;
+            cat.age4 = parseInt(adoptcatd[1]);
+            cat.sex4 = sex;
+            newstext("欢迎猫咪" + cat.name4 + "回家！");
+
+        } else if (cat.name5 == "") {
+            cat.zizhu5 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.huoyue5 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.jiankang5 = parseInt(adoptcatd[1]) + parseInt(adoptvalue);
+            cat.name5 = adoptcatd[0];
+            cat.lovestatus5 = 0;
+            cat.hungerstatus5 = 100;
+            cat.age5 = parseInt(adoptcatd[1]);
+            cat.sex5 = sex;
+            newstext("欢迎猫咪" + cat.name5 + "回家！");
+
+        }
+
+    } else {
+        newstext("猫位已满");
+    }
+    save();
+    location.reload();
+}

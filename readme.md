@@ -1,4 +1,15 @@
 # Guangyu's Game Collection
+
+## update2 20191217:
+### adding
+1. adopt cats system;
+2. buttons don't display when condition not fit.
+### fixing
+1. fix aging value issues;
+2. fix gamble value issue.
+### improving
+1. change work order.
+
 ## update 20191217:
 ### adding
 1. add new random events;

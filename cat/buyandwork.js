@@ -30,14 +30,13 @@ function workformoney() {
     sure = confirm("确认去打工挣钱吗?");
     if (sure == true) {
         nextday();
-        nextday();
         var oldmoney = cat.money;
         cat.money = parseInt(cat.money) + 50;
         earnmoremoney();
         var differmoney = cat.money - oldmoney;
         newstext("打工收获了" + differmoney + "金钱!")
         document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
-        save();
+        nextday();
     }
 
 }
