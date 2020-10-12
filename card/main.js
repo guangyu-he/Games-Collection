@@ -35,7 +35,7 @@ function start() {
 //电脑回合
 function main1() {
     if (clife < 5) {
-        document.getElementById("clife").style.backgroundColor = "red";
+        document.getElementById("clife").style.backgroundColor = "yellow";
     } else {
         document.getElementById("clife").style.backgroundColor = "white";
     }
@@ -93,7 +93,7 @@ function main2() {
 function main3() {
     mana = oldmana;
     if (life < 5) {
-        document.getElementById("life").style.backgroundColor = "red";
+        document.getElementById("life").style.backgroundColor = "yellow";
     } else {
         document.getElementById("life").style.backgroundColor = "white";
     }
@@ -166,7 +166,7 @@ function dead() {
     }
 
 
-    if (tough1 == 0 && tough2 == 0 && tough3 == 0 && ctough1 == 0 && ctough2 == 0 && ctough3 == 0 && zz == 11 && czz == 11) {
+    if (tough1 == 0 && tough2 == 0 && tough3 == 0 && ctough1 == 0 && ctough2 == 0 && ctough3 == 0 && zz == 12 && czz == 12) {
         alert("双方战场，手牌均为空，按剩余血量多少判别胜负");
         if (life < clife) {
             loss();
