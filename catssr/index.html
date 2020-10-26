@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
+    <title>CATSSR!</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            -moz-user-select: none;
+            /*火狐*/
+            -webkit-user-select: none;
+            /*webkit浏览器*/
+            -ms-user-select: none;
+            /*IE10*/
+            -khtml-user-select: none;
+            /*早期浏览器*/
+            user-select: none;
+        }
+        
+        div {
+            margin: 20px;
+            border: 0;
+            padding: 0;
+            width: auto;
+        }
+        
+        .lastResult {
+            color: white;
+            padding: 3px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/image.css">
+
+    <!-- Buttons 库的核心文件 -->
+    <link rel="stylesheet" href="css/buttons.css">
+    <!-- 当需要使用带下拉菜单的按钮时才需要加载下面的 JavaScript 文件 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body onload="onload()" class="text-align: center">
+
+
+    <div id="wrapper" class="wrapper">
+        <header class="header htmleaf-header">
+            <h1>CATSSR!<span>alpha:<text id="version"></text><br><a href="https://www.heguangyu.net" target="_blank">© heguangyu.net</a></span></h1>
+        </header>
+        <main>
+            <div class="container">
+                <section>
+
+                    <div>
+                        <p id="news" onclick=delnews() class="button-border button-rounded button-primary" style="word-break:break-word;">消息栏: <text id="newstext"></text> </p>
+                    </div>
+
+                    <div>
+                        <div class="btn-group">
+                            <button type="button" id="ssrselect" class=" button button-rounded" data-toggle="dropdown">
+                Settings<span class="caret"></span>
+            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="javascript:restart()">删除存档！</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:test()">测试！</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:hintsetting()" id="hintset">关闭提示</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+
+                            <div>
+                                <div class="button-group">
+                                    <button id="tocounterbutton" type="button" onclick="counterfunction()" style="display: inline" class="button button-primary">充值</button>
+                                    <button id="tomoneybutton" type="button" onclick="moneyfunction()" style="display: inline" class="button button-primary">提现</button>
+                                </div>
+
+                                <div class="button-group">
+                                    <button id="lowlvl10button" type="button" onclick="lowlvl10()" style="display: inline" class="button button-pill button-action">low10(500)</button>
+                                    <button id="lowlvl1button" type="button" onclick="lowlvl1()" style="display: inline" class="button button-pill button-action">lowl1(50)</button>
+                                    <button id="highlvl1button" type="button" onclick="highlvl1()" style="display: inline" class="button button-pill button-action">highl1(100)</button>
+                                    <button id="highlvl10button" type="button" onclick="highlvl10()" style="display: inline" class="button button-pill button-action">high10(1000)</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p id="rresult" onclick="rtocounter()" class="button-border button-rounded button-primary">R:</p>
+                                <p id="srresult" onclick="srtocounter()" class="button-border button-rounded button-primary">SR:</p>
+                                <p id="ssrresult" onclick="ssrtocounter()" class="button-border button-rounded button-primary">SSR:</p>
+                            </div>
+
+                            <div>
+                                <button id="counter" style="display: inline" onclick="counterfunction()" class="button  button-border button-rounded button-primary">counter:</button>
+                                <button id="money" style="display: inline" onclick="moneyfunction()" class="button  button-border button-rounded button-primary">money:</button>
+                            </div>
+
+                            <div>
+                                <button id="start" onclick="start()" class="button button-glow button-border button-rounded button-primary text-align: center">save</button>
+                            </div>
+                </section>
+                </div>
+        </main>
+        </div>
+
+        <script src="js/production/materialMenu.min.js"></script>
+
+        <!-- 触发弹窗 - 图片改为你的图片地址 -->
+        <img loading="lazy" id="myImg" src="test.jpg" alt="SSR!" width="300" height="200" style="display: none;">
+
+        <!-- 弹窗 -->
+        <div id="myModal" class="modal">
+
+            <!-- 关闭按钮 -->
+            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+            <!-- 弹窗内容 -->
+            <img class="modal-content" id="img01">
+
+            <!-- 文本描述 -->
+            <div id="caption"></div>
+        </div>
+
+
+        <script>
+            // 获取弹窗
+            var modal = document.getElementById('myModal');
+
+            // 获取图片插入到弹窗 - 使用 "alt" 属性作为文本部分的内容
+            var img = document.getElementById('myImg');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+            // 获取 <span> 元素，设置关闭按钮
+            var span = document.getElementsByClassName("close")[0];
+
+            // 当点击 (x), 关闭弹窗
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        </script>
+
+
+
+        <script>
+            var localStorage = window.localStorage;
+
+            var ssrstr;
+            var ssr = {
+                money: "",
+                counter: "",
+                rnum: "",
+                srnum: "",
+                ssrnum: "",
+            };
+
+            var newsssrstr;
+            var newsssr = {
+                newstext: ""
+            }
+
+            var hint = 1; //用于设置是否需要提醒，默认1为打开，0为关闭
+            function hintsetting() {
+                if (hint == 1) {
+                    hint = 0;
+                    newstext("游戏提示已关闭")
+                    document.getElementById("hintset").innerHTML = "打开提示";
+                } else {
+                    hint = 1;
+                    newstext("游戏提示已打开")
+                    document.getElementById("hintset").innerHTML = "关闭提示";
+                }
+            }
+
+            function restart() {
+                var sure;
+                sure = confirm("确认删除存档吗！?")
+                if (sure == true) {
+                    localStorage.clear();
+                    location.reload();
+                } else {}
+            }
+
+            function test() {
+                //测试用   
+
+                ssr.counter = ssr.counter + 1000;
+
+                newsssr.newstext = "";
+                newstext("已加载测试数据");
+                savenews();
+                save();
+                onload();
+                location.reload();
+            }
+
+            function onload() {
+
+                document.getElementsByTagName('body')[0].style.zoom = 0.8
+
+                var myDate = new Date();
+                var version = myDate.toLocaleString();
+
+                document.getElementById("version").innerHTML = "201026 - 1800";
+
+                load();
+
+                if (newsssr.newstext == null) {
+                    newsssr.newstext = "";
+                }
+
+                document.getElementById("newstext").innerHTML = newsssr.newstext;
+                displayresult()
+            }
+
+            function displayresult() {
+                document.getElementById("counter").innerHTML = "剩余counter:" + ssr.counter;
+                document.getElementById("money").innerHTML = "剩余money:" + ssr.money;
+
+                document.getElementById("rresult").innerHTML = "R:" + ssr.rnum;
+                document.getElementById("srresult").innerHTML = "SR:" + ssr.srnum;
+                document.getElementById("ssrresult").innerHTML = "SSR:" + ssr.ssrnum;
+            }
+
+            function newstext(text) { //消息栏
+                newsssr.newstext = newsssr.newstext + "||" + text;
+                document.getElementById("newstext").innerHTML = newsssr.newstext;
+            }
+
+            function delnews() {
+                sure = confirm("确定删除消息?");
+                if (sure == null || sure == false) {
+                    return;
+                } else {
+                    newsssr.newstext = "";
+                    document.getElementById("newstext").innerHTML = newsssr.newstext;
+                    savenews();
+                }
+            }
+
+            function start() {
+                save();
+                document.getElementById("test").onclick();
+            }
+
+            function deadand() { //传递信息给安卓的java 
+                //var text=document.getElementById("text").value;  
+                window.location = "javascript:window.android.deadand()";
+            }
+        </script>
+</body>
+
+<script src="loadandsave.js"></script>
+<script src="charge.js"></script>
+<script src="chouka.js"></script>
+<script src="selltocounter.js"></script>
+
+</html>
