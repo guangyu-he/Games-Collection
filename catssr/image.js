@@ -15,11 +15,3 @@ img.onclick = function() {
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
 }
-
-// 获取 <span> 元素，设置关闭按钮
-var span = document.getElementsByClassName("close")[0];
-
-// 当点击 (x), 关闭弹窗
-span.onclick = function() {
-    modal.style.display = "none";
-}

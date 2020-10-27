@@ -40,6 +40,7 @@
 /* 图片 */
 
 .modal-content {
+    position: relative;
     margin: auto;
     display: block;
     width: 100%;
@@ -90,21 +91,20 @@
 }
 
 
-/* 关闭按钮 */
+/* The Close Button */
 
 .close {
+    color: white;
     position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #ffffff;
-    font-size: 80px;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 .close:hover,
 .close:focus {
-    color: #bbb;
+    color: #999;
     text-decoration: none;
     cursor: pointer;
 }

@@ -38,6 +38,7 @@
         }
     </style>
     <link rel="stylesheet" href="css/image.css">
+    <link rel="stylesheet" href="css/gallary.css">
 
     <!-- Buttons 库的核心文件 -->
     <link rel="stylesheet" href="css/buttons.css">
@@ -89,8 +90,8 @@
                             </ul>
                         </div>
 
-                        <div>
 
+                        <div>
                             <div>
                                 <div class="button-group">
                                     <button id="tocounterbutton" type="button" onclick="counterfunction()" style="display: inline" class="button button-primary">充值</button>
@@ -120,26 +121,123 @@
                             <div>
                                 <button id="start" onclick="start()" class="button button-glow button-border button-rounded button-primary text-align: center">save</button>
                             </div>
+
+                            <!-- Images used to open the lightbox -->
+                            <div class="row" style="display: none;">
+                                <div class="column">
+                                    <img src="r.jpg" onclick="openModal();currentSlide(1)" width="200" height="200" class="hover-shadow">
+                                </div>
+                                <div class="column">
+                                    <img src="sr.jpg" onclick="openModal();currentSlide(2)" width="200" height="200" class="hover-shadow">
+                                </div>
+                                <div class="column">
+                                    <img src="ssr.jpg" onclick="openModal();currentSlide(3)" width="200" height="200" class="hover-shadow">
+                                </div>
+                            </div>
+
+                            <!-- The Modal/Lightbox -->
+                            <div id="myGallary" class="modal-gallary">
+                                <span class="close-gallary cursor" onclick="closeModal()">&times;</span>
+                                <div class="modal-content-gallary">
+
+                                    <div class="mySlides">
+                                        <img id="slides1" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides2" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides3" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides4" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides5" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides6" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides7" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides8" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides9" src="" width="300" height="300">
+                                    </div>
+                                    <div class="mySlides">
+                                        <img id="slides10" src="" width="300" height="300">
+                                    </div>
+
+                                    <!-- Next/previous controls -->
+                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                                    <!-- Caption text -->
+                                    <div class="caption-container">
+                                        <p id="captiongallary"></p>
+                                    </div>
+
+                                    <!-- Thumbnail image controls -->
+                                    <div class="column">
+                                        <img id="demo1" class="demo" src="" width="100" height="100" onclick="currentSlide(1)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo2" class="demo" src="" width="100" height="100" onclick="currentSlide(2)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo3" class="demo" src="" width="100" height="100" onclick="currentSlide(3)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo4" class="demo" src="" width="100" height="100" onclick="currentSlide(4)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo5" class="demo" src="" width="100" height="100" onclick="currentSlide(5)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo6" class="demo" src="" width="100" height="100" onclick="currentSlide(6)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo7" class="demo" src="" width="100" height="100" onclick="currentSlide(7)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo8" class="demo" src="" width="100" height="100" onclick="currentSlide(8)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo9" class="demo" src="" width="100" height="100" onclick="currentSlide(9)" alt="">
+                                    </div>
+                                    <div class="column">
+                                        <img id="demo10" class="demo" src="" width="100" height="100" onclick="currentSlide(10)" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 触发弹窗 - 图片改为你的图片地址 -->
+                            <img loading="lazy" id="myImg" src="" alt="" width="200" height="200" style="display: none;">
+
+                            <!-- 弹窗 -->
+                            <div id="myModal" class="modal">
+
+                                <!-- 关闭按钮 -->
+                                <span class="close-gallary cursor" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+                                <!-- 弹窗内容 -->
+                                <img class="modal-content" id="img">
+
+                                <!-- 文本描述 -->
+                                <div id="caption"></div>
+                            </div>
+
                 </section>
                 </div>
         </main>
         </div>
 
-        <!-- 触发弹窗 - 图片改为你的图片地址 -->
-        <img loading="lazy" id="myImg" src="" alt="" width="200" height="200" style="display: none;">
 
-        <!-- 弹窗 -->
-        <div id="myModal" class="modal">
 
-            <!-- 关闭按钮 -->
-            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
 
-            <!-- 弹窗内容 -->
-            <img class="modal-content" id="img">
-
-            <!-- 文本描述 -->
-            <div id="caption"></div>
-        </div>
 
 
         <script>
@@ -261,5 +359,6 @@
 <script src="chouka.js"></script>
 <script src="selltocounter.js"></script>
 <script src="image.js"></script>
+<script src="gallary.js"></script>
 
 </html>

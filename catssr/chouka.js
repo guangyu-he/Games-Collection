@@ -66,6 +66,7 @@ function lowlvl1() {
         }
     }
     displayresult();
+    document.getElementById("promote").innerHTML = "剩余Promote:" + ssr.promote;
 }
 
 function highlvl1() {
@@ -103,6 +104,7 @@ function highlvl1() {
         }
     }
     displayresult();
+    document.getElementById("promote").innerHTML = "剩余Promote:" + ssr.promote;
 }
 
 function lowlvl10() {
@@ -119,12 +121,13 @@ function lowlvl10() {
         if (result[i] < 90) {
             getpromote(result[i]);
             result10r = result10r + 1;
+            gallarydisplay(i, "r");
         } else if (result[i] > 90 && result[i] < 98) {
             result10sr = result10sr + 1;
+            gallarydisplay(i, "sr");
         } else {
-            document.getElementById("myImg").onclick();
-            //alert(result[i] + "SSR!");
             result10ssr = result10ssr + 1;
+            gallarydisplay(i, "ssr");
         }
         newstext(result[i]);
         i++;
@@ -132,26 +135,29 @@ function lowlvl10() {
 
     if (Math.max.apply(null, result) <= 90) {
         result10sr = result10sr + 1;
+        gallarydisplay(9, "sr");
     } else {
         result10d = randomNum(0, 100);
         newstext(result10d);
         if (result10d < 90) {
             getpromote(result10d);
             result10r = result10r + 1;
+            gallarydisplay(9, "r");
         } else if (result10d > 90 && result10d < 98) {
             result10sr = result10sr + 1;
+            gallarydisplay(9, "sr");
         } else {
-            document.getElementById("myImg").onclick();
-            //alert(result10d + "SSR!");
             result10ssr = result10ssr + 1;
+            gallarydisplay(9, "ssr");
         }
     }
-    alert("R:" + result10r + "; SR:" + result10sr + "; SSR:" + result10ssr);
+    openModal();
 
     ssr.rnum = ssr.rnum + result10r;
     ssr.srnum = ssr.srnum + result10sr;
     ssr.ssrnum = ssr.ssrnum + result10ssr;
     displayresult();
+    document.getElementById("promote").innerHTML = "剩余Promote:" + ssr.promote;
 }
 
 function highlvl10() {
@@ -169,37 +175,40 @@ function highlvl10() {
         if (result[i] < 80) {
             getpromote(result[i]);
             result10r = result10r + 1;
+            gallarydisplay(i, "r");
         } else if (result[i] > 80 && result[i] < 95) {
             result10sr = result10sr + 1;
+            gallarydisplay(i, "sr");
         } else {
-            document.getElementById("myImg").onclick();
-            // alert(result[i] + "SSR!");
             result10ssr = result10ssr + 1;
+            gallarydisplay(i, "ssr");
         }
         i++;
     }
 
     if (Math.max.apply(null, result) < 95) {
         result10ssr = result10ssr + 1;
-        document.getElementById("myImg").onclick();
+        gallarydisplay(9, "ssr");
     } else {
         result10d = randomNum(0, 100);
         newstext(result10d);
         if (result10d < 80) {
             getpromote(result10d);
             result10r = result10r + 1;
+            gallarydisplay(9, "r");
         } else if (result10d > 80 && result10d < 95) {
             result10sr = result10sr + 1;
+            gallarydisplay(9, "sr");
         } else {
-            document.getElementById("myImg").onclick();
-            //alert(result10d + "SSR!");
             result10ssr = result10ssr + 1;
+            gallarydisplay(9, "ssr");
         }
     }
-    alert("R:" + result10r + "; SR:" + result10sr + "; SSR:" + result10ssr);
+    openModal();
 
     ssr.rnum = ssr.rnum + result10r;
     ssr.srnum = ssr.srnum + result10sr;
     ssr.ssrnum = ssr.ssrnum + result10ssr;
     displayresult();
+    document.getElementById("promote").innerHTML = "剩余Promote:" + ssr.promote;
 }
