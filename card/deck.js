@@ -161,6 +161,12 @@ function deldeck() {
 
 function decksavingdis() {
 
+    for (i = 0; i < 12; i++) {
+        if (cardtot[0])
+            document.getElementById("decksaving" + )
+    }
+
+
     document.getElementById("decksaving1").innerHTML = cardtot[0];
     document.getElementById("decksaving2").innerHTML = cardtot[1];
     document.getElementById("decksaving3").innerHTML = cardtot[2];
