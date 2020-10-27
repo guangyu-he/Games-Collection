@@ -1,9 +1,9 @@
 function birth() {
     if (cat.pday == 10 && (cat.pstate1 == 1 || cat.pstate2 == 1 || cat.pstate3 == 1 || cat.pstate4 == 1 || cat.pstate5 == 1)) {
         var newname = prompt("宝宝出生了！输入宝宝的名字:", "");
-        var babynum = Math.floor(Math.random() * 10 + 1);
-        var sexnum = Math.floor(Math.random() * 10 + 1);
-        var random = Math.floor(Math.random() * 5 + 1);
+        var babynum = randomNum(0, 10);
+        var sexnum = randomNum(0, 10);
+        var random = randomNum(0, 5);
 
         if (babynum <= 5) {
             cat.newzizhu = cat.newzizhu - random;
@@ -95,7 +95,11 @@ function birth() {
 function baby() {
 
     if (hint == 1) {
-        alert("交配猫需要输入猫爸爸和妈妈的名字,交配双方年龄须大于30天\n后代的三围将根据算法产生\n母猫怀孕需要10天才会生产，当家中有猫怀孕时将无法继续交配猫\n此操作不能撤销(将导致强制存档)，请慎重！");
+        if (confirm('交配猫需要输入猫爸爸和妈妈的名字,交配双方年龄须大于30天\n后代的三围将根据算法产生\n母猫怀孕需要10天才会生产，当家中有猫怀孕时将无法继续交配猫\n此操作不能撤销(将导致强制存档)，请慎重！')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
     if (cat.pstate1 == 1 || cat.pstate2 == 1 || cat.pstate3 == 1 || cat.pstate4 == 1 || cat.pstate5 == 1) {

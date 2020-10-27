@@ -1,6 +1,10 @@
 function buyfood() {
     if (hint == 1) {
-        alert("购买100猫粮需花费50金钱.有一定概率遇到打折销售,此时可获得200猫粮!");
+        if (confirm('购买100猫粮需花费50金钱.有一定概率遇到打折销售,此时可获得200猫粮!')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
     var sure;
     sure = confirm("确认购买猫粮吗?");
@@ -24,7 +28,11 @@ function buyfood() {
 
 function workformoney() {
     if (hint == 1) {
-        alert("选择去打工将自动跳过一天,猫咪将自动消耗一天饮食,并且不进行任何活动.然后你将获得50金钱。有几率获得额外金钱。注意如果猫粮不够,将导致对猫咪的负面影响!");
+        if (confirm('选择去打工将自动跳过一天,猫咪将自动消耗一天饮食,并且不进行任何活动.然后你将获得50金钱。有几率获得额外金钱。注意如果猫粮不够,将导致对猫咪的负面影响!')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
     var sure;
     sure = confirm("确认去打工挣钱吗?");

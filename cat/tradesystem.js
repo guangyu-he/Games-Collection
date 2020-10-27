@@ -1,7 +1,11 @@
 function sellcat() {
 
     if (hint == 1) {
-        alert("卖猫时请输入要卖的猫的名字。\n系统将根据算法计算出此猫咪的价值，然后获得该价值的金钱。\n此操作不能撤销(将导致强制存档)，请慎重！");
+        if (confirm('卖猫时请输入要卖的猫的名字。\n系统将根据算法计算出此猫咪的价值，然后获得该价值的金钱。\n此操作不能撤销(将导致强制存档)，请慎重！')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
     var catdel = prompt("卖哪只猫，请输入名字：", "Name");
@@ -161,7 +165,11 @@ function sellcat() {
 function buycat() {
 
     if (hint == 1) {
-        alert("花费100金币购买猫咪！弹窗中输入希望猫咪的三围和名字（使用 / 分割）。\n三围总和不得超过30。 \n自主性影响学习能力，活跃度影响活动能力，健康值影响体力和食物消耗。\n此操作不能撤销(将导致强制存档)，请慎重！");
+        if (confirm('花费100金币购买猫咪！弹窗中输入希望猫咪的三围和名字（使用 / 分割）。\n三围总和不得超过30。 \n自主性影响学习能力，活跃度影响活动能力，健康值影响体力和食物消耗。\n此操作不能撤销(将导致强制存档)，请慎重！')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
     if (cat.money < 100) {
@@ -262,7 +270,11 @@ function buycat() {
 
 function adoptcat() {
     if (hint == 1) {
-        alert("收养一只猫\n弹窗中输入你希望收养猫的名字，年龄（不小于30天）（天数）和性别（m:男，w:女）（使用 / 分割）\n收养猫的三围将根据年龄随机生成\n此操作不能撤销(将导致强制存档)，请慎重！");
+        if (confirm('收养一只猫\n弹窗中输入你希望收养猫的名字，年龄（不小于30天）（天数）和性别（m:男，w:女）（使用 / 分割）\n收养猫的三围将根据年龄随机生成\n此操作不能撤销(将导致强制存档)，请慎重！')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
     if (cat.name1 == "" || cat.name2 == "" || cat.name3 == "" || cat.name4 == "" || cat.name5 == "") {
         var sure;
@@ -280,8 +292,8 @@ function adoptcat() {
             newstext("输入非法！");
             return;
         }
-        var randomnum = Math.floor(Math.random() * 100 + 1);
-        var adoptvalue = Math.floor(Math.random() * 10 + 1);
+        var randomnum = randomNum(0, 100);
+        var adoptvalue = randomnum(0, 10);
         var random;
         if (randomnum <= 50) {
             random = 1;

@@ -2,10 +2,14 @@
 function findfood() {
 
     if (hint == 1) {
-        alert("外出觅食将消耗所有体力尝试去自行寻找食物,如果成功将恢复饱食度.成功率取决于当前猫咪的活跃度以及去觅食时的体力剩余.");
+        if (confirm('外出觅食将消耗所有体力尝试去自行寻找食物,如果成功将恢复饱食度.成功率取决于当前猫咪的活跃度以及去觅食时的体力剩余.')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
-    var randomnum = Math.floor(Math.random() * 100 + 1);
+    var randomnum = randomNum(0, 100); // Math.floor(Math.random() * 100 + 1);
 
     if (catselected == 1) {
         if (cat.life1 > 0) {
@@ -124,10 +128,14 @@ function findfood() {
 function findmoney() {
 
     if (hint == 1) {
-        alert("外出挣钱将消耗所有体力尝试去搜寻散落硬币,如果成功将获得一定数量金钱.金钱多少和成功率取决于当前猫咪的活跃度以及去挣钱时的体力剩余.");
+        if (confirm('外出挣钱将消耗所有体力尝试去搜寻散落硬币,如果成功将获得一定数量金钱.金钱多少和成功率取决于当前猫咪的活跃度以及去挣钱时的体力剩余.')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
-    var randomnum = Math.floor(Math.random() * 100 + 1);
+    var randomnum = randomNum(0, 100); // Math.floor(Math.random() * 100 + 1);
 
     if (catselected == 1) {
         if (cat.life1 > 0) {
@@ -139,7 +147,7 @@ function findmoney() {
                 random = 1;
             }
 
-            var randommoney = Math.floor(Math.random() * parseInt(cat.life1) + 1);
+            var randommoney = randomNum(0, parseInt(cat.life1)); // Math.floor(Math.random() * parseInt(cat.life1) + 1);
             cat.life1 = 0;
 
             if (random == 0) {
@@ -162,7 +170,7 @@ function findmoney() {
                 random = 1;
             }
 
-            var randommoney = Math.floor(Math.random() * parseInt(cat.life2) + 1);
+            var randommoney = randomNum(0, parseInt(cat.life2)); //  Math.floor(Math.random() * parseInt(cat.life2) + 1);
             cat.life2 = 0;
 
             if (random == 0) {
@@ -185,7 +193,7 @@ function findmoney() {
                 random = 1;
             }
 
-            var randommoney = Math.floor(Math.random() * parseInt(cat.life3) + 1);
+            var randommoney = randomNum(0, parseInt(cat.life3)); // Math.floor(Math.random() * parseInt(cat.life3) + 1);
             cat.life3 = 0;
 
             if (random == 0) {
@@ -207,7 +215,7 @@ function findmoney() {
                 random = 1;
             }
 
-            var randommoney = Math.floor(Math.random() * parseInt(cat.life4) + 1);
+            var randommoney = randomNum(0, parseInt(cat.life4)); // Math.floor(Math.random() * parseInt(cat.life4) + 1);
             cat.life4 = 0;
 
             if (random == 0) {
@@ -230,7 +238,7 @@ function findmoney() {
                 random = 1;
             }
 
-            var randommoney = Math.floor(Math.random() * parseInt(cat.life5) + 1);
+            var randommoney = randomNum(0, parseInt(cat.life5)); // Math.floor(Math.random() * parseInt(cat.life5) + 1);
             cat.life5 = 0;
 
             if (random == 0) {

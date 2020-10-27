@@ -2,10 +2,14 @@
 function trainhuoyue() {
 
     if (hint == 1) {
-        alert("派当前猫咪去进行活跃度训练，训练成功会增加5点活跃度，成功率取决于自主性。训练要求10+好感度，会消耗100体力以及当前消耗饮食量的饱食度。训练成功会失去一半，失败将失去全部好感度。");
+        if (confirm('派当前猫咪去进行活跃度训练，训练成功会增加5点活跃度，成功率取决于自主性。训练要求10+好感度，会消耗100体力以及当前消耗饮食量的饱食度。训练成功会失去一半，失败将失去全部好感度。')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
-    var randomnum = Math.floor(Math.random() * 100 + 1);
+    var randomnum = randomNum(0, 100); // Math.floor(Math.random() * 100 + 1);
     //newstext(randomnum);
 
     if (catselected == 1) {
@@ -143,10 +147,14 @@ function trainhuoyue() {
 function trainzizhu() {
 
     if (hint == 1) {
-        alert("派当前猫咪去进行自主性训练，训练成功会增加5点自主性，成功率取决于自主性。训练要求10+好感度，会消耗100体力以及当前消耗饮食量的饱食度。训练成功会失去一半，失败将失去全部好感度。");
+        if (confirm('派当前猫咪去进行自主性训练，训练成功会增加5点自主性，成功率取决于自主性。训练要求10+好感度，会消耗100体力以及当前消耗饮食量的饱食度。训练成功会失去一半，失败将失去全部好感度。')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
-    var randomnum = Math.floor(Math.random() * 100 + 1);
+    var randomnum = randomNum(0, 100); // Math.floor(Math.random() * 100 + 1);
     //newstext(randomnum);
 
     if (catselected == 1) {

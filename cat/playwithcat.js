@@ -1,7 +1,11 @@
 function playwithcat() {
 
     if (hint == 1) {
-        alert("与当前猫咪一起玩，消耗50体力，获得10好感度");
+        if (confirm('与当前猫咪一起玩，消耗50体力，获得10好感度')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
 
     if (catselected == 1 && cat.life1 >= 50) {
@@ -60,7 +64,11 @@ function playwithcat() {
 
 function dubo() {
     if (hint == 1) {
-        alert("小赌怡情，大赌伤身，强赌灰飞烟灭！\n其实就是猜大小！");
+        if (confirm('小赌怡情，大赌伤身，强赌灰飞烟灭！\n其实就是猜大小！')) {
+            //console.log('yes');
+        } else {
+            return;
+        }
     }
     var dumoney = prompt("请输入赌金(整数):", "");
     if (dumoney == null || dumoney == "") {
@@ -76,7 +84,7 @@ function dubo() {
         return;
     }
     cat.money = parseInt(cat.money) - parseInt(dumoney);
-    var randomnum = Math.floor(Math.random() * 10 + 1);
+    var randomnum = randomNum(0, 10);
     alert(randomnum + "/10")
     if (randomnum <= 5 && duzhu == 2) {
         winmoney = parseInt(dumoney) * parseInt(duzhu);
