@@ -1,5 +1,11 @@
 # Guangyu's Game Collection
 
+## update 20201027 - 2
+### adding 
+1. Gallary display of deck
+### improving
+1. using image in deck display
+
 ## update 20201027
 ### adding
 1. CatSSR! button in homepage
