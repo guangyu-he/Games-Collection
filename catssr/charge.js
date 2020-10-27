@@ -59,3 +59,22 @@ function moneyfunction() {
         alert("should be divibible by 100")
     }
 }
+
+function promotefuntion() {
+    if (ssr.promote <= 0) {
+        return;
+    }
+    if (ispromoting) {
+        newstext("already promoting");
+        return;
+    }
+
+    ssr.promote = ssr.promote - 1;
+    promotingtime = 10;
+    ispromoting = true;
+    displayresult();
+
+    var div = document.getElementById('promote');
+    div.className = 'button button-caution-flat';
+    document.getElementById("promote").innerHTML = "剩余promote time:" + promotingtime;
+}

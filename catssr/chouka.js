@@ -21,8 +21,13 @@ function costcounter(mode) {
         ssr.counter = ssr.counter - cost;
         return false;
     }
+}
 
-
+function getpromote(num) {
+    if (num == 1) {
+        ssr.promote = ssr.promote + 1;
+        newstext("get one promte");
+    }
 }
 
 function lowlvl1() {
@@ -32,22 +37,32 @@ function lowlvl1() {
     result = randomNum(0, 100);
     newstext(result);
     if (result < 75) {
+        getpromote(result);
         ssr.rnum = ssr.rnum + 1;
+        resultimg("r");
+        document.getElementById("myImg").onclick();
     } else if (result > 75 && result < 95) {
         srweight = randomNum(0, 2);
         if (srweight == 0) {
             ssr.srnum = ssr.srnum + 1;
+            resultimg("sr");
+            document.getElementById("myImg").onclick();
         } else {
             ssr.rnum = ssr.rnum + 1;
+            resultimg("r");
+            document.getElementById("myImg").onclick();
         }
     } else {
         ssrweight = randomNum(0, 3);
         if (ssrweight == 0) {
+            resultimg("ssr");
             document.getElementById("myImg").onclick();
             //alert("SSR!");
             ssr.ssrnum = ssr.ssrnum + 1;
         } else {
             ssr.srnum = ssr.srnum + 1;
+            resultimg("sr");
+            document.getElementById("myImg").onclick();
         }
     }
     displayresult();
@@ -60,22 +75,31 @@ function highlvl1() {
     result = randomNum(0, 100);
     newstext(result);
     if (result < 75) {
+        getpromote(result);
         ssr.rnum = ssr.rnum + 1;
+        resultimg("r");
+        document.getElementById("myImg").onclick();
     } else if (result > 75 && result < 90) {
         srweight = randomNum(0, 1);
         if (srweight == 0) {
             ssr.srnum = ssr.srnum + 1;
+            resultimg("sr");
+            document.getElementById("myImg").onclick();
         } else {
             ssr.rnum = ssr.rnum + 1;
+            resultimg("r");
+            document.getElementById("myImg").onclick();
         }
     } else {
         ssrweight = randomNum(0, 2);
         if (ssrweight == 0) {
-            document.getElementById("myImg").onclick();
-            //alert("SSR!");
+            resultimg("ssr");
+            document.getElementById("myImg").onclick(); //alert("SSR!");
             ssr.ssrnum = ssr.ssrnum + 1;
         } else {
             ssr.srnum = ssr.srnum + 1;
+            resultimg("sr");
+            document.getElementById("myImg").onclick();
         }
     }
     displayresult();
@@ -93,6 +117,7 @@ function lowlvl10() {
     while (i < 9) {
         result[i] = randomNum(0, 100);
         if (result[i] < 90) {
+            getpromote(result[i]);
             result10r = result10r + 1;
         } else if (result[i] > 90 && result[i] < 98) {
             result10sr = result10sr + 1;
@@ -111,6 +136,7 @@ function lowlvl10() {
         result10d = randomNum(0, 100);
         newstext(result10d);
         if (result10d < 90) {
+            getpromote(result10d);
             result10r = result10r + 1;
         } else if (result10d > 90 && result10d < 98) {
             result10sr = result10sr + 1;
@@ -141,6 +167,7 @@ function highlvl10() {
         result[i] = randomNum(0, 100);
         newstext(result[i]);
         if (result[i] < 80) {
+            getpromote(result[i]);
             result10r = result10r + 1;
         } else if (result[i] > 80 && result[i] < 95) {
             result10sr = result10sr + 1;
@@ -159,6 +186,7 @@ function highlvl10() {
         result10d = randomNum(0, 100);
         newstext(result10d);
         if (result10d < 80) {
+            getpromote(result10d);
             result10r = result10r + 1;
         } else if (result10d > 80 && result10d < 95) {
             result10sr = result10sr + 1;

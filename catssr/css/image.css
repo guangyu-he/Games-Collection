@@ -42,8 +42,8 @@
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 400px;
 }
 
 
@@ -97,7 +97,7 @@
     top: 15px;
     right: 35px;
     color: #ffffff;
-    font-size: 40px;
+    font-size: 80px;
     font-weight: bold;
     transition: 0.3s;
 }

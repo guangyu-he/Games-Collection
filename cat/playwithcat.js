@@ -74,7 +74,7 @@ function dubo() {
     if (dumoney == null || dumoney == "") {
         return;
     }
-    var duzhu = prompt("请输入赔率(整数：2或5):", "");
+    var duzhu = prompt("请输入赔率(整数：2: win at 0-5或5:win at 0-2):", "");
     if (duzhu != "2" && duzhu != "5") {
         return;
     }

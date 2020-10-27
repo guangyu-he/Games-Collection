@@ -112,6 +112,7 @@
                             </div>
 
                             <div>
+                                <button id="promote" style="display: inline" onclick="promotefuntion()" class="button  button-border button-rounded button-primary">Promote:</button>
                                 <button id="counter" style="display: inline" onclick="counterfunction()" class="button  button-border button-rounded button-primary">counter:</button>
                                 <button id="money" style="display: inline" onclick="moneyfunction()" class="button  button-border button-rounded button-primary">money:</button>
                             </div>
@@ -124,10 +125,8 @@
         </main>
         </div>
 
-        <script src="js/production/materialMenu.min.js"></script>
-
         <!-- 触发弹窗 - 图片改为你的图片地址 -->
-        <img loading="lazy" id="myImg" src="test.jpg" alt="SSR!" width="300" height="200" style="display: none;">
+        <img loading="lazy" id="myImg" src="" alt="" width="200" height="200" style="display: none;">
 
         <!-- 弹窗 -->
         <div id="myModal" class="modal">
@@ -136,36 +135,11 @@
             <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
 
             <!-- 弹窗内容 -->
-            <img class="modal-content" id="img01">
+            <img class="modal-content" id="img">
 
             <!-- 文本描述 -->
             <div id="caption"></div>
         </div>
-
-
-        <script>
-            // 获取弹窗
-            var modal = document.getElementById('myModal');
-
-            // 获取图片插入到弹窗 - 使用 "alt" 属性作为文本部分的内容
-            var img = document.getElementById('myImg');
-            var modalImg = document.getElementById("img01");
-            var captionText = document.getElementById("caption");
-            img.onclick = function() {
-                modal.style.display = "block";
-                modalImg.src = this.src;
-                captionText.innerHTML = this.alt;
-            }
-
-            // 获取 <span> 元素，设置关闭按钮
-            var span = document.getElementsByClassName("close")[0];
-
-            // 当点击 (x), 关闭弹窗
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-        </script>
-
 
 
         <script>
@@ -178,12 +152,16 @@
                 rnum: "",
                 srnum: "",
                 ssrnum: "",
+                promote: "",
             };
 
             var newsssrstr;
             var newsssr = {
                 newstext: ""
             }
+
+            var ispromoting = false; // whether is in promoting,ture or false
+            var promotingtime = 0;
 
             var hint = 1; //用于设置是否需要提醒，默认1为打开，0为关闭
             function hintsetting() {
@@ -210,7 +188,9 @@
             function test() {
                 //测试用   
 
-                ssr.counter = ssr.counter + 1000;
+                ssr.counter = 1000;
+                ssr.money = ssr.money + 1000;
+                ssr.promote = 10;
 
                 newsssr.newstext = "";
                 newstext("已加载测试数据");
@@ -237,6 +217,7 @@
 
                 document.getElementById("newstext").innerHTML = newsssr.newstext;
                 displayresult()
+                document.getElementById("promote").innerHTML = "剩余Promote:" + ssr.promote;
             }
 
             function displayresult() {
@@ -266,7 +247,6 @@
 
             function start() {
                 save();
-                document.getElementById("test").onclick();
             }
 
             function deadand() { //传递信息给安卓的java 
@@ -280,5 +260,6 @@
 <script src="charge.js"></script>
 <script src="chouka.js"></script>
 <script src="selltocounter.js"></script>
+<script src="image.js"></script>
 
 </html>

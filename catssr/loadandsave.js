@@ -21,6 +21,7 @@ function load() {
 
         ssr.money = 0;
         ssr.counter = 0;
+        ssr.promote = 0;
 
         ssr.rnum = 0;
         ssr.srnum = 0;
@@ -29,6 +30,7 @@ function load() {
     {
         ssr.money = parseInt(cardmoney);
         ssr.counter = 0;
+        ssr.promote = 0;
 
         ssr.rnum = 0;
         ssr.srnum = 0;
@@ -37,6 +39,7 @@ function load() {
         ssr = JSON.parse(ssrstr);
         ssr.money = parseInt(cardmoney);
         ssr.counter = parseInt(ssr.counter);
+        ssr.promote = parseInt(ssr.promote);
 
         ssr.rnum = parseInt(ssr.rnum);
         ssr.srnum = parseInt(ssr.srnum);

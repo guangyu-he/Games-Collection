@@ -1,11 +1,27 @@
+function checkpromoting() {
+    promotingtime = promotingtime - 1;
+    document.getElementById("promote").innerHTML = "剩余promote time:" + promotingtime;
+    if (promotingtime == 0) {
+        ispromoting = false;
+        var div = document.getElementById('promote');
+        div.className = 'button  button-border button-rounded button-primary';
+        document.getElementById("promote").innerHTML = "剩余Promote:" + ssr.promote;
+    }
+}
+
 function rtocounter() {
     if (ssr.rnum <= 0) {
         return;
     }
     ssr.rnum = ssr.rnum - 1;
-    ssr.counter = ssr.counter + 5
+    if (ispromoting) {
+        ssr.counter = ssr.counter + 50;
+        checkpromoting();
+    } else {
+        ssr.counter = ssr.counter + 5;
+    }
 
-    displayresult()
+    displayresult();
 }
 
 function srtocounter() {
@@ -13,9 +29,14 @@ function srtocounter() {
         return;
     }
     ssr.srnum = ssr.srnum - 1;
-    ssr.counter = ssr.counter + 25
+    if (ispromoting) {
+        ssr.counter = ssr.counter + 250;
+        checkpromoting();
+    } else {
+        ssr.counter = ssr.counter + 25;
+    }
 
-    displayresult()
+    displayresult();
 }
 
 function ssrtocounter() {
@@ -23,7 +44,11 @@ function ssrtocounter() {
         return;
     }
     ssr.ssrnum = ssr.ssrnum - 1;
-    ssr.counter = ssr.counter + 50
-
-    displayresult()
+    if (ispromoting) {
+        ssr.counter = ssr.counter + 500;
+        checkpromoting();
+    } else {
+        ssr.counter = ssr.counter + 50;
+    }
+    displayresult();
 }
