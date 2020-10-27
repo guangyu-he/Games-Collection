@@ -8,6 +8,7 @@
     <title>Boundary Cards</title>
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/gallary.css">
     <style>
         body {
             align-items: center;
@@ -102,7 +103,8 @@
                                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a id="" href="javascript:void(0)">套牌及游戏模式选择</a>
+                                    <!--<a id="" href="javascript:void(0)">套牌及游戏模式选择</a>-->
+                                    <a id="" href="javascript:checkdeck()">Check Deck</a>
                                 </li>
                                 <li>
                                     <a id="" href="javascript:deck()">构筑模式</a>
@@ -129,6 +131,11 @@
                     <div class="vertical-align:middle;display:table-cell">
                         <table id="decksel" style="display:none">
                             <tr>
+                                <td>Choose </td>
+                                <td>Your</td>
+                                <td>Card</td>
+                            </tr>
+                            <tr>
                                 <td><img src="11dh.gif" onclick="yiyid()"></img>
                                 </td>
                                 <td><img src="11h.gif" onclick="yiyi()"></img>
@@ -153,46 +160,57 @@
 
                         <table id="decksaving" style="display:none;">
                             <tr>
+                                <td>Your Deck:</td>
+                            </tr>
+                            <tr>
                                 <td><img id="decksaving1" src=""></td>
                                 <td><img id="decksaving2" src=""></td>
                                 <td><img id="decksaving3" src=""></td>
                                 <td><img id="decksaving4" src=""></td>
                                 <td><img id="decksaving5" src=""></td>
                                 <td><img id="decksaving6" src=""></td>
-
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving1"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving2"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving3"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving4"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving5"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving6"></text></td>
                             </tr>
                             <tr>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving7"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving8"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving9"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving10"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving11"></text></td>
-                                <td><input name="decksaving" type="radio" onclick=""><text id="decksaving12"></text></td>
+                                <td><img id="decksaving7" src=""></td>
+                                <td><img id="decksaving8" src=""></td>
+                                <td><img id="decksaving9" src=""></td>
+                                <td><img id="decksaving10" src=""></td>
+                                <td><img id="decksaving11" src=""></td>
+                                <td><img id="decksaving12" src=""></td>
                             </tr>
                         </table>
 
                         <table id="limitsaving" style="display:none;">
                             <tr>
-                                <td><text id="limitsaving1"></text></td>
-                                <td><text id="limitsaving2"></text></td>
-                                <td><text id="limitsaving3"></text></td>
-                                <td><text id="limitsaving4"></text></td>
-                                <td><text id="limitsaving5"></text></td>
-                                <td><text id="limitsaving6"></text></td>
+                                <td>Your Deck:</td>
                             </tr>
                             <tr>
-                                <td><text id="limitsaving7"></text></td>
-                                <td><text id="limitsaving8"></text></td>
-                                <td><text id="limitsaving9"></text></td>
-                                <td><text id="limitsaving10"></text></td>
-                                <td><text id="limitsaving11"></text></td>
-                                <td><text id="limitsaving12"></text></td>
+                                <td><img id="limitsaving1"></img>
+                                </td>
+                                <td><img id="limitsaving2"></img>
+                                </td>
+                                <td><img id="limitsaving3"></img>
+                                </td>
+                                <td><img id="limitsaving4"></img>
+                                </td>
+                                <td><img id="limitsaving5"></img>
+                                </td>
+                                <td><img id="limitsaving6"></img>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img id="limitsaving7"></img>
+                                </td>
+                                <td><img id="limitsaving8"></img>
+                                </td>
+                                <td><img id="limitsaving9"></img>
+                                </td>
+                                <td><img id="limitsaving10"></img>
+                                </td>
+                                <td><img id="limitsaving11"></img>
+                                </td>
+                                <td><img id="limitsaving12"></img>
+                                </td>
                             </tr>
                         </table>
 
@@ -204,9 +222,18 @@
                         </table>
 
                         <table id="deckopenradio" style="display:none;">
-                            <td><input name="deckopen" type="radio" onclick="deckopen1()"><text id="deckopen1"></text></td>
-                            <td><input name="deckopen" type="radio" onclick="deckopen2()"><text id="deckopen2"></text></td>
-                            <td><input name="deckopen" type="radio" onclick="deckopen3()"><text id="deckopen3"></text></td>
+                            <td>
+                                <image id="decklimitopen1" onclick="deckopen1()">
+                                    </img>
+                            </td>
+                            <td>
+                                <image id="decklimitopen2" onclick="deckopen2()">
+                                    </img>
+                            </td>
+                            <td>
+                                <image id="decklimitopen3" onclick="deckopen3()">
+                                    </img>
+                            </td>
                         </table>
 
                         <table id="decklimit" style="display:none">
@@ -312,6 +339,104 @@
                         <input class="button button-3d button-primary button-rounded" type="button" id="restart" style="display:none;height:60px;width:120px" value="重新开始" onclick="restart()">
                     </div>
 
+                    <!-- Images used to open the lightbox -->
+                    <div class="row" style="display:none">
+                        <div class="column">
+                            <img src="mana.gif" onclick="openModal();currentSlide(1)" width="200" height="200" class="hover-shadow">
+                        </div>
+                    </div>
+
+                    <!-- The Modal/Lightbox -->
+                    <div id="myGallary" class="modal-gallary">
+                        <span class="close-gallary cursor" onclick="closeModal()">&times;</span>
+                        <div class="modal-content-gallary">
+
+                            <div class="mySlides">
+                                <img id="slides1" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides2" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides3" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides4" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides5" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides6" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides7" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides8" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides9" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides10" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides11" src="" width="100" height="200">
+                            </div>
+                            <div class="mySlides">
+                                <img id="slides12" src="" width="100" height="200">
+                            </div>
+
+                            <!-- Next/previous controls -->
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                            <!-- Caption text -->
+                            <div class="caption-container">
+                                <p id="captiongallary"></p>
+                            </div>
+
+                            <!-- Thumbnail image controls -->
+                            <div class="column">
+                                <img id="demo1" class="demo" src="" width="50" height="100" onclick="currentSlide(1)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo2" class="demo" src="" width="50" height="100" onclick="currentSlide(2)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo3" class="demo" src="" width="50" height="100" onclick="currentSlide(3)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo4" class="demo" src="" width="50" height="100" onclick="currentSlide(4)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo5" class="demo" src="" width="50" height="100" onclick="currentSlide(5)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo6" class="demo" src="" width="50" height="100" onclick="currentSlide(6)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo7" class="demo" src="" width="50" height="100" onclick="currentSlide(7)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo8" class="demo" src="" width="50" height="100" onclick="currentSlide(8)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo9" class="demo" src="" width="50" height="100" onclick="currentSlide(9)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo10" class="demo" src="" width="50" height="100" onclick="currentSlide(10)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo11" class="demo" src="" width="50" height="100" onclick="currentSlide(10)" alt="">
+                            </div>
+                            <div class="column">
+                                <img id="demo12" class="demo" src="" width="50" height="100" onclick="currentSlide(10)" alt="">
+                            </div>
+                        </div>
+                    </div>
+
                 </section>
             </div>
         </main>
@@ -337,6 +462,7 @@
     <script src="cardpicture.js"></script>
     <script src="limit.js"></script>
     <script src="display.js"></script>
+    <script src="gallary.js"></script>
 
     <script>
         var mana = 0;
@@ -361,6 +487,41 @@
                 localStorage.clear();
                 location.reload();
             } else {}
+        }
+
+        function checkdeck() {
+            for (ii = 0; ii < 12; ii++) {
+                i = ii + 1;
+                if (cardtot[ii] == "1|1|d") {
+                    document.getElementById("slides" + i.toString()).src = "11dh.gif";
+                    document.getElementById("demo" + i.toString()).src = "11dh.gif";
+                } else if (cardtot[ii] == "1|1") {
+                    document.getElementById("slides" + i.toString()).src = "11h.gif";
+                    document.getElementById("demo" + i.toString()).src = "11h.gif";
+                } else if (cardtot[ii] == "2|2") {
+                    document.getElementById("slides" + i.toString()).src = "22h.gif";
+                    document.getElementById("demo" + i.toString()).src = "22h.gif";
+                } else if (cardtot[ii] == "3|3") {
+                    document.getElementById("slides" + i.toString()).src = "33h.gif";
+                    document.getElementById("demo" + i.toString()).src = "33h.gif";
+                } else if (cardtot[ii] == "4|4") {
+                    document.getElementById("slides" + i.toString()).src = "44h.gif";
+                    document.getElementById("demo" + i.toString()).src = "44h.gif";
+                } else if (cardtot[ii] == "-2-2") {
+                    document.getElementById("slides" + i.toString()).src = "fuer.gif";
+                    document.getElementById("demo" + i.toString()).src = "fuer.gif";
+                } else if (cardtot[ii] == "-1-1") {
+                    document.getElementById("slides" + i.toString()).src = "fuyi.gif";
+                    document.getElementById("demo" + i.toString()).src = "fuyi.gif";
+                } else if (cardtot[ii] == "mana") {
+                    document.getElementById("slides" + i.toString()).src = "mana.gif";
+                    document.getElementById("demo" + i.toString()).src = "mana.gif";
+                } else {
+                    document.getElementById("slides" + i.toString()).src = "null.gif";
+                    document.getElementById("demo" + i.toString()).src = "null.gif";
+                }
+            }
+            openModal();
         }
         //网页版Android无联动
         function deadand() {

@@ -15,6 +15,7 @@ function deck() {
     cardstatus.mode = 0;
     savecard();
     builddisplay();
+    decksavingdis();
 }
 
 function deckback() {
@@ -160,23 +161,26 @@ function deldeck() {
 }
 
 function decksavingdis() {
-
-    for (i = 0; i < 12; i++) {
-        if (cardtot[0])
-            document.getElementById("decksaving" + 1);
+    for (ii = 0; ii < 12; ii++) {
+        i = ii + 1;
+        if (cardtot[ii] == "1|1|d") {
+            document.getElementById("decksaving" + i.toString()).src = "11dh.gif";
+        } else if (cardtot[ii] == "1|1") {
+            document.getElementById("decksaving" + i.toString()).src = "11h.gif";
+        } else if (cardtot[ii] == "2|2") {
+            document.getElementById("decksaving" + i.toString()).src = "22h.gif";
+        } else if (cardtot[ii] == "3|3") {
+            document.getElementById("decksaving" + i.toString()).src = "33h.gif";
+        } else if (cardtot[ii] == "4|4") {
+            document.getElementById("decksaving" + i.toString()).src = "44h.gif";
+        } else if (cardtot[ii] == "-2-2") {
+            document.getElementById("decksaving" + i.toString()).src = "fuer.gif";
+        } else if (cardtot[ii] == "-1-1") {
+            document.getElementById("decksaving" + i.toString()).src = "fuyi.gif";
+        } else if (cardtot[ii] == "mana") {
+            document.getElementById("decksaving" + i.toString()).src = "mana.gif";
+        } else {
+            document.getElementById("decksaving" + i.toString()).src = "null.gif";
+        }
     }
-
-
-    document.getElementById("decksaving1").innerHTML = cardtot[0];
-    document.getElementById("decksaving2").innerHTML = cardtot[1];
-    document.getElementById("decksaving3").innerHTML = cardtot[2];
-    document.getElementById("decksaving4").innerHTML = cardtot[3];
-    document.getElementById("decksaving5").innerHTML = cardtot[4];
-    document.getElementById("decksaving6").innerHTML = cardtot[5];
-    document.getElementById("decksaving7").innerHTML = cardtot[6];
-    document.getElementById("decksaving8").innerHTML = cardtot[7];
-    document.getElementById("decksaving9").innerHTML = cardtot[8];
-    document.getElementById("decksaving10").innerHTML = cardtot[9];
-    document.getElementById("decksaving11").innerHTML = cardtot[10];
-    document.getElementById("decksaving12").innerHTML = cardtot[11];
 }
