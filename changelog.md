@@ -1,5 +1,17 @@
 # Guangyu's Game Collection
 
+## update 20201027
+### adding
+1. CatSSR! button in homepage
+2. Adding back to homepage option
+### improving
+1. Using new create random number function in Cat!
+2. Using Promote instead of alert in hint 
+
+## update 20201026
+### adding
+1. NEW Game, CatSSR!
+
 ## update 20201012:
 ### changing
 1. switch to vscode workspace
