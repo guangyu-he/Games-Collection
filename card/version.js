@@ -18,7 +18,7 @@ function savecard() {
 
 function version() {
     document.getElementsByTagName('body')[0].style.zoom = 1;
-    var version = "191217 - 1415";
+    var version = "201027 - 1600";
     document.getElementById("version").innerHTML = version;
 
     cardstr = localStorage.getItem("cardstr");

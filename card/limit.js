@@ -28,13 +28,31 @@ function deckopen() {
         for (var i = 0; i < 3; i++) {
             var ii = Math.floor((Math.random() * deckopened.length));
             deckopenning[i] = deckopened[ii];
+            ii = i + 1;
+            if (deckopenning[i] == "1|1|d") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "11dh.gif";
+            } else if (deckopenning[i] == "1|1") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "11h.gif";
+            } else if (deckopenning[i] == "2|2") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "22h.gif";
+            } else if (deckopenning[i] == "3|3") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "33h.gif";
+            } else if (deckopenning[i] == "4|4") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "44h.gif";
+            } else if (deckopenning[i] == "-2-2") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "fuer.gif";
+            } else if (deckopenning[i] == "-1-1") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "fuyi.gif";
+            } else if (deckopenning[i] == "mana") {
+                document.getElementById("decklimitopen" + ii.toString()).src = "mana.gif";
+            } else {
+                document.getElementById("decklimitopen" + i.toString()).src = "null.gif";
+            }
         }
         cardstatus.decknum--;
         savecard();
         //document.getElementById("deckopendis").innerHTML = deckopenning;
-        document.getElementById("deckopen1").innerHTML = deckopenning[0];
-        document.getElementById("deckopen2").innerHTML = deckopenning[1];
-        document.getElementById("deckopen3").innerHTML = deckopenning[2];
+
         document.getElementById("deckmoney").innerHTML = "余额：" + cardstatus.deckbalance;
         document.getElementById("decknumber").innerHTML = "卡包数：" + cardstatus.decknum;
     }
@@ -101,7 +119,7 @@ function deckopen1() {
         jianyi();
         deckopenning[0] = null;
     }
-    document.getElementById("deckopen1").innerHTML = deckopenning[0];
+    document.getElementById("decklimitopen1").src = "null.gif";
 }
 
 function deckopen2() {
@@ -137,7 +155,7 @@ function deckopen2() {
         jianyi();
         deckopenning[1] = null;
     }
-    document.getElementById("deckopen2").innerHTML = deckopenning[1];
+    document.getElementById("decklimitopen2").src = "null.gif";
 }
 
 function deckopen3() {
@@ -173,20 +191,30 @@ function deckopen3() {
         jianyi();
         deckopenning[2] = null;
     }
-    document.getElementById("deckopen3").innerHTML = deckopenning[2];
+    document.getElementById("decklimitopen3").src = "null.gif";
 }
 
 function limitsavingdis() {
-    document.getElementById("limitsaving1").innerHTML = cardtot[0];
-    document.getElementById("limitsaving2").innerHTML = cardtot[1];
-    document.getElementById("limitsaving3").innerHTML = cardtot[2];
-    document.getElementById("limitsaving4").innerHTML = cardtot[3];
-    document.getElementById("limitsaving5").innerHTML = cardtot[4];
-    document.getElementById("limitsaving6").innerHTML = cardtot[5];
-    document.getElementById("limitsaving7").innerHTML = cardtot[6];
-    document.getElementById("limitsaving8").innerHTML = cardtot[7];
-    document.getElementById("limitsaving9").innerHTML = cardtot[8];
-    document.getElementById("limitsaving10").innerHTML = cardtot[9];
-    document.getElementById("limitsaving11").innerHTML = cardtot[10];
-    document.getElementById("limitsaving12").innerHTML = cardtot[11];
+    for (ii = 0; ii < 12; ii++) {
+        i = ii + 1;
+        if (cardtot[ii] == "1|1|d") {
+            document.getElementById("limitsaving" + i.toString()).src = "11dh.gif";
+        } else if (cardtot[ii] == "1|1") {
+            document.getElementById("limitsaving" + i.toString()).src = "11h.gif";
+        } else if (cardtot[ii] == "2|2") {
+            document.getElementById("limitsaving" + i.toString()).src = "22h.gif";
+        } else if (cardtot[ii] == "3|3") {
+            document.getElementById("limitsaving" + i.toString()).src = "33h.gif";
+        } else if (cardtot[ii] == "4|4") {
+            document.getElementById("limitsaving" + i.toString()).src = "44h.gif";
+        } else if (cardtot[ii] == "-2-2") {
+            document.getElementById("limitsaving" + i.toString()).src = "fuer.gif";
+        } else if (cardtot[ii] == "-1-1") {
+            document.getElementById("limitsaving" + i.toString()).src = "fuyi.gif";
+        } else if (cardtot[ii] == "mana") {
+            document.getElementById("limitsaving" + i.toString()).src = "mana.gif";
+        } else {
+            document.getElementById("limitsaving" + i.toString()).src = "null.gif";
+        }
+    }
 }
