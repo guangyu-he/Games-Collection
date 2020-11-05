@@ -167,10 +167,7 @@ function decksavingdis() {
             document.getElementById("decksaving" + i.toString()).src = "11dh.gif";
         } else if (cardtot[ii] == "1|1") {
             document.getElementById("decksaving" + i.toString()).src = "11h.gif";
-        } else if (cardtot[ii] == "2|2") {
-            document.getElementById("decksaving" + i.toString()).src = "22h.gif";
-        } else if (cardtot[ii] == "3|3") {
-            document.getElementById("decksaving" + i.toString()).src = "33h.gif";
+        } else if (cardtoring()).src = "33h.gif";
         } else if (cardtot[ii] == "4|4") {
             document.getElementById("decksaving" + i.toString()).src = "44h.gif";
         } else if (cardtot[ii] == "-2-2") {

@@ -1,4 +1,4 @@
 function version() {
-    var version = "190823-1820";
+    var version = "201027-1500";
     document.getElementById("version").innerHTML = version;
 }
