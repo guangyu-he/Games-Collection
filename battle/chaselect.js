@@ -48,8 +48,12 @@ function chaskill(chaselnum, chanum) {
 }
 
 function chaselect(chaselnum, chanum) {
-    if (gamestatus == 1) {
+    if (turn != 0) {
         newstext("already started!");
+        return;
+    }
+    if (chaselected1 == chanum) {
+        newstext("already chosen!");
         return;
     }
     restorebuttons();
@@ -69,14 +73,13 @@ function chaselected(chaselnum, chanum) {
         } else {
             return;
         }
+    } else if (chaselnum == 2) {
         if (chanum == 1) {
             chaselected2 = 1;
         } else if (chanum == 2) {
             chaselected2 = 2;
         } else if (chanum == 3) {
             chaselected2 = 3;
-        } else {
-            return;
         }
     } else {
         return;

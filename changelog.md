@@ -1,5 +1,18 @@
 # Guangyu's Game Collection
 
+## update 20201106
+### adding
+1. basic battle system
+2. mouseover/out effect
+3. boss value
+4. characters value display 
+### fixing
+1. bug in chaselect.js
+
+## update 20201105
+### adding
+1. new Battle! game
+
 ## update 20201027 - 2
 ### adding 
 1. Gallary display of deck

@@ -35,6 +35,7 @@ function load() {
 
     }
 
+    bossstatusdisplay();
     //save();
 }
 
@@ -51,6 +52,10 @@ function newvalue() {
     battle.cha1weight = 1;
     battle.cha2weight = 1;
     battle.cha3weight = 1;
+    battle.bossname = "HAHA";
+    battle.bosslife = 100;
+    battle.bossenergy = 0;
+    battle.bossweight = 1;
 }
 
 function readvalue() {
@@ -63,6 +68,9 @@ function readvalue() {
     battle.cha1weight = parseInt(battle.cha1weight);
     battle.cha2weight = parseInt(battle.cha2weight);
     battle.cha3weight = parseInt(battle.cha3weight);
+    battle.bosslife = parseInt(battle.bosslife);
+    battle.bossenergy = parseInt(battle.bossenergy);
+    battle.weight = parseInt(battle.weight);
 }
 
 function save() {
