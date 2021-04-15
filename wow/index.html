@@ -80,6 +80,7 @@
                         <button id="envenom_dot_display" style="display: none" class="button button-border button-rounded button-primary">毒伤 dot:</button>
                         <button id="poison_dot_display" style="display: none" class="button button-border button-rounded button-primary">毒药 dot:</button>
                         <button id="planning_time_display" style="display: none" class="button button-border button-rounded button-primary">深谋:</button>
+                        <button id="masterass_time_display" style="display: none" class="button button-border button-rounded button-primary">刺客大师:</button>
                     </div>
 
                     <div>
@@ -249,12 +250,13 @@
             boss_life: "",
             player_life: "",
             player_ap: "",
-            dps_100: "",
+            highest_dps: "",
         };
         //energy = [max, regen, rate]
         var energy = [120, 10, 1];
         var combo = 0;
         var crit_state = 0;
+        var crit_ini = 0;
 
 
         //skill = [Energy, Duration, Combo, Damage, CD]
@@ -310,6 +312,10 @@
 
         var nightwalk_damage = 0;
 
+        var masterass_time = 0;
+
+        var deathmark_cd = 0;
+
 
         var newstr;
         var news = {
@@ -345,6 +351,7 @@
             wow.haste = 0.3;
             wow.mastery = 0.3;
             wow.vers = 0.1;
+            wow.turn = 1;
 
             wow.player_ap = 1500 * 1.17 * 1.51;
 
@@ -365,7 +372,7 @@
             var myDate = new Date();
             var version = myDate.toLocaleString();
 
-            document.getElementById("version").innerHTML = "210413 - 1100";
+            document.getElementById("version").innerHTML = "210414 - 2300";
 
             load();
 
@@ -375,7 +382,7 @@
             document.getElementById("newstext").innerHTML = news.newstext;
 
             if (wow.turn == null || wow.turn == "") {
-                wow.turn = 0;
+                wow.turn = 1;
                 save();
             } else {
 
@@ -387,6 +394,12 @@
                 }else{
                     energy[0] = 120
                     energy[2] = 1 
+                }
+
+                if(wow.talent4 == "死亡标记"){
+                    document.getElementById("deathmark").style = "display:inline"
+                }else{
+                    document.getElementById("deathmark").style = "display:none"
                 }
 
 
@@ -404,6 +417,8 @@
             }
 
             document.getElementById("turn").innerHTML = "回合:" + wow.turn;
+
+            crit_ini = wow.crit;
 
 
             display_combat_stat();
@@ -427,8 +442,10 @@
             }
             if(Shiv[4] != 0){
                 document.getElementById("shiv").className = "button button-warning"
+                document.getElementById("shiv").innerHTML = "毒刃" + Shiv[4]
             }else{
                 document.getElementById("shiv").className = "button button-primary"
+                document.getElementById("shiv").innerHTML = "毒刃"
             }
             if(energy[0] < Envenom[0] || combo == 0){
                 document.getElementById("envenom").className = "button button-pill button-warning"
@@ -449,27 +466,24 @@
             }
 
             if(ambush_state == 1){
-                //潜行中
-                document.getElementById("ambush").className = "button button-primary"
-            }else{
-                document.getElementById("ambush").className = "button button-warning"
-            }
-
-            if(vanish_state == 0){
-                //潜行中
+                document.getElementById("ambush").className = "button button-caution"
+            }else if(vanish_state == 0){
                 if(energy[0] < Ambush[0]){
                     document.getElementById("ambush").className = "button button-warning"
                 }else{
                     document.getElementById("ambush").className = "button button-primary"
                 }
-            }else{
+            }
+            else{
                 document.getElementById("ambush").className = "button button-warning"
             }
 
             if(vanish_cd == 0){
                 document.getElementById("vanish").className = "button button-primary"
+                document.getElementById("vanish").innerHTML = "消失"
             }else{
                 document.getElementById("vanish").className = "button button-warning"
+                document.getElementById("vanish").innerHTML = "消失" + vanish_cd
             }
             
             if(vanish_state == 0){
@@ -478,6 +492,14 @@
                 document.getElementById("life").className = "button-border button-rounded button-caution"
             }else{
                 document.getElementById("life").style = "display:none"
+            }
+
+            if(deathmark_cd == 0){
+                document.getElementById("deathmark").className = "button button-pill button-action"
+                document.getElementById("deathmark").innerHTML = "死亡标记"
+            }else{
+                document.getElementById("deathmark").className = "button button-pill button-warning"
+                document.getElementById("deathmark").innerHTML = "死亡标记" + deathmark_cd
             }
             
         }
@@ -507,6 +529,10 @@
                             nightwalk_damage = 0;
                         }
 
+                        if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                            masterass_time = 4;
+                        }else{}
+
                         vanish_state = 1;
                         Garrote[4] = 6;
 
@@ -518,7 +544,7 @@
                     }else{
                         Garrote_dot = Garrote[1]
                     }
-                    
+
                     dot_display();
                     damage();
                 }
@@ -542,16 +568,23 @@
                         nightwalk_damage = 0;
                     }
 
+                    if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                            masterass_time = 4;
+                    }else{}
+                    if(masterass_time > 0){
+                        wow.crit += 0.5;
+                    }else{
+                        wow.crit = crit_ini;
+                    }
+
                     vanish_state = 1;
                     energy[0] -= Mutilate[0];
 
                     if(wow.talent1 == "侧袭"){
                         var ambush_check = randomNum(0,10);
                         if(ambush_check <= 2){
-                            document.getElementById("ambush").className = "button button-pill button-primary";
                             ambush_state = 1;
                         }else{
-                            document.getElementById("ambush").className = "button button-pill button-warning";
                             ambush_state = 0;
                         } 
                     }
@@ -570,6 +603,7 @@
                         //无暴击
                         mutilate_crit(1)
                     }
+                    wow.crit = crit_ini;
                     damage();
                 }
             }
@@ -619,6 +653,11 @@
                     news.newstext = "";
                     document.getElementById("newstext").innerHTML = news.newstext;
 
+
+                    if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                            masterass_time = 4;
+                    }else{}
+
                     vanish_state = 1;
 
 
@@ -628,7 +667,8 @@
                         nightwalk_damage = 0;
                     }
 
-                    Rupture_damage = (combo + 1) * Rupture[3] * wow.player_ap * (nightwalk_damage + 1) / Rupture_dot;
+
+                    Rupture_damage = (combo + 1) * Rupture[3] * wow.player_ap * (nightwalk_damage + 1) / ( (combo + 1) * Rupture[2] );
 
                     if(Rupture_dot == 0){
                         Rupture_dot = (combo + 1) * Rupture[2];
@@ -671,6 +711,15 @@
                     news.newstext = "";
                     document.getElementById("newstext").innerHTML = news.newstext;
 
+                    if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                            masterass_time = 4;
+                    }else{}
+                    if(masterass_time > 0){
+                        wow.crit += 0.5;
+                    }else{
+                        wow.crit = crit_ini;
+                    }
+
                     vanish_state = 1;
 
                     energy[0] -= Shiv[0];
@@ -688,6 +737,8 @@
                         nightwalk_damage = 0;
                     }
 
+
+
                     crit_state = randomNum(0,10);
                     if(crit_state <= wow.crit*10){
                         Shiv_damage = Shiv[3] * wow.player_ap * (wow.vers + 1) * 2 * (planning_damage + nightwalk_damage + 1);
@@ -696,7 +747,7 @@
                         Shiv_damage = Shiv[3] * wow.player_ap * (wow.vers + 1) * (planning_damage + nightwalk_damage + 1);
                         newstext("/毒刃"+ (Shiv_damage).toFixed(0));
                     }
-                    
+                    wow.crit = crit_ini;
                     dot_display();
                     damage();
                 }
@@ -711,10 +762,23 @@
                     news.newstext = "";
                     document.getElementById("newstext").innerHTML = news.newstext;
 
+                    if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                        masterass_time = 4;
+                    }else{}
+                    if(masterass_time > 0){
+                        wow.crit += 0.5;
+                    }else{
+                        wow.crit = crit_ini;
+                    }
+
                     vanish_state = 1;
 
                     Envenom_dot = combo + 1;
                     energy[0] -= Envenom[0];
+
+                    if(slice_time > 0){
+                        slice_time += 3 * combo;
+                    }else{}
 
                     if(wow.talent2 == "夜行者" && vanish_state == 0){
                         nightwalk_damage = 0.2;
@@ -740,6 +804,7 @@
                         planning_state = 1;
                         planning_time = 4;
                     }
+                    wow.crit = crit_ini;
                     dot_display();
                     damage();
                 }else{
@@ -762,6 +827,15 @@
                 nightwalk_damage = 0.2;
             }else{
                 nightwalk_damage = 0;
+            }
+
+            if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                masterass_time = 4;
+            }else{}
+            if(masterass_time > 0){
+                wow.crit += 0.5;
+            }else{
+                wow.crit = crit_ini;
             }
 
             var Poison_try = randomNum(0,10);
@@ -788,6 +862,7 @@
                 }
             }else{
             }
+            wow.crit = crit_ini;
         }
 
         function ambush_func(){
@@ -803,6 +878,15 @@
 
                 news.newstext = "";
                 document.getElementById("newstext").innerHTML = news.newstext;
+
+                if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                    masterass_time = 4;
+                }else{}
+                if(masterass_time > 0){
+                    wow.crit += 0.5;
+                }else{
+                    wow.crit = crit_ini;
+                }
 
                 vanish_state = 1;
 
@@ -833,7 +917,7 @@
                 } 
                 document.getElementById("ambush").className = "button button-pill button-warning";
                 ambush_state = 0;
-                
+                wow.crit = crit_ini;
                 dot_display();
                 damage();
 
@@ -845,6 +929,11 @@
             news.newstext = "";
             document.getElementById("newstext").innerHTML = news.newstext;
 
+            if(wow.talent2 == "刺客大师" && vanish_state == 0){
+                masterass_time = 4;
+                alert(masterass_time)
+            }else{}
+
             vanish_state = 1;
 
             damage();
@@ -854,12 +943,12 @@
             if(vanish_cd != 0){
 
             }else{
-                news.newstext = "";
+                news.newstext = "/消失";
                 document.getElementById("newstext").innerHTML = news.newstext;
                 vanish_state = 0;
                 vanish_cd = 40;
 
-                damage();
+                display_combat_stat()
             }
         }
 
@@ -897,12 +986,31 @@
             }
         }
 
+        function deathmark_func(){
+            if(deathmark_cd != 0){
+
+            }else{
+                news.newstext = "/死亡标记";
+                document.getElementById("newstext").innerHTML = news.newstext;
+                combo = 5;
+                deathmark_cd = 20;
+
+                display_combat_stat()
+            }
+        }
+
         function damage(){
 
             if(planning_state == 1){
                 planning_damage = 0.1;
             }else{
                 planning_damage = 0;
+            }
+
+            if(masterass_time > 0){
+                wow.crit += 0.5;
+            }else{
+                wow.crit = crit_ini;
             }
 
             if(Garrote_dot > 0){
@@ -1039,10 +1147,22 @@
             if(vanish_cd <= 0){
                 vanish_cd = 0;
             }else{}
+
+            deathmark_cd -= 1;
+            if(deathmark_cd <= 0){
+                deathmark_cd = 0;
+            }else{}
+
+            masterass_time -= 1;
+            if(masterass_time <= 0){
+                masterass_time = 0;
+            }else{}
+
+            wow.crit = crit_ini;
             
             var DPS = (Garrote_damage_sum + Rupture_damage_sum + Mutilate_damage_sum + Shiv_damage_sum + Envenom_damage_sum + Poison_damage_sum + Attack_damage_sum + Ambush_damage_sum) / wow.turn
             document.getElementById("damagetext").innerHTML = "锁喉" + Garrote_damage_sum.toFixed(0) + "/割裂" + Rupture_damage_sum.toFixed(0) + "/毁伤" + Mutilate_damage_sum.toFixed(0) + "/毒刃" + Shiv_damage_sum.toFixed(0) + "/毒伤" + Envenom_damage_sum.toFixed(0) + "/毒药" + Poison_damage_sum.toFixed(0) + "/攻击" + Attack_damage_sum.toFixed(0)  + "/伏击" + Ambush_damage_sum.toFixed(0) + " || DPS:" + DPS.toFixed(0);
-
+            
             dot_display();
             energy_regen()
             display_combat_stat();
@@ -1056,8 +1176,21 @@
             document.getElementById("turn").innerHTML = "回合:" + wow.turn;
 
             if(wow.turn == 100){
-                wow.dps_100 = DPS;
-                alert("100回合，dps为：" + wow.dps_100.toFixed(0));
+                if(wow.highest_dps == "" || wow.highest_dps == null){
+                    wow.highest_dps = 0;
+                }else{
+                    wow.highest_dps = parseInt(wow.highest_dps);
+                }
+                if(DPS > wow.highest_dps){
+                    wow.highest_dps = DPS;
+                    alert("你创造了最高dps记录：" + DPS.toFixed(0));
+                }else{
+                    alert("100回合，dps为：" + DPS.toFixed(0) + "/最高：" + wow.highest_dps.toFixed(0));
+                }
+                wow.turn = 0;
+                save();
+                test();
+                location.reload();
             }
         }
 
@@ -1065,13 +1198,23 @@
             if(Garrote_dot > 0){
                 document.getElementById("garrote_dot_display").innerHTML = "锁喉 dot:" + Garrote_dot;
                 document.getElementById("garrote_dot_display").style = "display:inline";
+                if(Garrote_dot <= Garrote[1]*0.3){
+                    document.getElementById("garrote_dot_display").className = "button button-border button-rounded button-caution"
+                }else{
+                    document.getElementById("garrote_dot_display").className = "button button-border button-rounded button-primary"
+                }
             }else{
                 document.getElementById("garrote_dot_display").style = "display:none";
             }
 
             if(Rupture_dot > 0){
-                document.getElementById("rupture_dot_display").innerHTML = "割裂 dot:" + Rupture_dot;
                 document.getElementById("rupture_dot_display").style = "display:inline";
+                document.getElementById("rupture_dot_display").innerHTML = "割裂 dot:" + Rupture_dot;
+                if(Rupture_dot <= Rupture[1]*0.3){
+                    document.getElementById("rupture_dot_display").className = "button button-border button-rounded button-caution"
+                }else{
+                    document.getElementById("rupture_dot_display").className = "button button-border button-rounded button-primary"
+                }
             }else{
                 document.getElementById("rupture_dot_display").style = "display:none";
             }
@@ -1109,6 +1252,13 @@
                 document.getElementById("slice_time_display").style = "display:inline";
             }else{
                 document.getElementById("slice_time_display").style = "display:none";
+            }
+
+            if(masterass_time > 0){
+                document.getElementById("masterass_time_display").innerHTML = "刺客大师:" + masterass_time;
+                document.getElementById("masterass_time_display").style = "display:inline";
+            }else{
+                document.getElementById("masterass_time_display").style = "display:none";
             }
             
 
