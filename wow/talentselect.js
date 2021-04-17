@@ -138,3 +138,26 @@ function legend3_func(){
     wow.legend = "刺客大师的决议"
     talent_display()
 } 
+
+
+function display_dps(){
+
+    if(wow.legend == "末日之刃"){
+        if(wow.talent3 == "毒药炸弹"){
+            DPS = (Garrote_damage_sum + Rupture_damage_sum + Mutilate_damage_sum + Shiv_damage_sum + Envenom_damage_sum + Poison_damage_sum + Attack_damage_sum + Ambush_damage_sum + Poisonbomb_damage_sum) / wow.turn
+            document.getElementById("damagetext").innerHTML = "锁喉" + Garrote_damage_sum.toFixed(0) + "/割裂" + Rupture_damage_sum.toFixed(0) + "/毁伤" + Mutilate_damage_sum.toFixed(0) + "/末日" + doom_damage_sum.toFixed(0) + "/毒刃" + Shiv_damage_sum.toFixed(0) + "/毒伤" + Envenom_damage_sum.toFixed(0) + "/毒药" + Poison_damage_sum.toFixed(0) + "/攻击" + Attack_damage_sum.toFixed(0)  + "/伏击" + Ambush_damage_sum.toFixed(0) + "/毒药炸弹" + Poisonbomb_damage_sum.toFixed(0) + " || DPS:" + DPS.toFixed(0);
+        }else{
+            DPS = (Garrote_damage_sum + Rupture_damage_sum + Mutilate_damage_sum + Shiv_damage_sum + Envenom_damage_sum + Poison_damage_sum + Attack_damage_sum + Ambush_damage_sum) / wow.turn
+            document.getElementById("damagetext").innerHTML = "锁喉" + Garrote_damage_sum.toFixed(0) + "/割裂" + Rupture_damage_sum.toFixed(0) + "/毁伤" + Mutilate_damage_sum.toFixed(0) + "/末日" + doom_damage_sum.toFixed(0) + "/毒刃" + Shiv_damage_sum.toFixed(0) + "/毒伤" + Envenom_damage_sum.toFixed(0) + "/毒药" + Poison_damage_sum.toFixed(0) + "/攻击" + Attack_damage_sum.toFixed(0)  + "/伏击" + Ambush_damage_sum.toFixed(0) + " || DPS:" + DPS.toFixed(0);
+        }
+    }else{
+        if(wow.talent3 == "毒药炸弹"){
+            DPS = (Garrote_damage_sum + Rupture_damage_sum + Mutilate_damage_sum + Shiv_damage_sum + Envenom_damage_sum + Poison_damage_sum + Attack_damage_sum + Ambush_damage_sum + Poisonbomb_damage_sum) / wow.turn
+            document.getElementById("damagetext").innerHTML = "锁喉" + Garrote_damage_sum.toFixed(0) + "/割裂" + Rupture_damage_sum.toFixed(0) + "/毁伤" + Mutilate_damage_sum.toFixed(0) + "/毒刃" + Shiv_damage_sum.toFixed(0) + "/毒伤" + Envenom_damage_sum.toFixed(0) + "/毒药" + Poison_damage_sum.toFixed(0) + "/攻击" + Attack_damage_sum.toFixed(0)  + "/伏击" + Ambush_damage_sum.toFixed(0) + "/毒药炸弹" + Poisonbomb_damage_sum.toFixed(0) + " || DPS:" + DPS.toFixed(0);
+        }else{
+            DPS = (Garrote_damage_sum + Rupture_damage_sum + Mutilate_damage_sum + Shiv_damage_sum + Envenom_damage_sum + Poison_damage_sum + Attack_damage_sum + Ambush_damage_sum) / wow.turn
+            document.getElementById("damagetext").innerHTML = "锁喉" + Garrote_damage_sum.toFixed(0) + "/割裂" + Rupture_damage_sum.toFixed(0) + "/毁伤" + Mutilate_damage_sum.toFixed(0) + "/毒刃" + Shiv_damage_sum.toFixed(0) + "/毒伤" + Envenom_damage_sum.toFixed(0) + "/毒药" + Poison_damage_sum.toFixed(0) + "/攻击" + Attack_damage_sum.toFixed(0)  + "/伏击" + Ambush_damage_sum.toFixed(0) + " || DPS:" + DPS.toFixed(0);
+        }
+    }
+
+}
