@@ -4,7 +4,7 @@ function onload() {
     message = lan.message_p + ""; //加载测试存档时无法显示提示，待修改。
     document.getElementsByTagName('body')[0].style.zoom = 0.8
 
-    document.getElementById("version").innerHTML = "210914 - 2249";
+    document.getElementById("version").innerHTML = "210914 - 1622";
 
 
     document.getElementById("status").style = "display:none";
@@ -13,8 +13,8 @@ function onload() {
 
 
     if(usr.name == "local"){
-        document.getElementById("user").innerHTML = "用户登录";
+        document.getElementById("user").innerHTML = lan.user;
     }else{
-        document.getElementById("user").innerHTML = "登出"+usr.name;
+        document.getElementById("user").innerHTML = lan.logout+usr.name;
     }
 }

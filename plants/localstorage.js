@@ -1,6 +1,3 @@
-var localStorage = window.localStorage;
-var cardmoney;
-
 function local_load() {
     plstr = localStorage.getItem("plstr");
 

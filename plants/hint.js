@@ -1,4 +1,3 @@
-var hint = true; 
 function hintsetting() {
     if (hint) {
         hint = false;

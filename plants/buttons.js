@@ -35,11 +35,5 @@ function restart() {
 
 function test() {
     //测试用
-    message = lan.message_p + "";
-    addmessage(lan.testmsg);
 
-    usr.money = "1000";
-    usr.fert_nr = "1";
-    usr.debug_nr = "1";
-    onload();
 }

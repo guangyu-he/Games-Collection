@@ -1,0 +1,74 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>JS识别长按案例源码</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+<body>
+    <div style="width:100%;">
+        <h2>JS识别长按案例源码 - 作用：判断用户有没有长按识别二维码等</h2>
+        <input type="button" onmousedown="gtouchstart()" 
+            onmousemove="gtouchmove()" 
+            onmouseup="gtouchend()" 
+            value="123"
+        />
+    </div>
+<script>
+
+    var time,timestart,timeend;
+//定时器
+function gettime(){
+    var now = new Date();
+    return now.getTime();
+}
+
+function mousedown(){
+    timestart = gettime();
+    time = setInterval(function(){
+        timeend = gettime();
+        if(timeend - timestart > 1000){
+            clearInterval(time);
+            alert("长按");
+        }
+    },100);
+}
+
+function mouseup(){
+    clearInterval(time);
+}
+
+var timeOutEvent;
+//开始按
+function gtouchstart(){
+    //这里设置定时器，定义长按500毫秒触发长按事件，时间可以自己改
+    timeOutEvent = setTimeout("longPress()", 500);
+    return false;
+};
+//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件   
+function gtouchend(){
+    //清除定时器
+    clearTimeout(timeOutEvent);
+    if(timeOutEvent!=0){
+        //这里写要执行的内容（尤如onclick事件）
+        alert("你这是点击，不是长按");
+    }
+    return false;
+};
+//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+function gtouchmove(){
+    //清除定时器
+    clearTimeout(timeOutEvent);
+    timeOutEvent = 0;
+};
+//真正长按后应该执行的内容
+function longPress(){
+    timeOutEvent = 0;
+    //执行长按要执行的内容，如弹出菜单
+    alert("长按事件触发发");
+}
+</script>
+</body>
+</html>

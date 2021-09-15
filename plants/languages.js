@@ -11,6 +11,7 @@ var lan_cn = {
     plwater: "含水量:",
 
     user: "用户登陆",
+    logout: "登出",
 
     save: "本地存档",
     load: "读取本地存档",
@@ -25,6 +26,9 @@ var lan_cn = {
     hintset_offed: "游戏提示已关闭",
 
     testmsg: "已加载测试数据",
+    shop_dis_msg: "商店折扣中",
+    shop_dis_end_msg: "商店折扣结束",
+    out_of_sale: "没货了",
 
 
     homepage: "返回主页",
@@ -36,7 +40,7 @@ var lan_cn = {
     switchbutton_2: "返回",
 
     shop_button: "商店",
-    shop_text: "点击以购买",
+    shop_text: "点击以购买,长按购买更多",
     shop_fert: "肥料",
     shop_debug: "杀虫剂",
     shop_supernurse: "超级护理",
@@ -63,6 +67,7 @@ var lan_en = {
     plwater: "Watering:",
 
     user: "Login",
+    logout: "Logout",
 
     save: "Local Save",
     load: "Load local Save",
@@ -77,7 +82,9 @@ var lan_en = {
     hintset_offed: "Hint closed",
 
     testmsg: "Loaded test profile",
-
+    shop_dis_msg: "Shop is on sale",
+    shop_dis_end_msg: "Sale is over",
+    out_of_sale: "out of sale",
 
     homepage: "Homepage",
     waterbutton: "Watering",
@@ -88,7 +95,7 @@ var lan_en = {
     switchbutton_2: "Back",
 
     shop_button: "Shop",
-    shop_text: "Click to buy",
+    shop_text: "Click to buy,press to buy more",
     shop_fert: "Fertilizer",
     shop_debug: "Debug",
     shop_supernurse: "Super-nurse",

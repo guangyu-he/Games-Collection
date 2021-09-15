@@ -4,150 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
-    <title>PLANTS!</title>
+
+    <!-- 网页模板的css文件 -->
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" href="css/style.min.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: auto;
-            -moz-user-select: none;
-            /*火狐*/
-            -webkit-user-select: none;
-            /*webkit浏览器*/
-            -ms-user-select: none;
-            /*IE10*/
-            -khtml-user-select: none;
-            /*早期浏览器*/
-            user-select: none;
-        }
-        
-        div {
-            margin: 20px;
-            border: 0;
-            padding: 0;
-            width: auto;
-        }
-        
-        .lastResult {
-            color: white;
-            padding: 3px;
-        }
-    </style>
 
-<style>        
-    #container {
-        display: flex;
-        justify-content: center;
-    }
-    
-    /* 打开按钮 */
-    #open {
-        background-color: #52699e;
-        border: none;
-        height: 30px;
-        width: 200px;
-        border-radius: 10px;
-        color: #fff;
-        outline: none;
-        cursor: pointer;
-    }
-    
-    #open:hover {
-        background-color: #4a5f8f;
-    }
-    
-    /* 背景遮罩 */
-    #hidden {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #000000;
-        opacity: 0.3;
-        display: none;
-    }
-    /* 盒子 */
-    #box {
-        color: #fff;
-        width: 400px;
-        height: 250px;
-        background-color: #40527e;
-        display: none;
-        flex-direction: column;
-        border-radius: 10px;
-        align-items: center;
-        padding-top: 50px;
-        box-sizing: border-box;
-        position: absolute;
-        top: 200px;
-        cursor: move;
-    }
-    /* 关闭按钮 */
-    #close {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        font-weight: normal;
-        display: block;
-        width: 50px;
-        height: 25px;
-        line-height: 25px;
-        text-align: center;
-        border-radius: 20px;
-        color: #7a9ae4;
-    }
-    
-    #close:hover {
-        background-color: #52699e;
-        cursor: pointer;
-    }
-    /* 输入框 */
-    #box input {
-        width: 200px;
-        height: 25px;
-        border-radius: 25px;
-        border: none;
-        outline: none;
-        padding-left: 20px;
-        background-color: #536a9e;
-        color: #fff;
-    }
-    /* 改变placeholder的值 */
-    #box input::-webkit-input-placeholder {
-        color: rgb(255, 255, 255);
-        opacity: 0.4;
-    }
-    
-    #box input:first-child {
-        margin-bottom: 20px;
-    }
-    /* 登录按钮 */
-    #box #login {
-        cursor: pointer;
-        width: 300px;
-        height: 30px;
-        background-color: #02a0a0;
-    }
-    
-    #box #login:hover {
-        background-color: #019191;
-    }
+    <!-- 自定义的css文件 -->
+    <link rel="stylesheet" href="custom.css">
 
-    #box #register {
-        cursor: pointer;
-        width: 300px;
-        height: 30px;
-        background-color: #1a02a0;
-    }
-    
-    #box #register:hover {
-        background-color: #1a02a0;
-    }
-</style>
 
     <!-- Buttons 库的核心文件 -->
     <link rel="stylesheet" href="css/buttons.css">
@@ -158,8 +22,9 @@
     <script src="bootstrap.min.js"></script>
 
     <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
+    <title>PLANTS!</title>
 
 </head>
 
@@ -173,17 +38,11 @@
         <main>
             <div class="container">
                 <section>
-
                     <div>
-                        <p id="date" class="button-border button-rounded button-primary"></p>
+                        <p id="message_p" onclick=delmessage() class="button-border button-rounded button-primary" style="word-break:break-word;display: none"></p>
                     </div>
 
-                    <div>
-                        <p id="message_p" onclick=delmessage() class="button-border button-rounded button-primary" style="word-break:break-word;"></p>
-                    </div>
-
-                    <div display:inline>
-
+                    <div style="display:inline-flex">
                         <div  class="btn-group">
                             <button type="button" id="shop_button" class=" button button-rounded" data-toggle="dropdown"><span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu">
@@ -193,10 +52,10 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a id="shop_fert" href="javascript:shop_fertfunction()"></a>
+                                    <a id="shop_fert" onmousedown="gtouchstart('fert')" onmousemove="gtouchmove()" onmouseup="gtouchend('fert')" ></a>
                                 </li>
                                 <li>
-                                    <a id="shop_debug" href="javascript:shop_debugfunction()"></a>
+                                    <a id="shop_debug" onmousedown="gtouchstart('debug')" onmousemove="gtouchmove()" onmouseup="gtouchend('debug')"></a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
@@ -292,11 +151,12 @@
                         </div>
                     </div>
 
-                    <div>
-                        <button id="fertilizer_state" style="display: inline" onclick="" class="button button-border button-rounded button-primary"></button>
-                        <button id="debug_state" style="display: inline" onclick="" class="button button-border button-rounded button-primary"></button>
-                        <button id="supernurse_state" style="display: none" onclick="" class="button button-border button-rounded button-primary"></button>
-                        <button id="money_state" style="display: inline" onclick="" class="button  button-border button-rounded button-primary"></button>
+                    <div style="display: block">
+                        <p id="date" onclick="" class="button button-border button-rounded button-primary"></p>
+                        <p id="fertilizer_state"  onclick="" class="button button-border button-rounded button-primary"></p>
+                        <p id="debug_state"  onclick="" class="button button-border button-rounded button-primary"></p>
+                        <p id="supernurse_state" style="display: none" onclick="" class="button button-border button-rounded button-primary"></butpton>
+                        <p id="money_state"  onclick="" class="button  button-border button-rounded button-primary"></p>
                     </div>
 
                     <div>
@@ -372,13 +232,6 @@
         </script>
 
     <script src="js/production/materialMenu.min.js"></script>
-    <script>
-        function deadand() { //传递信息给安卓的java 
-            //var text=document.getElementById("text").value;  
-            window.location = "javascript:window.android.deadand()";
-        }
-        
-    </script>
 </body>
 
 <script src="plselect.js"></script>
@@ -395,5 +248,7 @@
 <script src="random.js"></script>
 <script src="events.js"></script>
 <script src="shop.js"></script>
-
+<script src="display.js"></script>
+<script src="status_index.js"></script>
+<script src="random_events.js"></script>
 </html>

@@ -1,8 +1,29 @@
 function nextday(){
+
+    //清除消息栏
+    message = lan.message_p + "";
+    document.getElementById("message_p").style="word-break:break-word;display: none"
+
+    //囤货每天+1
+    fert_ini_nr++;
+    debug_ini_nr++;
+
+    //每天自然增长10金币
+    usr.money = String(parseInt(usr.money) + 10);
+
+    if(sale_state[0]){
+        sale_state[1]--;
+    }else{}
+    random_sale();
+    random_events_dis();
+
+    //对所有花盆进行操作
     for(var i=0;i<5;i++){
         var next_health = parseInt(pl[i].health);
         var next_age, next_water, next_fert;
         if(pl[i].id != ""){
+
+            //获得sick参数是概率植物死亡
             if(status_index(pl[i].status,"sick")){
                 var dead_rate = randomNum(0,100);
                 if(pl[i].age < 10){
@@ -23,6 +44,7 @@ function nextday(){
                 pl[i].status = status_remove(pl[i].status,"sick");
             }else{}
 
+            //缺水或肥料时减少健康度，如果获得过量参数则减少更多
             if(pl[i].water <= 0){
                 next_health = next_health - 10;
             }else{}
@@ -33,6 +55,7 @@ function nextday(){
                 next_health = next_health - 20;
             }else{}
 
+            //生命值低于0获得sick参数
             if(next_health <= 0 && !status_index(pl[i].status,"sick")){
                 pl[i].status = pl[i].status + ",sick"
             }else{}
@@ -40,6 +63,7 @@ function nextday(){
                 next_health = 0;
             }else{}
 
+            //默认10%概率获得bug参数，每有一盆有，其他的概率就增加10%
             var bug_rate = randomNum(0,100);
             var bug_threshold;
             var bug_nr = 0;
@@ -58,8 +82,8 @@ function nextday(){
                 next_health = next_health - 20;
             }else{}
 
+            //增龄，按年龄扣除水量和肥料
             next_age = parseInt(pl[i].age) + 1;
-
             if(next_age < 10){
                 next_water = parseInt(pl[i].water) - 5;
                 next_fert = parseInt(pl[i].fert) - 1;
@@ -71,7 +95,6 @@ function nextday(){
                 next_water = parseInt(pl[i].water) - 20;
                 next_fert = parseInt(pl[i].fert) - 10;
             }
-
             if(next_water <= 0){
                 next_water = 0;
             }else{}
@@ -79,6 +102,7 @@ function nextday(){
                 next_fert = 0;
             }
             
+            //年龄大于10时根据稀有度参数获取植物名称
             if(next_age >= 10 && pl[i].name == "tiny"){
                 if(status_index(pl[i].status,"sr")){
                     pl[i].name = "sr";
@@ -101,33 +125,6 @@ function nextday(){
     }
     usr.day = String(parseInt(usr.day) + 1);
     text_display();
-    //plselected = null;
-}
-
-function status_index(status,status_type){
-    var status_array = status.split(",");
-    for(i=0;i<10;i++){
-        if(status_array[i] == status_type){
-            return true;
-        }else{}
-    }
-    return false;
-}
-function status_remove(status,status_type){
-    var status_array = status.split(",");
-    var status_output = "";
-    for(i=0;i<status_array.length;i++){
-        if(status_array[i] == status_type){
-            status_array[i] = ""
-        }else{}
-        if(status_array[i] != ""){
-            status_output = status_output + status_array[i];
-        }else{}
-    }
-    if(status_output == ","){
-        status_output == "";
-    }
-    return status_output;
 }
 
 function plant_dead(id){
@@ -137,39 +134,4 @@ function plant_dead(id){
     pl[id].life = "";
     pl[id].health = "";
     pl[id].status = "";
-}
-
-function text_display(){
-
-    for(var i=0;i<5;i++){            
-        var name_dis = "name_dis_" + String(i+1);
-        var state_dis = "state_dis_" + String(i+1);
-        var life_state = "life_state_" + String(i+1);
-        var fert_state = "fert_state_" + String(i+1);
-        var water_state = "water_state_" + String(i+1);
-        if(pl[i].id == ""){
-            document.getElementById(state_dis).style = "display:none";
-        }else{
-            document.getElementById(state_dis).style = "display:inline";
-            document.getElementById(name_dis).innerHTML = lan.plname + pl[i].name + "," + pl[i].age;
-            document.getElementById(life_state).innerHTML = lan.pllife + pl[i].health + "/" + "100";
-            document.getElementById(fert_state).innerHTML = lan.plfert + pl[i].fert + "/" + "100"; //按百分比计算
-            document.getElementById(water_state).innerHTML = lan.plwater + pl[i].water + "/" + "100"; //按百分比计算
-        }
-    }
-
-    document.getElementById("date").innerHTML = lan.date + usr.day;
-
-    document.getElementById("fertilizer_state").innerHTML = lan.fertilizer_state + usr.fert_nr;
-    document.getElementById("debug_state").innerHTML = lan.debug_state + usr.debug_nr;
-    document.getElementById("supernurse_state").innerHTML = lan.supernurse_state + usr.supernurse_nr;
-    document.getElementById("money_state").innerHTML = lan.money_state + usr.money;
-
-
-
-    if(usr.name == "local" && usr.day == "0"){
-        document.getElementById("save").style = "display:none";
-    }else{
-        document.getElementById("save").style = "display:block";
-    }
 }
