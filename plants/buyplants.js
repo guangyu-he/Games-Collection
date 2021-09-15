@@ -15,14 +15,11 @@ function adoptfunction(){
     addmessage("捡了一只小幼苗");
     var adopt_rare = randomNum(0,100);
     if(adopt_rare <= 50){
-        addmessage("50");
         adopt_rare_func("r");
     }
     else if(adopt_rare > 50 && adopt_rare <= 85){
-        addmessage("85"+adopt_rare);
         adopt_rare_func("sr");
     }else if(adopt_rare > 85 && adopt_rare <= 100){
-        addmessage("100"+adopt_rare);
         adopt_rare_func("ssr");
     }else{}
     text_display();
@@ -40,5 +37,26 @@ function adopt_rare_func(str){
             break;
         }
     }
+}
+
+function sellfunction(){
+    if(plselected == "" || plselected == null){
+        return;
+    }else{}
+
+    var price_base = 0;
+    if(status_index(pl[plselected].status,"r")){
+        price_base = 1;
+    }else if(status_index(pl[plselected].status,"sr")){
+        price_base = 1.5;
+    }else if(status_index(pl[plselected].status,"ssr")){
+        price_base = 2;
+    }else{}
+
+    var sell_money = String(parseInt(pl[plselected].age) * price_base);
+    addmessage(pl[plselected].name + lan.sell_money + sell_money);
+    usr.money = String(parseInt(usr.money) + parseInt(sell_money));
+    plant_dead(plselected);
+    text_display();
 }
 

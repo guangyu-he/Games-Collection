@@ -15,7 +15,7 @@ function status_remove(status,status_type){
             status_array[i] = ""
         }else{}
         if(status_array[i] != ""){
-            status_output = status_output + status_array[i];
+            status_output = status_output + "," + status_array[i];
         }else{}
     }
     if(status_output == ","){

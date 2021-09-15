@@ -1,4 +1,6 @@
 *.icloud
 .apk
 .DS_Store
+*/.DS_Store
+*/*/.DS_Store
 .conf

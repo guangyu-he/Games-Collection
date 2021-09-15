@@ -5,7 +5,7 @@ function shop_fertfunction(){
         return;
     }else{}
     if(usr.money - fert_price < 0){
-        addmessage("没有足够的钱");
+        addmessage(lan.insufficient_money);
         return;
     }else{}
     usr.fert_nr = String(parseInt(usr.fert_nr) + 1);
@@ -21,7 +21,7 @@ function shop_debugfunction(){
         return;
     }else{}
     if(usr.money - debug_price < 0 ){
-        addmessage("没有足够的钱");
+        addmessage(lan.insufficient_money);
         return;
     }else{}
     usr.debug_nr = String(parseInt(usr.debug_nr) + 1);
@@ -38,17 +38,17 @@ function shop_fertfunction_more(){
         return;
     }else{}
 
-    var shop_nr = prompt("请输入购买份数（目前可用"+fert_ini_nr+"):",fert_ini_nr);
+    var shop_nr = prompt(lan.ask_for_nr + fert_ini_nr,fert_ini_nr);
     if(shop_nr == "" || shop_nr == null){
         return;
     }else{}
     shop_nr = parseInt(shop_nr);
     if(usr.money - shop_nr * fert_price< 0){
-        addmessage("没有足够的钱");
+        addmessage(lan.insufficient_money);
         return;
     }else{}
     if(shop_nr > fert_ini_nr){
-        addmessage("没有足够的库存");
+        addmessage(lan.insufficient_goods);
         return;
     }else{}
     
@@ -66,17 +66,17 @@ function shop_debugfunction_more(){
         return;
     }else{}
 
-    var shop_nr = prompt("请输入购买份数（目前可用"+debug_ini_nr+"):",debug_ini_nr);
+    var shop_nr = prompt(lan.ask_for_nr + debug_ini_nr,debug_ini_nr);
     if(shop_nr == "" || shop_nr == null){
         return;
     }else{}
     shop_nr = parseInt(shop_nr);
     if(usr.money - shop_nr * debug_price < 0){
-        addmessage("没有足够的钱");
+        addmessage(lan.insufficient_money);
         return;
     }else{}
     if(shop_nr > debug_ini_nr){
-        addmessage("没有足够的库存");
+        addmessage(lan.insufficient_goods);
         return;
     }else{}
 

@@ -29,7 +29,10 @@ var lan_cn = {
     shop_dis_msg: "商店折扣中",
     shop_dis_end_msg: "商店折扣结束",
     out_of_sale: "没货了",
-
+    insufficient_money: "没有足够的钱",
+    insufficient_goods: "没有足够的库存",
+    ask_for_nr: "请输入购买份数?目前可用:",
+    sell_money: "卖出了",
 
     homepage: "返回主页",
     waterbutton: "浇水",
@@ -85,6 +88,11 @@ var lan_en = {
     shop_dis_msg: "Shop is on sale",
     shop_dis_end_msg: "Sale is over",
     out_of_sale: "out of sale",
+    insufficient_money: "insufficient_money",
+    insufficient_goods: "insufficient_goods",
+    ask_for_nr: "How many do you want?Currently available:",
+    sell_money: "sold for ",
+
 
     homepage: "Homepage",
     waterbutton: "Watering",
@@ -133,6 +141,7 @@ function lang_sel(lan_type){
         pl_name = pl_name_cn;
     }
     lang_dis();
+    text_display();
 }
 
 function lang_dis(){

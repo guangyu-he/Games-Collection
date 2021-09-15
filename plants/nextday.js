@@ -63,7 +63,7 @@ function nextday(){
                 next_health = 0;
             }else{}
 
-            //默认10%概率获得bug参数，每有一盆有，其他的概率就增加10%
+            //默认10%概率获得bug参数，每有一盆有，其他的概率就增加5%
             var bug_rate = randomNum(0,100);
             var bug_threshold;
             var bug_nr = 0;
@@ -72,7 +72,7 @@ function nextday(){
                     bug_nr++;
                 }else{}
             }
-            bug_threshold = bug_nr * 10 + 10;
+            bug_threshold = bug_nr * 5 + 10;
             if( bug_rate <= bug_threshold ){
                 if(!status_index(pl[i].status,"bug")){
                     pl[i].status = pl[i].status + ",bug"

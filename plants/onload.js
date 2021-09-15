@@ -4,7 +4,7 @@ function onload() {
     message = lan.message_p + ""; //加载测试存档时无法显示提示，待修改。
     document.getElementsByTagName('body')[0].style.zoom = 0.8
 
-    document.getElementById("version").innerHTML = "210914 - 1622";
+    document.getElementById("version").innerHTML = "210914 - 2141";
 
 
     document.getElementById("status").style = "display:none";
