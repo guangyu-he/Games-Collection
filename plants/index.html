@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.5">
+    <title>PLANTS!</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            -moz-user-select: none;
+            /*火狐*/
+            -webkit-user-select: none;
+            /*webkit浏览器*/
+            -ms-user-select: none;
+            /*IE10*/
+            -khtml-user-select: none;
+            /*早期浏览器*/
+            user-select: none;
+        }
+        
+        div {
+            margin: 20px;
+            border: 0;
+            padding: 0;
+            width: auto;
+        }
+        
+        .lastResult {
+            color: white;
+            padding: 3px;
+        }
+    </style>
+
+<style>        
+    #container {
+        display: flex;
+        justify-content: center;
+    }
+    
+    /* 打开按钮 */
+    #open {
+        background-color: #52699e;
+        border: none;
+        height: 30px;
+        width: 200px;
+        border-radius: 10px;
+        color: #fff;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    #open:hover {
+        background-color: #4a5f8f;
+    }
+    
+    /* 背景遮罩 */
+    #hidden {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #000000;
+        opacity: 0.3;
+        display: none;
+    }
+    /* 盒子 */
+    #box {
+        color: #fff;
+        width: 400px;
+        height: 250px;
+        background-color: #40527e;
+        display: none;
+        flex-direction: column;
+        border-radius: 10px;
+        align-items: center;
+        padding-top: 50px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 200px;
+        cursor: move;
+    }
+    /* 关闭按钮 */
+    #close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-weight: normal;
+        display: block;
+        width: 50px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        border-radius: 20px;
+        color: #7a9ae4;
+    }
+    
+    #close:hover {
+        background-color: #52699e;
+        cursor: pointer;
+    }
+    /* 输入框 */
+    #box input {
+        width: 200px;
+        height: 25px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+        padding-left: 20px;
+        background-color: #536a9e;
+        color: #fff;
+    }
+    /* 改变placeholder的值 */
+    #box input::-webkit-input-placeholder {
+        color: rgb(255, 255, 255);
+        opacity: 0.4;
+    }
+    
+    #box input:first-child {
+        margin-bottom: 20px;
+    }
+    /* 登录按钮 */
+    #box #login {
+        cursor: pointer;
+        width: 300px;
+        height: 30px;
+        background-color: #02a0a0;
+    }
+    
+    #box #login:hover {
+        background-color: #019191;
+    }
+
+    #box #register {
+        cursor: pointer;
+        width: 300px;
+        height: 30px;
+        background-color: #1a02a0;
+    }
+    
+    #box #register:hover {
+        background-color: #1a02a0;
+    }
+</style>
+
+    <!-- Buttons 库的核心文件 -->
+    <link rel="stylesheet" href="css/buttons.css">
+
+    <!-- 当需要使用带下拉菜单的按钮时才需要加载下面的 JavaScript 文件 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+
+    <!-- 只有使用字体图标时才需要加载 Font-Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+
+<body onload="onload()" class="text-align: center">
+
+
+    <div id="wrapper" class="wrapper">
+        <header class="header htmleaf-header">
+            <h1>PLANTS!<span>alpha:<text id="version"></text><br><a href="https://www.heguangyu.net" target="_blank">© heguangyu.net</a>||<a id="changelan" href="javascript:changelanfunction()"></a></span></h1>
+        </header>
+        <main>
+            <div class="container">
+                <section>
+
+                    <div>
+                        <p id="date" class="button-border button-rounded button-primary"></p>
+                    </div>
+
+                    <div>
+                        <p id="message_p" onclick=delmessage() class="button-border button-rounded button-primary" style="word-break:break-word;"></p>
+                    </div>
+
+                    <div display:inline>
+
+                        <div  class="btn-group">
+                            <button type="button" id="shop_button" class=" button button-rounded" data-toggle="dropdown"><span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <text id="shop_text"></a>
+                                </li>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="shop_fert" href="javascript:shop_fertfunction()"></a>
+                                </li>
+                                <li>
+                                    <a id="shop_debug" href="javascript:shop_debugfunction()"></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="shop_supernurse" href="javascript:shop_supernursefunction()"></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div  class="btn-group">
+                            <button type="button" id="settings" class=" button button-rounded" data-toggle="dropdown"><span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a id="user" href="javascript:openfunction()"></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="save" href="javascript:local_save()"></a>
+                                </li>
+                                <li>
+                                    <a id="load" href="javascript:local_load()"></a>
+                                </li>
+                                <li>
+                                    <a id="delsave" href="javascript:restart()"></a>
+                                </li>
+                                <li>
+                                    <a id="loadtest" href="javascript:test()"></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="hintset" href="javascript:hintsetting()"></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a id="homepage" href="../index.html"></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p id="status" class="button-border button-rounded button-primary"></p>
+                    </div>
+
+
+
+                    <div id="functionbutton1" style="display: block" >
+                        <button id="waterbutton" type="button" onclick="waterfunction()" style="display: inline" class="button button-pill button-primary"></button>
+                        <button id="fertbutton" type="button" onclick="fertfunction()" style="display: inline" class="button button-pill button-primary"></button>
+                        <button id="nursebutton" type="button" onclick="nursefunction()" style="display: inline" class="button button-pill button-primary"></button>
+                        <button id="bugbutton" type="button" onclick="bugfunction()" style="display: inline" class="button button-pill button-primary"></button>
+                        <button id="switchbutton_1" type="button" onclick="switchbutton()" style="display: inline" class="button button-pill button-primary"></button>
+
+                    </div>
+
+                    <div id="functionbutton2" style="display: none">
+                        <button id="adoptbutton" type="button" onclick="adoptfunction()" style="display: inline" class="button button-pill button-action"></button>
+                        <button id="buybutton" type="button" onclick="buyfunction()" style="display: inline" class="button button-pill button-action"></button>
+                        <button id="sellbutton" type="button" onclick="sellfunction()" style="display: inline" class="button button-pill button-action"></button>
+                        <button id="birthbutton" type="button" onclick="birthfunction()" style="display: inline" class="button button-pill button-action"></button>
+                        <button id="switchbutton_2" type="button" onclick="switchbutton()" style="display: inline" class="button button-pill button-action"></button>
+                    </div>
+
+
+
+                    <div style="display: inline-flex;">
+                        <div id="state_dis_1" onclick="plselect(0)" class="button-border button-rounded button-primary">
+                            <p id="name_dis_1"></p>
+                            <p id="water_state_1"></p>
+                            <p id="fert_state_1"></p>
+                            <p id="life_state_1"></p>
+                        </div>
+                        <div id="state_dis_2" onclick="plselect(1)" class="button-border button-rounded button-primary">
+                            <p id="name_dis_2"></p>
+                            <p id="water_state_2"></p>
+                            <p id="fert_state_2"></p>
+                            <p id="life_state_2"></p>
+                        </div>
+                        <div id="state_dis_3" onclick="plselect(2)" class="button-border button-rounded button-primary">
+                            <p id="name_dis_3"></p>
+                            <p id="water_state_3"></p>
+                            <p id="fert_state_3"></p>
+                            <p id="life_state_3"></p>
+                        </div>
+                        <div id="state_dis_4" onclick="plselect(3)" class="button-border button-rounded button-primary">
+                            <p id="name_dis_4"></p>
+                            <p id="water_state_4"></p>
+                            <p id="fert_state_4"></p>
+                            <p id="life_state_4"></p>
+                        </div>
+                        <div id="state_dis_5" onclick="plselect(4)" class="button-border button-rounded button-primary">
+                            <p id="name_dis_5"></p>
+                            <p id="water_state_5"></p>
+                            <p id="fert_state_5"></p>
+                            <p id="life_state_5"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button id="fertilizer_state" style="display: inline" onclick="" class="button button-border button-rounded button-primary"></button>
+                        <button id="debug_state" style="display: inline" onclick="" class="button button-border button-rounded button-primary"></button>
+                        <button id="supernurse_state" style="display: none" onclick="" class="button button-border button-rounded button-primary"></button>
+                        <button id="money_state" style="display: inline" onclick="" class="button  button-border button-rounded button-primary"></button>
+                    </div>
+
+                    <div>
+                        <button id="nextday" onclick="nextday()" class="button button-glow button-border button-rounded button-primary text-align: center"></button>
+                    </div>
+
+        <div id="container">
+            <!-- 背景黑色遮罩 -->
+            <div id="hidden"></div>
+            <div id="box">
+                <strong id="close" onclick="javascript:closefunction()">关闭</strong>
+                <span>输入账号：<input id="username_in" type="text" placeholder="输入账号"></span>
+                <span>输入密码：<input id="password_in" type="password" placeholder="输入密码"></span>
+                <input type="button" value="注册" id="register" onclick="user_reg()">
+                <p></p>
+                <input type="button" value="登录" id="login" onclick="user_log()">
+            </div>
+        </div>
+
+                </section>
+            </div>
+        </main>
+    </div>
+
+    
+        <script>
+
+            var box = my$('box');
+            var hidden = my$('hidden');
+
+            function openfunction() {
+                if(usr.name != "local"){
+                    location.reload();
+                }
+                box.style.display = 'flex';
+                hidden.style.display = 'block';
+            }
+            function closefunction() {
+                box.style.display = 'none';
+                hidden.style.display = 'none';
+                // 关闭后恢复box到原来的默认位置
+                box.style.top = '200px';
+                box.style.left = '';
+            }
+            box.onmousedown = function (e) {
+                e = e || window.event;
+                // 盒子的位置
+                var x = getPage(e).pageX - box.offsetLeft;
+                var y = getPage(e).pageY - box.offsetTop;
+                document.onmousemove = function (e) {
+                    e = e || window.event;
+                    box.style.left = getPage(e).pageX - x + 'px';
+                    box.style.top = getPage(e).pageY - y + 'px';
+                }
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+
+            function my$(id) {
+                return document.getElementById(id);
+            }
+
+            // 获取鼠标在页面的位置，处理浏览器兼容性
+            function getPage(e) {
+                var pageX = e.pageX || e.clientX + getScroll().scrollLeft;
+                var pageY = e.pageY || e.clientY + getScroll().scrollTop;
+                return {
+                    pageX: pageX,
+                    pageY: pageY
+                }
+            }
+        </script>
+
+    <script src="js/production/materialMenu.min.js"></script>
+    <script>
+        function deadand() { //传递信息给安卓的java 
+            //var text=document.getElementById("text").value;  
+            window.location = "javascript:window.android.deadand()";
+        }
+        
+    </script>
+</body>
+
+<script src="plselect.js"></script>
+<script src="user.js"></script>
+<script src="languages.js"></script>
+<script src="variables.js"></script>
+<script src="buttons.js"></script>
+<script src="localstorage.js"></script>
+<script src="hint.js"></script>
+<script src="message.js"></script>
+<script src="onload.js"></script>
+<script src="nextday.js"></script>
+<script src="buyplants.js"></script>
+<script src="random.js"></script>
+<script src="events.js"></script>
+<script src="shop.js"></script>
+
+</html>
