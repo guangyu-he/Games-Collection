@@ -94,6 +94,9 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
+                                    <a id="user" href="javascript:user()">用户登陆</a>
+                                </li>
+                                <li>
                                     <a href="javascript:restart()">删除存档！</a>
                                 </li>
                                 <li>
@@ -166,13 +169,13 @@
                     <div>
                         <button id="nextday" onclick="nextday()" class="button button-glow button-border button-rounded button-primary text-align: center">next day</button>
                     </div>
+
                 </section>
             </div>
         </main>
     </div>
 
     <script src="js/production/materialMenu.min.js"></script>
-
     <script>
         var localStorage = window.localStorage;
 
@@ -318,8 +321,8 @@
             var myDate = new Date();
             var version = myDate.toLocaleString();
 
-            document.getElementById("version").innerHTML = "201027 - 1100";
-
+            document.getElementById("version").innerHTML = "210908 - 1700";
+            
             load();
 
             if (news.newstext == null) {
@@ -482,6 +485,12 @@
             document.getElementById("day").innerHTML = "日期:" + cat.day;
             document.getElementById("food").innerHTML = "剩余食物:" + cat.food;
             document.getElementById("money").innerHTML = "剩余金钱:" + cat.money;
+
+            if(username_str =="" || username_str == null){
+                document.getElementById("user").innerHTML = "用户登录";
+            }else{
+                document.getElementById("user").innerHTML = "登出"+username_str;
+            }
 
             buttondisplay();
 
@@ -836,5 +845,6 @@
 <script src="activity.js"></script>
 <script src="random.js"></script>
 <script src="randomevents.js"></script>
+<script src="user.js"></script>
 
 </html>

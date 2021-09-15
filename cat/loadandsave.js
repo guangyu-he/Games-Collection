@@ -40,7 +40,16 @@ function load() {
 }
 
 function save() {
+
     catstr = JSON.stringify(cat);
+
+    if(username_str == "" || username_str == null){
+    }else{
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","updateuser.php?q="+username_str+"&g="+cat.money+"&s="+catstr,true);
+        xmlhttp.send();
+    }
+
     localStorage.setItem("catstr", catstr);
 
     cardmoney = cat.money;
