@@ -1,0 +1,103 @@
+<html>
+<head>
+</head>
+<body>
+
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+<div id="demo"><b></b></div>
+
+
+<div>
+  <input type="text" id="username" value="Username">
+  <input type="text" id="password" value="password">
+
+  <button onclick="register()">Register</button>
+  <button onclick="login()">login</button>
+  <p id="demo"></p>
+</div>
+
+<script>
+  var sql_return = "";
+  var user_exist = "";
+  var user_password = "";
+  var user_gold = "";
+
+  function register() {
+    var username_str = document.getElementById("username").value;
+    var password_str = document.getElementById("password").value;
+    returnuser(username_str,"r");
+    setTimeout(function(){
+      //alert("/"+user_exist+"/"+username_str+"/");
+      if(user_exist == username_str){
+        document.getElementById("demo").innerHTML = "user exist!";
+      }
+      else{
+        addUser(username_str,password_str);
+      }
+    },50);
+  }
+
+  function login() {
+    var username_str = document.getElementById("username").value;
+    var password_str = document.getElementById("password").value;
+    returnuser(username_str,"l");
+    setTimeout(function(){
+      //alert("/"+user_password+"/"+password_str+"/");
+      if(user_password == password_str){
+        returnuser(username_str,"g");
+        setTimeout(function(){
+          document.getElementById("demo").innerHTML = "login success!" + "gold" + user_gold;
+        },50);
+      }
+      else{
+        document.getElementById("demo").innerHTML = "wrong pass or user not exists!";
+      }
+    },50);
+  }
+
+function returnuser(str,mode){
+  if(str == "" || mode == ""){
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  }
+  else{ 
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function(){
+      sql_return = this.responseText;
+    };
+    xmlhttp.open("GET","returnuser.php?q="+str+"&m="+mode,true);
+    xmlhttp.send();
+  }
+  setTimeout(function(){
+    if(mode=="r"){
+      user_exist = sql_return;
+    }else if(mode=="l"){
+      user_password = sql_return;
+    }else if(mode=="g"){
+      user_gold = sql_return;
+    }else{
+      return;
+    }
+  },50);
+  
+}
+
+  function addUser(str,pass_str) {
+    if (str == "Username" || str == "") {
+      return;
+    } else { 
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("txtHint").innerHTML = this.responseText;
+          //document.getElementById("gold").innerHTML = this.responseText;
+        }
+      };
+      xmlhttp.open("GET","adduser.php?q="+str+"&p="+pass_str+"&g=0",true);
+      xmlhttp.send();
+    }
+  }
+</script>
+
+</body>
+</html>
