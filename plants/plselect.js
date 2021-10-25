@@ -1,4 +1,3 @@
-
 function plselect(pl_nr){
     plselected = parseInt(pl_nr);
     if(pl[pl_nr].name == ""){

@@ -7,6 +7,7 @@ function status_index(status,status_type){
     }
     return false;
 }
+
 function status_remove(status,status_type){
     var status_array = status.split(",");
     var status_output = "";
@@ -18,8 +19,5 @@ function status_remove(status,status_type){
             status_output = status_output + "," + status_array[i];
         }else{}
     }
-    if(status_output == ","){
-        status_output == "";
-    }
-    return status_output;
+    return status_output.substr(1);
 }

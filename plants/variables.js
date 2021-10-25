@@ -10,7 +10,7 @@ var usr = {
     fert_nr: "0",
     debug_nr: "0",
     supernurse_nr: "0",
-    day: "0",
+    day: "1",
     status: "",
 };
 

@@ -40,7 +40,7 @@ function adopt_rare_func(str){
 }
 
 function sellfunction(){
-    if(plselected == "" || plselected == null){
+    if(plselected == null){
         return;
     }else{}
 
@@ -58,5 +58,6 @@ function sellfunction(){
     usr.money = String(parseInt(usr.money) + parseInt(sell_money));
     plant_dead(plselected);
     text_display();
+    document.getElementById("status").style = "display:none"
 }
 
